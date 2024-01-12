@@ -20,14 +20,16 @@ const PintsController = {
   },
 
   index: (req, res) => {
-    Pint.find((err, foundPints) => {
-      if (err) {
-        return res.status(500).json({ error: 'Internal Server Error' });
-      } else {
-        const token = TokenGenerator.jsonwebtoken(req.user_id);
-        return res.status(200).json({ pints: foundPints, token: token });
-      }
-    });
+    Pint.find()
+      .populate('owner owed_by bet')
+      .exec((err, foundPints) => {
+        if (err) {
+          return res.status(500).json({ error: 'Internal Server Error' });
+        } else {
+          const token = TokenGenerator.jsonwebtoken(req.user_id);
+          return res.status(200).json({ pints: foundPints, token: token });
+        }
+      });
   },
 
   FindByID: (req, res) => {

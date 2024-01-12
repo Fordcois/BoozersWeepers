@@ -3,8 +3,8 @@ import isTokenValid from '../Utility/isTokenValid';
 import VertNavbar from '../VertNavBar/VertNavBar';
 import '../../Pages/style.css'
 import Header from '../header/Header';
-import Stats from '../stats/stats';
-import Trial from '../stats/stats'
+import ReWorkStats from '../stats/reworkstats';
+import InfoPuller from '../stats/infopuller';
 
 const Template = ({ navigate }) => {
   const [token, setUserToken] = useState(window.localStorage.getItem('token'));
@@ -25,6 +25,7 @@ const Template = ({ navigate }) => {
           <div>
             {/* Additional content for logged-in users */}
             <p>Welcome! User is logged in</p>
+            <InfoPuller/>
           </div>
         ) : (
           <div>
