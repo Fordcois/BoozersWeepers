@@ -13,16 +13,12 @@ const InfoPuller = () => {
     const fetchPints = async () => {
       try {
         const response = await fetch(`/pints`, {
-          headers: { Authorization: `Bearer ${userToken}` }
+        headers: { Authorization: `Bearer ${userToken}` }
         });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        if (!response.ok) {throw new Error('Network response was not ok');}
         const fetchedData = await response.json();
         setpintsData(fetchedData.pints);
-      } catch (error) {
-        console.error('Error fetching pint data:', error);
-      }
+      } catch (error) {console.error('Error fetching pint data:', error);}
     };
 
     fetchPints(); 
@@ -32,7 +28,6 @@ const InfoPuller = () => {
     const userObjectArray = calculateUserStats(pintsData)
       .sort((a, b) => b.winPercentage - a.winPercentage)
       .slice(0, 10)
-
     setuserObject(userObjectArray);
 
     // Find user with the most pintsOwedNotClaimed

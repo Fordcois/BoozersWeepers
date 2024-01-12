@@ -4,11 +4,14 @@ function calculateUserStats(jsonData) {
   // Iterate through each bet in the JSON data
   jsonData.forEach((pint) => {
     const ownerUsername = pint.owner.username;
+    const ownerUserID = pint.owner._id;
     const owedByUsername = pint.owed_by.username;
+    const owedByID = pint.owed_by._id;
 
     // Initialize user stats if not already present
     if (!userStats[ownerUsername]) {
       userStats[ownerUsername] = {
+        ID: ownerUserID,
         betsWon: 0,
         betsLost: 0,
         pintsOwnedClaimed: 0,
@@ -20,6 +23,7 @@ function calculateUserStats(jsonData) {
 
     if (!userStats[owedByUsername]) {
       userStats[owedByUsername] = {
+        ID: owedByID,
         betsWon: 0,
         betsLost: 0,
         pintsOwnedClaimed: 0,
@@ -43,9 +47,10 @@ function calculateUserStats(jsonData) {
 
   // Convert user stats to an array of objects
   const result = Object.keys(userStats).map((username) => {
-    const { betsWon, betsLost } = userStats[username];
+    const { ID, betsWon, betsLost } = userStats[username];
 
     return {
+      ID,
       username,
       betsWon,
       betsLost,
@@ -59,4 +64,5 @@ function calculateUserStats(jsonData) {
 
   return result;
 }
+
 module.exports = calculateUserStats;

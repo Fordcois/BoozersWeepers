@@ -27,7 +27,7 @@ const LeaderBoard = ({ navigate }) => {
           <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
           <Header />
 
-        <InfoPuller/>
+        <InfoPuller />
 
         </div>
       </div>
