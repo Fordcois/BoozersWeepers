@@ -25,8 +25,8 @@ const InfoPuller = () => {
       }
     };
 
-    fetchPints(); // Call the function when the component mounts or when userToken changes
-  }, [userToken]); // userToken is now a dependency
+    fetchPints(); 
+  }, [userToken]); 
 
   useEffect(() => {
     const userObjectArray = calculateUserStats(pintsData)
