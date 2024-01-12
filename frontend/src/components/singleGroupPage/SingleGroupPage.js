@@ -10,20 +10,20 @@ import '../../Pages/style.css'
 
 const SingleGroupPage = ({ navigate }) => {
   const { pubGroupId } = useParams();
-  const [pubGroupData, setpubGroupData] = useState(null);
-  const [wagers, setWagers] = useState([])
+  const [pubGroupData, setPubGroupData] = useState(null);
+  const [wagers, setWagers] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
   const [expanded, setExpanded] = useState(true);
   const [hasJoinedGroup, setHasJoinedGroup] = useState(false);
   const [hasLeftGroup, setHasLeftGroup] = useState(false);
 
-	// Get group and member info
-	useEffect(() => {
-		if(token) {
+  // Get group and member info
+  useEffect(() => {
+    if (token) {
       fetch(`/pubGroups/${pubGroupId}`, {
         method: 'get',
-        headers: {'Authorization': `Bearer ${token}`}
+        headers: { 'Authorization': `Bearer ${token}` }
       })
         .then(response => response.json())
         .then(async data => {
