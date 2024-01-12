@@ -32,7 +32,8 @@ const PintsController = {
       });
   },
 
-  FindByID: (req, res) => {
+
+FindByID: (req, res) => {
     const pintID = req.params.id;
     Pint.findById(pintID)
     .populate('owner owed_by bet')

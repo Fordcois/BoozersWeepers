@@ -3,7 +3,9 @@ import isTokenValid from '../Utility/isTokenValid';
 import VertNavbar from '../VertNavBar/VertNavBar';
 import Header from '../header/Header';
 import '../../Pages/style.css';
+import './leaderboard.css';
 import './MyAccountPage.css';
+
 import InfoPuller from '../stats/infopuller';
 
 const LeaderBoard = ({ navigate }) => {

@@ -17,7 +17,6 @@ import SingleGroupPage from '../singleGroupPage/SingleGroupPage'
 import NewGroupPage from '../newGroupPage/NewGroupPage'
 import LeaderBoard from '../leaderboard/leaderboard';
 
-
 const App = () => {
     return (
         <Routes>
@@ -35,8 +34,6 @@ const App = () => {
           <Route path='/groups/:pubGroupId' element={<SingleGroupPage navigate={ useNavigate() }/>}/>
           <Route path='/groups' element={<PubGroupsPage navigate={ useNavigate() }/>}/>
           <Route path='/leaderboard' element={<LeaderBoard navigate={ useNavigate() }/>}/>
-
-
           <Route path='/'  element={<Home navigate={ useNavigate() }/>}/>
 
 
