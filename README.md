@@ -1,40 +1,22 @@
-# TeamTavern
-COPIED FROM tavern:
-# tavern
+# Boozers Weepers
 
-In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.
+## Project Overview
 
-## Documentation
+BoozersWeepers is a social & lifestyle web application for tracking and settling informal pub bets and IOUs between friend groups. Users are able to register accounts, create wagers as well as collect and claimed owed drinks in a user wallet.
 
-[More documentation of the codebase and its architecture can be found here.](./DOCUMENTATION.md) It's recommended you all read this _after making sure the whole setup below worked for everyone_. Then work together on a diagram describing how the application works.
+This is a personal continuation of a [group project](https://github.com/Catherine-Russell/TeamTavern) which was built in 2 weeks featuring contributions from myself, [Ben Dixon](https://github.com/BenDixon96), [Catherine Russell](https://github.com/Catherine-Russell), and [Rachel Roberts](https://github.com/Rachel853)
 
-[A template Miro board for your diagrams can be found here.](https://miro.com/app/board/uXjVPqNzFfc=/?share_link_id=360271550320) Make sure your validate your diagrams with your coach.
 
-## Card wall
+## Technology Stack
 
-REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
+- MongoDB
+- Express.js
+- React.js
+- Node.js
 
-## Quickstart
+## Set up 
 
-### Install Node.js
-
-1. Install Node Version Manager (NVM)
-   ```
-   brew install nvm
-   ```
-   Then follow the instructions to update your `~/.bash_profile`.
-2. Open a new terminal
-3. Install the latest version of [Node.js](https://nodejs.org/en/), currently `18.1.0`.
-   ```
-   nvm install 18
-   ```
-
-### Set up your project
-
-1. Fork this repository
-2. Rename your fork to `tavern-<team name>`
-3. Clone your fork to your local machine
-4. Install Node.js dependencies for both the `frontend` and `api` directories.
+1. Install Node.js dependencies for both the `frontend` and `api` directories.
    ```
    ; cd api
    ; npm install
@@ -44,14 +26,14 @@ REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
 
 > You might get warning messages about the installed dependencies at this point. You can ignore them, as long as the installation process doesn't fail. If the setup fails at this point, don't wait for too long and reach out to your coach.
 
-5. Install an ESLint plugin for your editor. For example: [`linter-eslint`](https://github.com/AtomLinter/linter-eslint) for Atom.
-6. Install MongoDB
+2. Install an ESLint plugin for your editor. For example: [`linter-eslint`](https://github.com/AtomLinter/linter-eslint) for Atom.
+3. Install MongoDB
    ```
    brew tap mongodb/brew
    brew install mongodb-community@5.0
    ```
    *Note:* If you see a message that says `If you need to have mongodb-community@5.0 first in your PATH, run:`, follow the instruction. Restart your terminal after this.
-7. Start MongoDB
+4. Start MongoDB
    ```
    brew services start mongodb-community@5.0
    ```
@@ -75,11 +57,7 @@ REPLACE THIS TEXT WITH A LINK TO YOUR CARD WALL
   ; npm start
   ```
 
-You should now be able to open your browser and go to `http://localhost:3000/signup` to create a new user.
-
-Then, after signing up, you should be able to log in by going to `http://localhost:3000/login`.
-
-After logging in, you won't see much but you can create posts using PostMan and they should then show up in the browser if you refresh the page.
+You should now be able to open your browser and go to `http://localhost:3000/` 
 
 ### How to run automated tests
 
@@ -128,24 +106,3 @@ Then run the tests in a new terminal session
 
 ; JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 npm run test
 ```
-
-## MongoDB Connection Errors?
-
-Some people occasionally experience MongoDB connection errors when running the tests or trying to use the application. Here are some tips which might help resolve such issues.
-
-- Check that MongoDB is installed using `mongo --version`
-- Check that it's running using `brew services list`
-
-If you have issues that are not resolved by these tips, please reach out to a coach and, once the issue is resolved, we can add a new tip!
-
-
-
-<!-- BEGIN GENERATED SECTION DO NOT EDIT -->
-
----
-
-**How was this resource?**  
-[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Ftavern-mern-template&prefill_File=README.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Ftavern-mern-template&prefill_File=README.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Ftavern-mern-template&prefill_File=README.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Ftavern-mern-template&prefill_File=README.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Ftavern-mern-template&prefill_File=README.md&prefill_Sentiment=😀)  
-Click an emoji to tell us.
-
-<!-- END GENERATED SECTION DO NOT EDIT -->
