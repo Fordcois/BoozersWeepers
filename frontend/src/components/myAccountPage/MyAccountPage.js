@@ -143,7 +143,7 @@ const toggleHistory = (event) =>{
 
           <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
           <BlackboardHeader />
-          <h1 className='username-subheading'>Catherine's wagers</h1>
+          <h1 className='username-subheading'>My wagers</h1>
           {wagerRequests.length > 0 && (
           <button onClick={toggleIncoming} className='NotificationButton'>
             <FaBell /> 
