@@ -1,6 +1,3 @@
-/* Contains Information for shifting the Content when the Navbar Expands */
-@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
-
 
 .page-content {
   flex-grow: 1;
@@ -28,13 +25,11 @@
   }
 
   .page_title{
-    font-family: 'Caveat';
     font-size: 50px;
     color: #cd561b;
   }
 
   .page_subheading {
-    font-family: 'Caveat', sans-serif; 
     font-size: 40px;
     color: #333; 
   }
