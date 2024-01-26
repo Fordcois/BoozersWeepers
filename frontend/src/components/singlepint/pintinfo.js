@@ -31,18 +31,14 @@ const PintInfo = ({ pintId }) => {
           'Content-Type': 'application/json' 
         }
       })
-        .then(response => {
-          if (response.status === 200) {
-            console.log("Pint Claimed!");
-            return response.json();
-          } else {console.log("Pint failed to be Claimed");}
-        })
-        .catch(error => {
-          console.error('Error claiming pint:', error);
-        });
-
-      console.log('Now we should navigate');
-      window.location.reload();
+      .then(response => {
+        if (response.status === 200) {console.log("Pint Claimed!");} 
+        else {console.log("Pint failed to be Claimed.");}
+      })
+      .catch(error => {console.error('Error claiming pint:', error);})
+      .finally(() => {
+        window.location.reload();
+      });
     }
   };
 
