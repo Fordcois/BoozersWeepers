@@ -29,7 +29,7 @@ const SingleGroupPage = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          setpubGroupData(data.pubGroup)
+          setPubGroupData(data.pubGroup)
         })
       }
 			if (!isLoggedIn) {navigate('/');}
