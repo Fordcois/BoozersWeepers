@@ -15,29 +15,13 @@ const NotificationDetails = (props) =>{
   
   useEffect(() => {
     if (token) {
-
-    
-      // This ensures the user's ID is fetched dynamically from the URL
-      fetch(`/userData/${props.userId}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
+      fetch(`/userData/${props.userId}`, {headers: {'Authorization': `Bearer ${token}`}})
       .then(response => response.json())
       .then(async userData => {
         window.localStorage.setItem("token", userData.token);
         setToken(window.localStorage.getItem("token"));
-
-        // Set user data obtained from the API response to the state
-        setUserData(userData.user);
-
-      
-
-      })
-      .catch(error => {
-        console.error('Error fetching user data:', error);
-        // Handle errors, e.g., set an error state or display a message
-      });
+        setUserData(userData.user);})
+      .catch(error => {console.error('Error fetching user data:', error);});
     }
   }, []);
 return(
@@ -45,14 +29,9 @@ return(
 <div>
   {userData && (
     <h4 className='notificationdetails'>{props.messageBeforeName} {userData.username} {props.messageAfterName}</h4>
-
-
   )}
   </div>
-)
-
-  
-}
+)}
 
 
 export default NotificationDetails;
