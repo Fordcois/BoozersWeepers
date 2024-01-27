@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import isTokenValid from '../Utility/isTokenValid';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import Header from '../header/Header';
-import './SingleGroupPage.css'
 import '../../Pages/style.css'
 
 

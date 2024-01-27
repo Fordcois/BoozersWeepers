@@ -21,21 +21,11 @@ const WalletPage = ({ navigate }) => {
         <Header/>
       <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
       <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-      <br />
-      <br />
-      <br />
-      <br />
-        
         <h1 className="page_subheading">Wallet</h1>
-        <br />
-        <br />
-        <br />
-        
         {isLoggedIn ? (
           <div>
             {/* Additional content for logged-in users */}
             <WalletComponent UserID={SessionUserId}/>
-            <br />
           </div>
         ) : (
           <div>

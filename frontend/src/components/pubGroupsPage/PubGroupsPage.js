@@ -3,8 +3,6 @@ import isTokenValid from '../Utility/isTokenValid';
 import React, { useEffect, useState } from 'react';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import '../../Pages/style.css'
-import './PubGroupsPage.css'
-
 import SearchBar from "../SearchBar/SearchBar";
 import Header from '../header/Header';
 
