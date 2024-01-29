@@ -112,10 +112,10 @@ const toggleHistory = (event) =>{
         <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
           <div className='blackboard'>
           <div className='form'>
-
           <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
           <BlackboardHeader />
-          <h1>My wagers</h1>
+          
+          <span className='chalktitle'>My Wagers</span>
           {wagerRequests.length > 0 && (
           <button onClick={toggleIncoming} className='NotificationButton'>
             <FaBell /> 

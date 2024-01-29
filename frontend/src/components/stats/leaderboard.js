@@ -46,7 +46,7 @@ const Leaderboard = () => {
 
   return (
     <div>
-      <h2 className='leadertitle'>Diamond Geezers..</h2>
+      <span className='chalktitle'>Diamond Geezers..</span>
       <ul>
         {userObject.map((user, index) => (
           <li key={index} className='leadertext'>
@@ -56,7 +56,7 @@ const Leaderboard = () => {
       </ul>
 
       <div>
-      <h2 className='leadertitle'>Top Boozer</h2>
+      <span className='chalktitle'>Top Boozer</span>
         {topPintsOwedNotClaimed && (
           <p className='leadertext'>
             <b>{topPintsOwedNotClaimed.username}</b>  has {topPintsOwedNotClaimed.pintsOwedNotClaimed} pints with their name on it<br/>
@@ -66,7 +66,7 @@ const Leaderboard = () => {
       </div>
 
       <div>
-      <h2 className='leadertitle'>Top Weeper</h2>
+      <span className='chalktitle'>Top Weeper</span>
         {topPintsOwnedClaimed && (
           <p className='leadertext'>
             {topPintsOwnedClaimed.username} still owes {topPintsOwnedClaimed.pintsOwnedClaimed} pints <br/>

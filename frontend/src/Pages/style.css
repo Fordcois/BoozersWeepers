@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
 .page-content {
   flex-grow: 1;
   margin-left: 50px;
@@ -59,4 +61,10 @@
 
 .form {
   padding: 0% 0% 3% 1%;
+}
+
+.chalktitle{
+  font-family: 'Permanent Marker';
+  font-size: 40px;
+  color: whitesmoke;
 }

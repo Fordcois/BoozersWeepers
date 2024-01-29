@@ -7,7 +7,7 @@ import '../../Pages/style.css';
 
 
 
-const LeaderBoard = ({ navigate }) => {
+const LeaderBoardPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [wagers, setWagers] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
@@ -32,4 +32,4 @@ const LeaderBoard = ({ navigate }) => {
   );
 };
 
-export default LeaderBoard;
+export default LeaderBoardPage;

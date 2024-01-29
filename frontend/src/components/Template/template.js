@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import isTokenValid from '../Utility/isTokenValid';
 import VertNavbar from '../VertNavBar/VertNavBar';
 import '../../Pages/style.css'
-import Header from '../header/Header';
 
 const Template = ({ navigate }) => {
   const [token, setUserToken] = useState(window.localStorage.getItem('token'));
@@ -16,7 +15,6 @@ const Template = ({ navigate }) => {
     <div>
       <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
       <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-        <Header/>
         <h1>Title</h1>
         {isLoggedIn ? (
           <div>
