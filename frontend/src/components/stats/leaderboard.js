@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import calculateUserStats from './reworkstats';
 import './leaderstats.css'
 
-const InfoPuller = () => {
+const Leaderboard = () => {
   const [userToken, setUserToken] = useState(window.localStorage.getItem("token"));
   const [pintsData, setpintsData] = useState([]);
   const [userObject, setuserObject] = useState([]);
@@ -42,7 +42,7 @@ const InfoPuller = () => {
 
     setTopPintsOwnedClaimed(userWithTopPintsOwnedClaimed);
 
-  }, [pintsData]); // Trigger when pintsData is updated
+  }, [pintsData]);
 
   return (
     <div>
@@ -78,4 +78,4 @@ const InfoPuller = () => {
   );
 };
 
-export default InfoPuller;
+export default Leaderboard;

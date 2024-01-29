@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import isTokenValid from '../Utility/isTokenValid';
 import VertNavbar from '../VertNavBar/VertNavBar';
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
-import InfoPuller from '../stats/infopuller';
+import Leaderboard from '../stats/leaderboard';
 import '../../Pages/style.css';
 
 
@@ -25,7 +25,7 @@ const LeaderBoard = ({ navigate }) => {
         <div className='blackboard'>
           <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
           <BlackboardHeader />
-          <InfoPuller />
+          <Leaderboard />
         </div>
       </div>
     </div>
