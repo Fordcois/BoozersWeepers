@@ -22,12 +22,10 @@ const Template = ({ navigate }) => {
       <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
         <Header/>
         <h1>Title</h1>
-
         {isLoggedIn ? (
           <div>
             {/* Additional content for logged-in users */}
             <p>Welcome! User is logged in</p>
-            <InfoPuller/>
           </div>
         ) : (
           <div>

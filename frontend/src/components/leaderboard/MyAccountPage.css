@@ -10,13 +10,6 @@
     font-family: 'Caveat';
 }
 
-
-.page-content {
-    padding: 20px;
-    transition: margin-left 0.5s;
-    
-  }
-  
   .page-heading {
     font-size: 24px;
     margin-bottom: 20px;

@@ -16,7 +16,6 @@ import PubGroupsPage from '../pubGroupsPage/PubGroupsPage'
 import SingleGroupPage from '../singleGroupPage/SingleGroupPage'
 import NewGroupPage from '../newGroupPage/NewGroupPage'
 import LeaderBoard from '../leaderboard/leaderboard';
-import Experiment from '../experiment/experiment';
 
 const App = () => {
     return (
@@ -36,8 +35,6 @@ const App = () => {
           <Route path='/groups' element={<PubGroupsPage navigate={ useNavigate() }/>}/>
           <Route path='/leaderboard' element={<LeaderBoard navigate={ useNavigate() }/>}/>
           <Route path='/'  element={<Home navigate={ useNavigate() }/>}/>
-          <Route path='/trial'  element={<Experiment navigate={ useNavigate() }/>}/>
-
 
         </Routes>
     );

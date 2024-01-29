@@ -1,7 +1,5 @@
 
 .BBHeaderMainBar {
-    color: #fff;
-    width: 100%;
     text-align: right;
     align-items: center; /* Center content vertically */
     justify-content: flex-end; /* Align content to the right */
@@ -10,10 +8,10 @@
 .BBHeaderMainBar img {
     padding-top: 0px;
     height: auto;
-    width: 160px;
-    padding-top: 0px;
+    width: 135px;
+    padding-top: .5%;
+    padding-right: .5%;
     padding-bottom: 0px;
-    padding-right: 50px;
   }
 
 .BBbottom-right-image {

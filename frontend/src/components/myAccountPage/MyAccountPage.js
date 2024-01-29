@@ -7,11 +7,9 @@ import PendingWagers from './myAccountPageComponents/PendingWagers';
 import PastWagers from './myAccountPageComponents/PastWagers';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import UnresolvedWagers from './myAccountPageComponents/UnresolvedWagers';
-import NotificationDetails from './myAccountPageComponents/NotificationDetails';
 import VertNavbar from '../VertNavBar/VertNavBar';
-import BlackboardHeader from './blackboardHeader/blackboardHeader';
+import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 import '../../Pages/style.css'
-import './MyAccountPage.css'
 
 
 const MyAccountPage = ({ navigate }) => {
@@ -111,11 +109,13 @@ const toggleHistory = (event) =>{
   
       return (
         <div className='shade'>
+        <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
           <div className='blackboard'>
+          <div className='form'>
 
           <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
           <BlackboardHeader />
-          <h1 className='username-subheading'>My wagers</h1>
+          <h1>My wagers</h1>
           {wagerRequests.length > 0 && (
           <button onClick={toggleIncoming} className='NotificationButton'>
             <FaBell /> 
@@ -160,6 +160,8 @@ const toggleHistory = (event) =>{
           </div>
         )}
 
+    </div>
+    </div>
     </div>
     </div>
       )};
