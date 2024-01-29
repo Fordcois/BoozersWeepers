@@ -27,62 +27,43 @@ const MyAccountPage = ({ navigate }) => {
   const [showUnresolved, setShowUnresolved] = useState(null)
   const [showHistory, setShowHistory] = useState(null)
   
-
-
 const toggleIncoming = (event) =>{
-  if(showIncoming === null){
-    setShowIncoming(true)
-  event.preventDefault()
-  }
-  else{
-    setShowIncoming(null)
-  event.preventDefault()
-  }
-}
+  if(showIncoming === null)
+    {setShowIncoming(true)
+    event.preventDefault()}
+  else
+    {setShowIncoming(null)
+    event.preventDefault()}}
+
 const toggleOngoing = (event) =>{
-  if(showOngoing === null){
-    setShowOngoing(true)
-  event.preventDefault()
-  }
-  else{
-    setShowOngoing(null)
-  event.preventDefault()
-  }
-}
+  if(showOngoing === null)
+    {setShowOngoing(true)
+    event.preventDefault()}
+  else
+    {setShowOngoing(null)
+    event.preventDefault()}}
+
 const togglePending = (event) =>{
-  if(showPending === null){
-    setShowPending(true)
-  event.preventDefault()
-  }
-  else{
-    setShowPending(null)
-  event.preventDefault()
-  }
-}
+  if(showPending === null)
+    {setShowPending(true)
+    event.preventDefault()}
+  else
+    {setShowPending(null)
+    event.preventDefault()}}
+
 const toggleUnresolved = (event) =>{
-  if(showUnresolved === null){
-    setShowUnresolved(true)
-  
-  event.preventDefault()
-  }
-  else{
-  
-    setShowUnresolved(null)
-  
-  }
-}
+  if(showUnresolved === null)
+    {setShowUnresolved(true)
+    event.preventDefault()}
+  else
+    {setShowUnresolved(null)}}
+
 const toggleHistory = (event) =>{
-  if(showHistory === null){
-    setShowHistory(true)
-  
-  event.preventDefault()
-  }
-  else{
-  
-    setShowHistory(null)
-  
-  }
-}
+  if(showHistory === null)
+  {setShowHistory(true)
+  event.preventDefault()}
+  else
+  {setShowHistory(null)}}
 
 // Returns True if deadline has not yet passed, false if deadline is over and wager is complete
   const checkIfOngoing = (deadline) => {
@@ -92,21 +73,13 @@ const toggleHistory = (event) =>{
     }
   
   useEffect((event) => {
-    
-    // Gets Wagers data from backend
     if(token) {
-      fetch("/wagers", {
-        method: 'get',
-        headers: {'Authorization': `Bearer ${token}`}
-      })
+      fetch("/wagers", {headers: {'Authorization': `Bearer ${token}`}})
         .then(response => response.json())
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setWagers(data.wagers)
-        
-          
-          
         })
       }
 
@@ -139,7 +112,6 @@ const toggleHistory = (event) =>{
       return (
         <div className='shade'>
           <div className='blackboard'>
-            <div className='form'>
 
           <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
           <BlackboardHeader />
@@ -190,7 +162,6 @@ const toggleHistory = (event) =>{
 
     </div>
     </div>
-  </div>
       )};
     
   export default MyAccountPage;
