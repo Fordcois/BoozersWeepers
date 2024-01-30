@@ -13,7 +13,6 @@ import '../../Pages/style.css'
 
 
 const MyAccountPage = ({ navigate }) => {
-  // const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [wagers, setWagers] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
@@ -103,7 +102,6 @@ const toggleHistory = (event) =>{
 
   
     useEffect(() => {
-
       if (!isLoggedIn) {navigate('/');}
       }, [navigate, isLoggedIn]);
   
@@ -116,6 +114,7 @@ const toggleHistory = (event) =>{
           <BlackboardHeader />
           
           <span className='chalktitle'>My Wagers</span>
+          
           {wagerRequests.length > 0 && (
           <button onClick={toggleIncoming} className='NotificationButton'>
             <FaBell /> 
