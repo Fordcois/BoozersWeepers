@@ -7,7 +7,6 @@ const LogInForm = ({ navigate }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     let response = await fetch( '/tokens', {
       method: 'post',
       headers: {'Content-Type': 'application/json',},
@@ -24,17 +23,24 @@ const LogInForm = ({ navigate }) => {
   }
 
   const handleEmailChange = (event) => {setEmail(event.target.value)}
-
   const handlePasswordChange = (event) => {setPassword(event.target.value)}
 
     return (
 <form>
-<FaPencil style={{transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px'}} />
-    <input placeholder='Email' id="email" type='text' value={email} onChange={handleEmailChange} /><br/>
-<FaPencil style={{transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px'}} />
-    <input placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} /><br/>
-<button className="orange_Button" onClick={handleSubmit} id='submit'>Submit</button>
+  <div style={{ display: 'flex', marginBottom: '10px' }}>
+    <div style={{ flex: '5%', justifyContent: 'flex-end' }}>
+      <FaPencil style={{ transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px', marginRight:'4px',opacity:'0.2' }} />
+    </div>
+    <div style={{ flex: '95%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+      
+      <input placeholder='Email' id="email" type='text' value={email} onChange={handleEmailChange} /><br/>
+      <input placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} /><br/>
+      
+    </div>
+  </div>
+  <button className="orange_Button" onClick={handleSubmit} id='submit'>Submit</button>
 </form>
+
     );
 }
 

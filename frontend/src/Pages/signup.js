@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import isTokenValid from '../components/Utility/isTokenValid';
 import VertNavbar from '../components/VertNavBar/VertNavBar';
 import SignUpForm from '../components/user/SignUpForm'
-import Header from '../components/header/Header';
+import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import '../Pages/style.css'
 
 const SignUpPage = ({ navigate }) => {
@@ -17,25 +18,38 @@ const SignUpPage = ({ navigate }) => {
     }, [token, navigate, isLoggedIn]);
 
     return (
-      <div>
-        <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-        <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-          <Header />
-          <h1 id='signup-subheading' className='page_subheading'>Register a New Account</h1>
-          {isLoggedIn ? (
-            <div>
-              <p>Please log-out to see this content</p>
-            </div>
-          ) : (
-            <div>
-              <SignUpForm navigate={navigate} />
-            <br></br>
-              Already have an account? 
-              <a href='/login'> Log in</a>
-            </div>
-          )}
-        </div>
-      </div>
+
+ <div className='shade'>
+ <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
+   <div className='blackboard'>
+     <div className='form'>
+     <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+     <BlackboardHeader/>
+
+     <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Register</span>
+       
+     <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
+      <SignUpForm navigate={navigate} />
+     
+       <div style={{ marginTop: '40px' }}>
+       <span className="chalk" style={{ '--fsize': '18px', '--talign': 'center' }}>Already have an account?</span>
+       <Link to={{ pathname: '/login', state: { name: 'John' } }} className="Homepage-link">Login</Link>
+       </div>
+     </div>
+       
+       
+ 
+
+
+     </div>
+   </div>
+ </div>
+</div>
+
+
+
+
+
     )};
   
 export default SignUpPage;

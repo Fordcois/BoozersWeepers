@@ -28,9 +28,6 @@
     background-color: #e57036;
   }
   
-.orange_Button:hover {
-  background-color: #e57036;
-}
 
 .shade {
   overflow: auto;
@@ -118,14 +115,14 @@
   color: #e57036;
 }
 
-.chalksubtitle-center{
+.chalk-error{
   font-family: 'Permanent Marker';
-  font-size: 24px;
-  color: whitesmoke;
+  font-size: 14px;
+  color: #ff0000;
   text-align: center;
-  display: block; 
-  margin: 0 auto; 
-  opacity: 0.75;
+  display: block;
+  margin-bottom: 5%
+
 }
 
 .HomeLogo{
@@ -136,9 +133,13 @@
   margin-right: auto;
 }
 
-input[type=text],input[type=password] {
-  background-color: white;
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  padding-left: 40px;
+input[type=text],
+input[type=password] {
+  background-color: transparent;
+  border: none;
+  color: whitesmoke;
+  border-bottom: 2px solid #cd561b;
+  padding-left: 5px;
+  font-size: 18px;
+  max-width: 520px;
 }

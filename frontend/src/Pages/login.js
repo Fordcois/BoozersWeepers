@@ -48,9 +48,6 @@ const LogInPage = ({ navigate }) => {
 </div>
   
   
-  
-  
-  
   )};
   
 export default LogInPage;
