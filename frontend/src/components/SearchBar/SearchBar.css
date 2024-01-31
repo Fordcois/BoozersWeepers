@@ -19,19 +19,6 @@
     margin-right: 8px;
   }
   
-  button {
-    background-color: #cd561b;
-    color: #ffffff;
-    border: none;
-    padding: 10px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #ad3e12;
-  }
-  
   .result-container {
     margin-top: 10px;
   }

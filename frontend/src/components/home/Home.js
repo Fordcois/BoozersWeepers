@@ -33,7 +33,7 @@ const Home = ({ navigate }) => {
         <Link to={{ pathname: '/login', state: { name: 'John' } }} className="Homepage-link">Sign-in</Link>
         <p>
         <span className="chalk" style={{ '--fsize': '18px' ,'--talign': 'center'}}>Don't have an account?</span>
-        <Link to={{ pathname: '/newpage', state: { name: 'John' } }} className="Homepage-link">Register</Link></p>
+        <Link to={{ pathname: '/signup', state: { name: 'John' } }} className="Homepage-link">Register</Link></p>
       </div>
  
  
