@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import isTokenValid from '../components/Utility/isTokenValid';
 import VertNavbar from '../components/VertNavBar/VertNavBar';
-import { useParams } from 'react-router-dom';
 import '../Pages/style.css';
-import Header from '../components/header/Header';
+import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 
-const ProfilePage = ({ navigate }) => {
+const ProfilePage = () => {
   const { userID } = useParams();
   const [userToken, setUserToken] = useState(window.localStorage.getItem('token'));
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(userToken));
   const [expanded, setExpanded] = useState(true);
-  const [userData,setUserData] = useState(null);
+  const [userData, setUserData] = useState(null);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -18,14 +18,18 @@ const ProfilePage = ({ navigate }) => {
         const response = await fetch(`/userdata/${userID}`, {
           headers: { Authorization: `Bearer ${userToken}` }
         });
-        if (!response.ok) {throw new Error('Network response was not ok');}
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
         const fetchedData = await response.json();
 
         window.localStorage.setItem('token', fetchedData.token);
         setUserToken(window.localStorage.getItem('token'));
-        setUserData(fetchedData);
+        setUserData(fetchedData.user);
       
-      } catch (error) {console.error('Error fetching user data:', error);}
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
     };
 
     fetchData();
@@ -36,27 +40,67 @@ const ProfilePage = ({ navigate }) => {
   };
 
   return (
-    <div>
-      <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+    <div className='shade'>
       <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-        <Header />
-        <h1>ProfilePage</h1>
-        {isLoggedIn ? (
-          <div>
+        <div className='blackboard'>
+          <div className='form'>
+            <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+            <BlackboardHeader />
             {userData ? (
-            <p>
-            Username: {userData.user.username}<br/>
-            First Name: {userData.user.firstName}<br/>
-            Last Name: {userData.user.lastName}<br/>
-            email: {userData.user.email}<br/>
-            profilepicture: <img src={userData.user.profilepicurl} alt='user Profile'/>
-            </p>
-           
-           ) : (<p>User Not Found</p>)}
+              <>
+              <div style={{ backgroundColor: 'red' }}>
+      
+              </div>
+
+                <div style={{ display: 'flex' }}>
+                <div style={{ flex: '47%', backgroundColor: 'transparent' }}>
+                  <span className="chalk" style={{ '--fsize': '34px', '--talign': 'left','text-decoration': 'underline #cd561b', 'text-decoration-thickness': '3px' }}>{userData.username}</span>
+                  <span className="chalk" style={{ '--fsize': '24px', '--talign': 'left', color: '#cd561b'}}> {userData.firstName} {userData.lastName}</span>
+                    <div class="profilepageportrait">
+                      <img src={userData.profilepicurl} alt="User Avatar" />
+                    </div>
+
+                </div>
+                
+                
+                
+                
+                
+                
+                
+                <div style={{ flex: '53%', backgroundColor: 'transparent' }}>
+                        <div style={{ backgroundColor: 'transparent', 'text-align': 'right', marginRight:'25px' }}><button className="orange_Button" >Challenge</button></div>
+                        
+                        <div style={{ backgroundColor: 'transparent' }}><div className='post-it'>
+                  <p className="note">
+                    Username: {userData.username}<br />
+                    First Name: {userData.firstName}<br />
+                    Last Name: {userData.lastName}<br />
+                    Email: {userData.email}<br />
+                  </p>
+                </div></div>
+                
+                
+                
+                
+                </div>
+                </div>
+
+
+
+
+
+
+
+                
+  
+                
+              </>
+            ) : (
+              <p>User Not Found</p>
+            )}
           </div>
-        ) : (
-          <div>Please <a href="/login">log in</a> to access this page</div>
-        )}
+        </div>
       </div>
     </div>
   );
