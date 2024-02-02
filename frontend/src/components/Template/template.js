@@ -1,33 +1,50 @@
 import React, { useEffect, useState } from 'react';
-import isTokenValid from '../Utility/isTokenValid';
 import VertNavbar from '../VertNavBar/VertNavBar';
-import '../../Pages/style.css'
+import BlackboardHeader from '../blackboardHeader/blackboardHeader';
+import NewSearchBar from '../NewSearch/NewSearch';
+import '../../Pages/style.css';
 
 const Template = ({ navigate }) => {
   const [token, setUserToken] = useState(window.localStorage.getItem('token'));
-  const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
   const [expanded, setExpanded] = useState(true);
+  const [list,setlist] = useState([])
 
-  const toggleExpand = () => {setExpanded(!expanded);};
+  const toggleExpand = () => {
+    setExpanded(!expanded);
+  };
 
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {const response = await fetch('/userdata', {headers: { Authorization: `Bearer ${token}` }});
+        if (!response.ok) {throw new Error('Network response was not ok');}
+        const userData = await response.json();
+        setlist(userData.users) 
+    } catch (error) {console.error('Error fetching user data:', error);}
+    };
+
+    fetchData();
+  }, [token]); 
+
   return (
-    <div>
-      <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+    <div className='shade'>
       <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-        <h1>Title</h1>
-        {isLoggedIn ? (
-          <div>
-            {/* Additional content for logged-in users */}
-            <p>Welcome! User is logged in</p>
+        <div className='blackboard'>
+          <div className='form'>
+            <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+            <BlackboardHeader /> 
+            <span className='chalktitle'>Welcome to the Workshop</span>
+
+            <NewSearchBar SearchData={list}/>
+
+          
+          
+          
+          
+          
+          
+          
           </div>
-        ) : (
-          <div>
-            {/* Content for non-logged-in users */}
-            <p>Please <a href="/login">log in</a> to access this page</p>
-            
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );

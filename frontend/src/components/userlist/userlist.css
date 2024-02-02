@@ -1,18 +1,52 @@
-/* Add styles to your CSS file */
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
-.pageTitle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 60vh; /* Adjust as needed */
-  }
-  
-  h1 {
-    margin-bottom: 20px; /* Add margin for spacing */
+.singleuser{
+    background-color: transparent
   }
 
-  .shifted-content {
-    margin-left: 200px;
-  }
-  
+.SingleUserNameText {
+    color: whitesmoke;
+    font-style: bold;
+    font-family: 'Permanent Marker';
+    font-size: 120%
+}
+
+.singleuser:hover .SingleUserNameText {
+  color: #cd561b;
+}
+.singleuser:hover .profilepic {
+  border: 3px solid whitesmoke;
+}
+.singleuser:hover .RealNameText {
+  color: #cd561b;
+  font-style: bold;
+  font-size: 80%;
+}
+
+
+.RealNameText {
+  color: #B0B0B0;
+  font-style: italic;
+  font-size: 80%;
+}
+
+.profilepic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid #cd561b;
+}
+
+.page-content {
+  flex-grow: 1;
+  margin-left: 50px;
+  padding-left: 2%;
+  transition: margin-left 0.2s ease-in-out;
+}
+.shifted-content {
+  margin-left: 200px;
+}
+
+.singleuser-link{
+  text-emphasis: none;
+}

@@ -24,7 +24,7 @@ const App = () => {
           <Route path='/signup' element={<SignUpPage navigate={ useNavigate() }/>}/>
           <Route path='/myAccount' element={<MyAccountPage navigate={ useNavigate() }/>}/>
           <Route path='/newWager/:challengedUserID' element={<NewWagerForm navigate={ useNavigate() }/>}/>
-          <Route path='/userlist'  element={<UserList navigate={ useNavigate() }/>}/>
+          <Route path='/newbet'  element={<UserList navigate={ useNavigate() }/>}/>
           <Route path='/Wager/:wagerID' element={<WagerInfoPage navigate={ useNavigate() }/>}/>
           <Route path='/workshop' element={<Workshop navigate={ useNavigate() }/>}/>
           <Route path='/profile/:userID' element={<ProfilePage navigate={ useNavigate() }/>}/>
