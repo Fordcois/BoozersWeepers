@@ -46,7 +46,12 @@ const ProfilePage = ({ navigate }) => {
             {userData ? (
             <p>
             Username: {userData.user.username}<br/>
-            email: {userData.user.email}</p>
+            First Name: {userData.user.firstName}<br/>
+            Last Name: {userData.user.lastName}<br/>
+            email: {userData.user.email}<br/>
+            profilepicture: <img src={userData.user.profilepicurl} alt='user Profile'/>
+            </p>
+           
            ) : (<p>User Not Found</p>)}
           </div>
         ) : (

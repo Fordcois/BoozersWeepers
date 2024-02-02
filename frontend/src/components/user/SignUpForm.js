@@ -7,6 +7,8 @@ const SignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (event) => {
@@ -17,7 +19,7 @@ const SignUpForm = ({ navigate }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email, password: password, username: username })
+      body: JSON.stringify({ email: email, password: password, username: username, firstName: firstname, lastName: lastname  })
     })
     .then(async response => {
       if(response.status === 201) {
@@ -32,13 +34,11 @@ const SignUpForm = ({ navigate }) => {
 }
   
   const handleEmailChange = (event) => {setEmail(event.target.value)}
+  const handleUsernameChange = (event) => {setUsername(event.target.value)}
+  const handlePasswordChange = (event) => {setPassword(event.target.value)}
+  const handleFirstNameChange = (event) => {setFirstname(event.target.value)}
+  const handleLastNameChange = (event) => {setLastname(event.target.value)}
   
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value)
-  }
   
   return (
 <form>
@@ -51,6 +51,8 @@ const SignUpForm = ({ navigate }) => {
       
     <input placeholder="Email" id="email" type='text' value={email} onChange={handleEmailChange} />
     <input placeholder="Username" id="username" type='text' value={username} onChange={handleUsernameChange} />
+    <input placeholder="First Name" id="FirstName" type='text' value={firstname} onChange={handleFirstNameChange} />
+    <input placeholder="Last Name" id="LasttName" type='text' value={lastname} onChange={handleLastNameChange} />
     <input placeholder="Password" id="password" type='password' value={password} onChange={handlePasswordChange} />
       
     </div>
