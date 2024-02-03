@@ -15,3 +15,22 @@
     font-size: small;
     padding-left: 2%;
 }
+.penfont-small {
+    display: block;
+    font-family: 'Permanent Marker';
+    font-size: 18px;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 0px;
+}
+
+.penfont-large {
+    margin: 0px;
+    display: block;
+    font-family: 'Permanent Marker';
+    color: #cd561b;
+    font-size: 36px;
+    text-align: center;
+
+}
+

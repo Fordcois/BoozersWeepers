@@ -21,8 +21,7 @@ const WagersController = {
 
   Index: (req, res) => {
     Wager.find()
-
-    .populate('peopleInvolved  -password')
+    .populate('peopleInvolved', '-password')
     .populate('winner', '_id username')
     .exec((err, wagers) => {
       if (err) {
@@ -34,21 +33,21 @@ const WagersController = {
   },
 
   Accept: async (req, res) => {
-	const wagerID = req.params.wager_id;
-	const wager = await Wager.updateOne({_id: wagerID}, {$set: {approved: true}});
-	if (!wager) {
-		return res.status(400).json({message: "wager_id not found"})
-	}
-	else {
-		const token = TokenGenerator.jsonwebtoken(req.user_id)
-		res.status(200).json({ message: 'OK', token: token });
-	}
+    const wagerID = req.params.wager_id;
+    const wager = await Wager.updateOne({_id: wagerID}, {$set: {approved: true}});
+    if (!wager) {
+      return res.status(400).json({message: "wager_id not found"})
+    }
+    else {
+      const token = TokenGenerator.jsonwebtoken(req.user_id)
+      res.status(200).json({ message: 'OK', token: token });
+    }
   },
 
   FindByID: (req, res) => {
     const wagerID = req.params.id;
     Wager.findById(wagerID)
-		.populate('peopleInvolved winner')
+    .populate('peopleInvolved', 'winner')
     .exec((err, wager) => {
         if (err) {
           return res.status(500).json({ error: 'Internal Server Error' });
@@ -59,18 +58,6 @@ const WagersController = {
         const token = TokenGenerator.jsonwebtoken(req.user_id);
         return res.status(200).json({ wager: wager, token: token });
       });
-  },
-
-  Accept: async (req, res) => {
-  const wagerID = req.params.wager_id;
-  const wager = await Wager.updateOne({_id: wagerID}, {$set: {approved: true}});
-  if (!wager) {
-    return res.status(400).json({message: "Wager not found"})
-  }
-  else {
-    const token = TokenGenerator.jsonwebtoken(req.user_id)
-    res.status(200).json({ message: 'OK', token: token });
-  }
   },
 
   UpdateWinner: async (req, res) => {
@@ -91,7 +78,7 @@ const WagersController = {
       console.error('Error updating winner:', error);
       res.status(500).json({ error: 'Internal Server Error.' });
     }
-},
+  },
 
   Cancel: async (req, res) => {
     const wagerID = req.params.wager_id;
@@ -100,8 +87,8 @@ const WagersController = {
     if (!wagerID) {
       // error message for debugging - in theory this path should never be used because can't go along this route if no wager id is in the route parameters 
       console.log("Cancelling wager attempt failed - wager ID not provided")
-        return res.status(400).json({ error: 'Wager ID not provided in route parameters' });
-      }
+      return res.status(400).json({ error: 'Wager ID not provided in route parameters' });
+    }
     const existingWager = await Wager.findById(wagerID);
     if (!existingWager) {
       return res.status(404).json({ error: 'Wager not found in database' });
@@ -113,6 +100,23 @@ const WagersController = {
       res.status(200).json({ message: 'Wager successfully removed from database', token: token });
     } 
   },
+
+  FindUserBets: (req, res) => {
+    const userId = req.params.userId;
+    Wager.find({
+        peopleInvolved: {
+            $elemMatch: { $eq: userId }
+        }
+    })
+    .populate('peopleInvolved', '-password')
+    .populate('winner', '_id username')
+    .exec((err, wagers) => {
+        if (err) {return res.status(500).json({ error: 'Internal Server Error' });}
+        console.log('Found user bets:', wagers);
+        const token = TokenGenerator.jsonwebtoken(req.user_id);
+        return res.status(200).json({ wagers: wagers, token: token });
+    });
 }
+};
 
 module.exports = WagersController;

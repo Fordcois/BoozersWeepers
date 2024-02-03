@@ -10,7 +10,8 @@ router.post("/:wager_id/accept", WagersController.Accept);
 router.post("/updateWinner/:wagerID/:winnerID", WagersController.UpdateWinner);
 router.post("/", WagersController.Create);
 router.post("/:wager_id/cancel", WagersController.Cancel);
-
+router.get("/", WagersController.Index);
+router.get("/findall/:userId", WagersController.FindUserBets);
 
 
 module.exports = router;

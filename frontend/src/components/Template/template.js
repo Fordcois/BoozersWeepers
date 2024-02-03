@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import VertNavbar from '../VertNavBar/VertNavBar';
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
-import NewSearchBar from '../NewSearch/NewSearch';
 import '../../Pages/style.css';
+
+import SingleUserStats from '../stats/getSingleUserStats';
 
 const Template = ({ navigate }) => {
   const [token, setUserToken] = useState(window.localStorage.getItem('token'));
   const [expanded, setExpanded] = useState(true);
   const [list,setlist] = useState([])
+  const [ID,setID] = useState('65b3cb2aa30533d477e17ff2')
 
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {const response = await fetch('/userdata', {headers: { Authorization: `Bearer ${token}` }});
-        if (!response.ok) {throw new Error('Network response was not ok');}
-        const userData = await response.json();
-        setlist(userData.users) 
-    } catch (error) {console.error('Error fetching user data:', error);}
-    };
 
-    fetchData();
-  }, [token]); 
+
+
+
+
+
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {const response = await fetch(`/wagers/findall/${ID}`, 
+  //     {headers: { Authorization: `Bearer ${token}` }});
+  //       if (!response.ok) {throw new Error('Network response was not ok');}
+  //       const userData = await response.json();
+  //       console.log(userData)
+  //   } catch (error) {console.error('Error fetching user data:', error);}
+  //   };
+
+  //   fetchData();
+  // }, [token]); 
 
   return (
     <div className='shade'>
@@ -34,7 +44,12 @@ const Template = ({ navigate }) => {
             <BlackboardHeader /> 
             <span className='chalktitle'>Welcome to the Workshop</span>
 
-            <NewSearchBar SearchData={list}/>
+
+
+
+            <SingleUserStats UserID={'65b3cb2aa30533d477e17ff2'}/>
+
+            
 
           
           

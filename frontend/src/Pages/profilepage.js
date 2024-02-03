@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import isTokenValid from '../components/Utility/isTokenValid';
 import VertNavbar from '../components/VertNavBar/VertNavBar';
 import '../Pages/style.css';
 import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
+import SingleUserStats from '../components/stats/getSingleUserStats';
 
 const ProfilePage = () => {
   const { userID } = useParams();
@@ -11,7 +12,7 @@ const ProfilePage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(userToken));
   const [expanded, setExpanded] = useState(true);
   const [userData, setUserData] = useState(null);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,7 +27,6 @@ const ProfilePage = () => {
         window.localStorage.setItem('token', fetchedData.token);
         setUserToken(window.localStorage.getItem('token'));
         setUserData(fetchedData.user);
-      
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -48,56 +48,38 @@ const ProfilePage = () => {
             <BlackboardHeader />
             {userData ? (
               <>
-              <div style={{ backgroundColor: 'red' }}>
-      
-              </div>
-
                 <div style={{ display: 'flex' }}>
-                <div style={{ flex: '47%', backgroundColor: 'transparent' }}>
-                  <span className="chalk" style={{ '--fsize': '34px', '--talign': 'left','text-decoration': 'underline #cd561b', 'text-decoration-thickness': '3px' }}>{userData.username}</span>
-                  <span className="chalk" style={{ '--fsize': '24px', '--talign': 'left', color: '#cd561b'}}> {userData.firstName} {userData.lastName}</span>
-                    <div class="profilepageportrait">
+                  <div style={{ paddingRight: '5em', backgroundColor: 'transparent' }}>
+                    {/* User Information */}
+                    <span className="chalk" style={{ '--fsize': '34px', '--talign': 'left', 'text-decoration': 'underline #cd561b', 'text-decoration-thickness': '3px' }}>{userData.username}</span>
+                    <span className="chalk" style={{ '--fsize': '24px', '--talign': 'left', color: '#cd561b' }}> {userData.firstName} {userData.lastName}</span>
+                    <div className="profilepageportrait">
                       <img src={userData.profilepicurl} alt="User Avatar" />
                     </div>
-
+                  </div>
+                  {/* User Stats */}
+                  <div style={{ backgroundColor: 'transparent' }}>
+                    <div style={{ backgroundColor: 'transparent' }}>
+                      <div className='post-it'>
+                        <p className="note">
+                          <SingleUserStats UserID={userID} />
+                        </p>
+                        <div style={{ backgroundColor: 'transparent', textAlign: 'center', marginTop: '20px' }}>
+                          {/* Challenge Button */}
+                          <Link to={{ pathname: `/newWager/${userData._id}`, state: 'hello' }}>
+                            <button className="orange_Button">Challenge</button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                
-                
-                
-                
-                
-                
-                
-                <div style={{ flex: '53%', backgroundColor: 'transparent' }}>
-                        <div style={{ backgroundColor: 'transparent', 'text-align': 'right', marginRight:'25px' }}><button className="orange_Button" >Challenge</button></div>
-                        
-                        <div style={{ backgroundColor: 'transparent' }}><div className='post-it'>
-                  <p className="note">
-                    Username: {userData.username}<br />
-                    First Name: {userData.firstName}<br />
-                    Last Name: {userData.lastName}<br />
-                    Email: {userData.email}<br />
-                  </p>
-                </div></div>
-                
-                
-                
-                
-                </div>
-                </div>
-
-
-
-
-
-
-
-                
-  
-                
               </>
             ) : (
-              <p>User Not Found</p>
+              <div style={{ 'textAlign': 'center' }}>
+                <span className="chalk" style={{ '--fsize': '34px' }}>No User Found</span>
+                <span className="chalk" style={{ '--fsize': '28px', 'opacity': '0.8' }}>(Sorry!)</span>
+              </div>
             )}
           </div>
         </div>
