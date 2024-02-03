@@ -46,36 +46,32 @@ const ProfilePage = () => {
           <div className='form'>
             <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
             <BlackboardHeader />
-            {userData ? (
-              <>
-                <div style={{ display: 'flex' }}>
-                  <div style={{ paddingRight: '5em', backgroundColor: 'transparent' }}>
-                    {/* User Information */}
-                    <span className="chalk" style={{ '--fsize': '34px', '--talign': 'left', 'text-decoration': 'underline #cd561b', 'text-decoration-thickness': '3px' }}>{userData.username}</span>
-                    <span className="chalk" style={{ '--fsize': '24px', '--talign': 'left', color: '#cd561b' }}> {userData.firstName} {userData.lastName}</span>
-                    <div className="profilepageportrait">
-                      <img src={userData.profilepicurl} alt="User Avatar" />
-                    </div>
-                  </div>
-                  {/* User Stats */}
-                  <div style={{ backgroundColor: 'transparent' }}>
-                    <div style={{ backgroundColor: 'transparent' }}>
-                      <div className='post-it'>
-                        <p className="note">
-                          <SingleUserStats UserID={userID} />
-                        </p>
-                        <div style={{ backgroundColor: 'transparent', textAlign: 'center', marginTop: '20px' }}>
-                          {/* Challenge Button */}
-                          <Link to={{ pathname: `/newWager/${userData._id}`, state: 'hello' }}>
-                            <button className="orange_Button">Challenge</button>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : (
+            
+{userData ? (
+<>
+<div style={{ display: 'flex' }}>
+  <div style={{ paddingRight: '5em'}}>
+      <span className="chalk" style={{ '--fsize': '34px', '--talign': 'left', 'text-decoration': 'underline #cd561b', 'text-decoration-thickness': '3px' }}>{userData.username}</span>
+      <span className="chalk" style={{ '--fsize': '24px', '--talign': 'left', color: '#cd561b' }}> {userData.firstName} {userData.lastName}</span>
+      <div className="profilepageportrait"><img src={userData.profilepicurl} alt="User Avatar" /></div>
+  </div>
+
+  <div >
+      <div className='post-it'>
+      <p className="note"><SingleUserStats UserID={userID} /></p>
+    
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <Link to={{ pathname: `/newWager/${userData._id}`, state: 'hello' }}>
+          <button className="orange_Button">Challenge</button>
+        </Link>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+</>
+                ) : (
               <div style={{ 'textAlign': 'center' }}>
                 <span className="chalk" style={{ '--fsize': '34px' }}>No User Found</span>
                 <span className="chalk" style={{ '--fsize': '28px', 'opacity': '0.8' }}>(Sorry!)</span>

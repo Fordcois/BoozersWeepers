@@ -47,27 +47,21 @@ const SingleUserStats = ({ UserID }) => {
   }, [UserID, token]);
 
   return (
-<div style={{ width:'100%', display:'block' }}>
+  <div style={{ width:'100%', display:'block' }}>
 
     <span className="penfont-small">Bets Made:</span> 
     <span className="penfont-large">{results.BetsMade}</span>
 
+    <span className="penfont-small">Wins:</span> 
+    <span className="penfont-large centered">{results.Wins}</span>
 
-
-  <span className="penfont-small">Wins:</span> 
-  <span className="penfont-large centered">{results.Wins}</span>
-
-
-
-  <span className="penfont-small">Losses:</span> 
+    <span className="penfont-small">Losses:</span> 
     <span className="penfont-large centered">{results.Losses}</span>
 
-
-
-  <span className="penfont-small">Win Percentage:</span>
+    <span className="penfont-small">Win Percentage:</span>
     <span className="penfont-large">{results.BetsComplete === 0 ? 0 : (results.Wins / results.BetsComplete * 100).toFixed(2)}%</span>
 
-</div>
+  </div>
 )};
 
 export default SingleUserStats;
