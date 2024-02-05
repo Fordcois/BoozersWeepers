@@ -155,7 +155,7 @@ const toggleHistory = (event) =>{
 
         {pastWagers.length === 0 && unresolvedWagers.length===0 && pendingWagers.length === 0 && ongoingWagers.length===0 &&(
           <div>
-            <h2 className="noWagers"> You have no wagers - <a className="noWagers" href='/userlist'>challenge someone!</a></h2> 
+            <h2 className="noWagers"> You have no wagers - <a className="noWagers" href='/newWager'>challenge someone!</a></h2> 
           </div>
         )}
 
