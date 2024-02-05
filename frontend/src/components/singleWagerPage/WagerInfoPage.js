@@ -6,8 +6,8 @@ import SinglePendingWager from './childComponents/SinglePendingWager';
 import SingleWagerRequest from './childComponents/SingleWagerRequest';
 import SingleOngoingWager from './childComponents/SingleOngoingWager';
 import SingleResolvedWager from './childComponents/SingleResolvedWager';
-import Header from '../header/Header';
 import '../../Pages/style.css'
+import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 
 
 
@@ -19,8 +19,6 @@ const WagerInfoPage = ({ navigate }) => {
   const loggedInUser = getSessionUserID(token)
   
   useEffect(() => {
-    console.log("I've got this from the URL-", wagerID)
-
     const fetchData = async () => {
       try {
         const response = await fetch(`/wagers/${wagerID}`, {
@@ -46,7 +44,6 @@ const toggleExpand = () => {setExpanded(!expanded);};
 if (!wagerData) {
   return(
     <div>
-      <Header/>
     <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
     <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
       <p id='loading-message' className='loading-message'>Loading...</p>
@@ -56,19 +53,22 @@ if (!wagerData) {
 } else {
 
   return (
-      <div id='single-wager-page' className='single-wager-page'>
-        <Header/>
-				<VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-        <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+    <div className='shade'>
+    <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
+      <div className='blackboard'>
+        <div className='form'>
+          <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+          <BlackboardHeader /> 
+
+
+
+
+
+          
+
+        
+    
         <h1 id='single-wager-page-header' className='page_subheading'>Wager Details</h1>
-        <br/>
-        <br/>
         { wagerData.approved === false && wagerData.peopleInvolved[0]._id === loggedInUser ? (
       
             <SinglePendingWager wagerData={wagerData}/>
@@ -88,12 +88,10 @@ if (!wagerData) {
             ) : (
             <p>Error - return to account page</p>
         )}
-
-        <br /><br/>
-        <br/>
-          <button id='return-button' className='return-button' onClick={() => navigate('/myAccount')}>Return to All Wagers</button>
         </div>
-        </div>
+      </div>
+    </div>
+  </div>
       )
     }
   }

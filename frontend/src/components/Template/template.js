@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import VertNavbar from '../VertNavBar/VertNavBar';
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 import '../../Pages/style.css';
+import { useParams } from 'react-router-dom';
 
 import SingleUserStats from '../stats/getSingleUserStats';
 
@@ -10,11 +11,12 @@ const Template = ({ navigate }) => {
   const [expanded, setExpanded] = useState(true);
   const [list,setlist] = useState([])
   const [ID,setID] = useState('65b3cb2aa30533d477e17ff2')
-
+  const { name, lastName } = useParams();
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
-
+  
+  
 
 
 
@@ -42,12 +44,11 @@ const Template = ({ navigate }) => {
           <div className='form'>
             <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
             <BlackboardHeader /> 
-            <span className='chalktitle'>Welcome to the Workshop</span>
+            <span className='chalktitle'>Welcome to the Workshop, {name} {lastName} </span>
 
 
 
 
-            <SingleUserStats UserID={'65b3cb2aa30533d477e17ff2'}/>
 
             
 
