@@ -8,6 +8,7 @@ import SingleOngoingWager from './childComponents/SingleOngoingWager';
 import SingleResolvedWager from './childComponents/SingleResolvedWager';
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 import '../../Pages/style.css'
+import WagerDetails from './childComponents/WagerDetails';
 
 
 const WagerInfoPage = ({ navigate }) => {
@@ -37,6 +38,7 @@ const WagerInfoPage = ({ navigate }) => {
   }, [token, wagerID]);
 
 const toggleExpand = () => {setExpanded(!expanded);};
+console.log(wagerData);
 
 return (
   <div className='shade'>
@@ -53,8 +55,8 @@ return (
               </div>
           ) : (
             <>
-              <h1 id='single-wager-page-header' className='page_subheading'>Wager Details</h1>
-              {wagerData.approved === false && wagerData.peopleInvolved[0]._id === loggedInUser ? (
+              <WagerDetails wagerData={wagerData}/>
+              {/* {wagerData.approved === false && wagerData.peopleInvolved[0]._id === loggedInUser ? (
                 <SinglePendingWager wagerData={wagerData}/>
               ) : wagerData.approved === false && wagerData.peopleInvolved[1]._id === loggedInUser ? (
                 <SingleWagerRequest wagerData={wagerData}/>
@@ -64,7 +66,7 @@ return (
                 <SingleResolvedWager wagerData={wagerData}/>
               ) : (
                 <p>Error - return to account page</p>
-              )}
+              )} */}
             </>
           )}
         </div>
