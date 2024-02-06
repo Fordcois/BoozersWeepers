@@ -47,7 +47,7 @@ const WagersController = {
   FindByID: (req, res) => {
     const wagerID = req.params.id;
     Wager.findById(wagerID)
-    .populate('peopleInvolved', 'winner')
+    .populate(['winner','peopleInvolved'])
     .exec((err, wager) => {
         if (err) {
           return res.status(500).json({ error: 'Internal Server Error' });

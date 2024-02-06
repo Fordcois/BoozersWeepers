@@ -83,7 +83,7 @@
   color: whitesmoke;
   text-align: var(--talign);
   display: block;
-  margin: 0 auto; 
+  /* margin: 10;  */
 }
 
 .chalktitle-center{
@@ -233,6 +233,25 @@ input[type=password] {
 
 }
 .profilepageportrait img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+
+.wageruserportrait {
+  position: relative;
+  width: 125px;
+  height: 125px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 7px solid #cd561b;
+}
+.wageruserportrait img {
   position: absolute;
   left: 50%;
   top: 50%;
