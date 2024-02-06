@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './SearchBar.css';
-import SingleUser from '../userlist/Singleuser';
+import SingleUser from '../NewWagerPage/Singleuser';
 import { useNavigate } from 'react-router-dom';
 
 

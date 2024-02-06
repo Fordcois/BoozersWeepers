@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SingleUser from '../userlist/Singleuser';
+import SingleUser from '../NewWagerPage/Singleuser';
 import { FaPencil } from "react-icons/fa6";
 
 const NewSearchBar = (props) => {

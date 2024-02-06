@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import SingleUser from './Singleuser';
 import NewSearchBar from '../NewSearch/NewSearch';
 import VertNavbar from '../VertNavBar/VertNavBar';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 import './userlist.css'
 
-const UserList = () => {
+const NewWagerPage = () => {
   const [ListOfUsers, setUsernames] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [expanded, setExpanded] = useState(true);
@@ -53,4 +52,4 @@ const UserList = () => {
   );
 };
 
-export default UserList;
+export default NewWagerPage;
