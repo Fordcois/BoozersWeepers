@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom"
 import VertNavbar from '../VertNavBar/VertNavBar';
 import Header from '../header/Header';
 import '../../Pages/style.css'
+import { FaPencil } from "react-icons/fa6";
+import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 
 const NewWagerForm = ({ navigate }) => {
 	const {challengedUserID} = useParams()
@@ -81,27 +83,34 @@ if (token) {
 		<>
 			{userData && (
 				<>
-					<VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-					<Header />
-					<div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-						
-					<div className="NewWager">
-						<form onSubmit={handleWagerSubmit}>
-							<h1 id="page_subheading" className='page_subheading'>Create a wager with {userData.username}</h1>
-						<br></br>
-						<br></br>
-						<br></br>
-						<br></br>
-							<input placeholder="Description" id="description" type='text' value={description} onChange={handleDescriptionChange} />
-							<input placeholder="Deadline" id="deadline" type='date' value={deadline} onChange={handleDeadlineChange} />
-							<br></br>
-							<input id='submit' type="submit" value="Submit" />
-						</form>
-						<br></br>
-						<br></br>
-						<br></br>
-						<br></br>
-					</div>
+					<div className='shade'>
+
+						<div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
+
+						<div className='blackboard'>
+				
+							<VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+							<BlackboardHeader/>
+
+								<div className="NewWager"> 
+								
+										<form onSubmit={handleWagerSubmit}>
+											<span id="page_subheading" className="chalk" style={{ margin: '2rem', '--fsize': '3rem'}}>Create a wager with {userData.username}</span>
+
+											<span className="chalk" style={{ display: 'inline', '--fsize': '1.5rem'}}> You bet that... </span>
+											<div style={{ display: 'inline',justifyContent: 'flex-end' }}>
+												<FaPencil style={{ transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px', marginRight:'2px',opacity:'0.2' }} />
+											</div>
+											<input placeholder="Bet description" id="description" type='text' value={description} onChange={handleDescriptionChange} style={{marginRight: '0.5rem'}}/>
+											<br></br>
+											<span className="chalk" style={{ display: 'inline', '--fsize': '1.5rem'}}> To be resolved by... </span>
+											<input placeholder="Deadline" id="deadline" type='date' value={deadline} onChange={handleDeadlineChange} /><br></br>
+											
+											<button class="orange_Button" id="submit" style={{margin: '1em'}}>Submit </button>
+										</form>
+								</div>
+							</div>
+						</div>
 					</div>
 				</>
 			)}
