@@ -8,8 +8,16 @@ const SingleOngoingWager = (wagerData) => {
     const token = window.localStorage.getItem('token');
     const loggedInUser = getSessionUserID(token)
     const wager = wagerData.wagerData
-    const user1 = wager.peopleInvolved[0]
-    const user2 = wager.peopleInvolved[1]
+    let ActiveUser;
+    let OtherUser;
+    
+    if (loggedInUser === wager.peopleInvolved[0]._id) {
+        ActiveUser = wager.peopleInvolved[0];
+        OtherUser = wager.peopleInvolved[1];
+    } else if (loggedInUser === wager.peopleInvolved[1]._id){
+        ActiveUser = wager.peopleInvolved[1];
+        OtherUser = wager.peopleInvolved[2];
+    } 
 
     const dateParts = wager.deadline.slice(0, 10).split("-");
     const deadlineDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`
@@ -58,55 +66,34 @@ const SingleOngoingWager = (wagerData) => {
 
   return(
   <div>
-    <span className="chalk" style={{ marginTop:'1%',paddingLeft:'12%','--fsize': '22px', '--talign': 'left', color: '#cd561b'}}> Will happen by...</span>
-    <span className="chalk" style={{ marginTop:'1%', paddingLeft:'17%','--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span>
+        {new Date(wager.deadline) > new Date() ? 
+        // 'Deadline Not Passed'
+        <>
+          <span className="chalk" style={{ marginTop:'1%',paddingLeft:'12%','--fsize': '22px', '--talign': 'left', color: '#cd561b'}}> Will happen by...</span>
+          <span className="chalk" style={{ marginTop:'1%', paddingLeft:'17%','--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span> 
 
-  
-      {/* Deadline is: {new Date(wager.deadline)}<br/>
-      Now is: {new Date()} <br/> */}
+          <span className="chalk" style={{ marginTop:'4%','--fsize': '27px', '--talign': 'center', color: 'whitesmoke' }}>Throw in the towel early?</span>
+          <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', '--talign': 'center', color: 'whitesmoke', opacity:'0.8' }}>(Lost your bottle?)</span>
+          
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop:'3%'}}>
+            <button id='accept-button' className='orange_Button' onClick={() => handleWinner(OtherUser._id,ActiveUser._id,)}>Concede Wager</button>
+          </div>
+        </>
+        : 
+        // 'Deadline Passed'
+        <>
+          <span className="chalk" style={{ marginTop:'1%',paddingLeft:'12%','--fsize': '22px', '--talign': 'left', color: '#cd561b'}}> Would happen by...</span>
+          <span className="chalk" style={{ marginTop:'1%', paddingLeft:'17%','--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span>  
 
-
-    {new Date(wager.deadline) > new Date() ? 'Deadline Not Passed' : 'Deadline Passed'}
-      
-    <span className="chalk" style={{ marginTop:'4%','--fsize': '27px', '--talign': 'center', color: 'whitesmoke' }}>Do you accept the challenge?</span>
-    <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', '--talign': 'center', color: 'whitesmoke', opacity:'0.8' }}>(I fancy your chances)</span>
-
-    {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop:'3%'}}>
-      <button id='accept-button' className='orange_Button' style={{marginRight:'7%'}} onClick={ handleAcceptClick }>Accept Wager</button>
-      <button id='reject-button' className='orange_Button' style={{marginLeft:'7%'}}onClick={ handleRejectClick }>Reject Wager</button>
-    </div> */}
-
-
-  </div>)
-  //   if (user1._id === loggedInUser) {
-  //     return (
-  //       <div className="preamble">
-  //         You bet {user2.username} that {wager.description} would happen before {deadlineDate} <br />
-  //         So...Who won?
-  //         <br/>
-  //         <button onClick={() => handleWinner(user1._id, user2._id)}>I Won</button><span className="button-space"></span>
-  //         <button onClick={() => handleWinner(user2._id, user1._id)}>{user2.username} won</button>
-
-  //       </div>
-  //     );
-  // } else if (user2._id === loggedInUser) {
-  //     return (
-  //       <div className="preamble">
-  //       {user1.username} bet you that {wager.description} would happen before {deadlineDate}  <br /><br />
-  //       So...   Who won?
-  //       <br/>
-  //       <br/>
-  //       <button onClick={() => handleWinner(user2._id, user1._id)}>I Won</button><span className="button-space"></span>
-  //       <button onClick={() => handleWinner(user1._id, user2._id)}>{user1.username} Won</button>
+          <span className="chalk" style={{ marginTop:'4%','--fsize': '27px', '--talign': 'center', color: 'whitesmoke' }}>So, Times up! Who won?</span>
+          <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', '--talign': 'center', color: 'whitesmoke', opacity:'0.8' }}>(Who's the real guv'nor round 'ere?)</span>
         
-
-  //       </div>
-  //     );
-  // } else { 
-  //   return (
-  //   <div>
-  //   You Are Not Involved in this bet!
-  // </div>)}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop:'3%'}}>
+            <button id='accept-button' className='orange_Button' style={{marginRight:'7%'}} onClick={() => handleWinner(ActiveUser._id, OtherUser._id)}>I won</button>
+            <button id='reject-button' className='orange_Button' style={{marginLeft:'7%'}} onClick={() => handleWinner(OtherUser._id,ActiveUser._id)}>{OtherUser.firstName} Won</button>
+          </div>
+        </>}
+  </div>)
 };
 
 export default SingleOngoingWager;
