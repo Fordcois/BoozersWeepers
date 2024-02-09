@@ -27,7 +27,7 @@ const LogInForm = ({ navigate }) => {
 
     return (
 <form>
-  <div style={{ display: 'flex', marginBottom: '10px' }}>
+  <div style={{ display: 'flex', marginBottom: '10px'}}>
     <div style={{ flex: '5%', justifyContent: 'flex-end' }}>
       <FaPencil style={{ transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px', marginRight:'4px',opacity:'0.2' }} />
     </div>
