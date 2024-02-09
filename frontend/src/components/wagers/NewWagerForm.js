@@ -94,19 +94,21 @@ if (token) {
 
 								<div className="NewWager"> 
 								
-										<form onSubmit={handleWagerSubmit}>
+										<form onSubmit={handleWagerSubmit} style={{width:'1000px'}}>
 											<span id="page_subheading" className="chalk" style={{ margin: '2rem', '--fsize': '3rem'}}>Create a wager with {userData.username}</span>
 
 											<span className="chalk" style={{ display: 'inline', '--fsize': '1.5rem'}}> You bet that... </span>
 											<div style={{ display: 'inline',justifyContent: 'flex-end' }}>
-												<FaPencil style={{ transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px', marginRight:'2px',opacity:'0.2' }} />
+												<FaPencil style={{ transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px', marginRight:'4px',opacity:'0.2' }} />
 											</div>
-											<input placeholder="Bet description" id="description" type='text' value={description} onChange={handleDescriptionChange} style={{marginRight: '0.5rem'}}/>
+											<input placeholder="Bet description" id="description" type='text' value={description} onChange={handleDescriptionChange} style={{ marginTop: '1rem', width:'15rem'}}/>
 											<br></br>
+
 											<span className="chalk" style={{ display: 'inline', '--fsize': '1.5rem'}}> To be resolved by... </span>
-											<input placeholder="Deadline" id="deadline" type='date' value={deadline} onChange={handleDeadlineChange} /><br></br>
-											
-											<button class="orange_Button" id="submit" style={{margin: '1em'}}>Submit </button>
+											<input placeholder="Deadline" id="deadline" type='date' value={deadline} onChange={handleDeadlineChange} />
+											<br></br>
+
+											<button class="orange_Button" id="submit" style={{marginTop: '0.5em', marginBottom: '2em'}}>Submit </button>
 										</form>
 								</div>
 							</div>
