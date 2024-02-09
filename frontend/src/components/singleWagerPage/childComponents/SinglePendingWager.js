@@ -21,12 +21,16 @@ const SinglePendingWager = (wagerData) => {
     }
     return (
         <div id='single-pending-wager' className="single-wager-info">
-            <div id='pending-wager-header' className='pending-wager-header'>We are still waiting for {wager.peopleInvolved[1].username} to respond to your wager!</div>
-            <div id='wager-details'>
-                Wager details: {wager.description} <br />
-                Winnings: {wager.quantity} drink<br /> 
-                Deadline: {deadlineDate} </div><br />
-            <button id='cancel-request-button' onClick={ handleCancelButtonClick }>Cancel Request</button>
+
+            <span className="chalk" style={{ marginTop:'1%',paddingLeft:'12%','--fsize': '22px', '--talign': 'left', color: '#cd561b'}}> Will happen by...</span>
+            <span className="chalk" style={{ marginTop:'1%', paddingLeft:'17%','--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span>
+
+            <span className="chalk" style={{ marginTop:'4%','--fsize': '27px', '--talign': 'center', color: 'whitesmoke' }}>You're still waiting on {wager.peopleInvolved[1].username} to respond to your wager.</span>
+            <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', '--talign': 'center', color: 'whitesmoke', opacity:'0.8' }}>(Let's see if they've got the minerals...)</span>
+            
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop:'3%'}}>
+                <button class="orange_Button" id='cancel-request-button' onClick={handleCancelButtonClick}>Cancel Request</button>
+            </div>
         </div>
     )
 }
