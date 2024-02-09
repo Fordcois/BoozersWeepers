@@ -13,11 +13,11 @@ return (
 <div>
 
   <div style={{display: 'flex'}}>
-      <div style={{flex: '20%', backgroundColor: 'transparent',display:'flex',alignItems: 'flex-start'}}>
+      <div style={{flex: '20%', backgroundColor: 'transparent',display:'flex',alignItems: 'flex-start',justifyContent:'right'}}>
         <div className="wageruserportrait"><img src={challenger.profilepicurl} alt='user profile'/> </div>
       </div>
           
-          <div style={{flex: '60%', backgroundColor: 'transparent',padding:'2% 0px'}}>
+          <div style={{flex: '60%', backgroundColor: 'transparent',padding:'1%'}}>
               <span className="chalk" style={{ '--fsize': '24px', '--talign': 'left', color: '#cd561b' }}> {challenger.username}</span> 
               <span className="chalk" style={{ '--fsize': '34px', 'text-decoration': 'underline #cd561b', 'text-decoration-thickness': '3px' }}> {challenger.firstName} {challenger.lastName}</span>
               
@@ -27,17 +27,14 @@ return (
               <span className="chalk" style={{ '--fsize': '24px', '--talign': 'right', color: '#cd561b' }}> {challengedUser.username}</span> 
           </div>
 
-      <div style={{flex: '20%', backgroundColor: 'transparent',display:'flex',alignItems: 'flex-end',justifyContent:'right'}}>
+      <div style={{flex: '20%', backgroundColor: 'transparent',display:'flex',alignItems: 'flex-end',justifyContent:'left'}}>
           <div className="wageruserportrait"><img src={challengedUser.profilepicurl} alt='user profile'/> </div>
       </div>
   </div>
  
-  <span className="chalk" style={{ marginTop:'2%',paddingLeft:'10%','--fsize': '24px', '--talign': 'left', color: 'whitesmoke'}}> {challenger.firstName} bet that... <br/> </span>
-  <span className="chalk" style={{ marginTop:'1%', paddingLeft:'15%','--fsize': '20px', '--talign': 'left', color: 'whitesmoke' }}> {wager.description}</span>
+  <span className="chalk" style={{ paddingLeft:'12%','--fsize': '24px', '--talign': 'left', color: '#cd561b'}}> {challenger.firstName} bet that... <br/> </span>
+  <span className="chalk" style={{ marginTop:'1%',paddingLeft:'17%','--fsize': '20px', '--talign': 'left', color: 'whitesmoke' }}> {wager.description}</span>
 
- 
- 
- 
  
  
  

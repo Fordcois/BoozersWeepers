@@ -30,21 +30,23 @@ const SingleWagerRequest = (wagerData) => {
 
   const handleRejectClick  = () => {
     console.log("Wager rejected")
-    navigate('/myAccount')
-
-  }
+    navigate('/myAccount')}
+    
   return (
-    <div id='single-wager-request' className='preamble'>
-    {wager.peopleInvolved[0].username} wants to wager that {wager.description}.<br />
-    The winner will receive {wager.quantity} pint!
-    <div id='deadline' className='deadline'>Deadline: {deadlineDate} </div><br />
-    Do you accept or reject their challenge?<br /> <br />
-    <button id='accept-button' className='accept-button' onClick={ handleAcceptClick }>Accept Wager</button><span className="button-space"></span>
-    <button id='reject-button' className='reject-button' onClick={ handleRejectClick }>Reject Wager</button>
+  <div id='single-wager-request' className='preamble'>
+
+    <span className="chalk" style={{ marginTop:'1%',paddingLeft:'12%','--fsize': '22px', '--talign': 'left', color: '#cd561b'}}> Will happen by...</span>
+    <span className="chalk" style={{ marginTop:'1%', paddingLeft:'17%','--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span>
+
+    <span className="chalk" style={{ marginTop:'4%','--fsize': '27px', '--talign': 'center', color: 'whitesmoke' }}>Do you accept the challenge?</span>
+    <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', '--talign': 'center', color: 'whitesmoke', opacity:'0.8' }}>(I fancy your chances)</span>
+
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop:'3%'}}>
+      <button id='accept-button' className='orange_Button' style={{marginRight:'7%'}} onClick={ handleAcceptClick }>Accept Wager</button>
+      <button id='reject-button' className='orange_Button' style={{marginLeft:'7%'}}onClick={ handleRejectClick }>Reject Wager</button>
     </div>
 
-  )
-
-}
+</div>
+)};
 
 export default SingleWagerRequest;

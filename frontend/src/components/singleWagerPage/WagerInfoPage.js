@@ -56,7 +56,7 @@ return (
           ) : (
             <>
               <WagerDetails wagerData={wagerData}/>
-              {/* {wagerData.approved === false && wagerData.peopleInvolved[0]._id === loggedInUser ? (
+              {wagerData.approved === false && wagerData.peopleInvolved[0]._id === loggedInUser ? (
                 <SinglePendingWager wagerData={wagerData}/>
               ) : wagerData.approved === false && wagerData.peopleInvolved[1]._id === loggedInUser ? (
                 <SingleWagerRequest wagerData={wagerData}/>
@@ -66,7 +66,7 @@ return (
                 <SingleResolvedWager wagerData={wagerData}/>
               ) : (
                 <p>Error - return to account page</p>
-              )} */}
+              )}
             </>
           )}
         </div>

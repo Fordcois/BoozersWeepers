@@ -102,11 +102,11 @@ if (token) {
 												<FaPencil style={{ transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px', marginRight:'4px',opacity:'0.2' }} />
 											</div>
 											<input placeholder="Bet description" id="description" type='text' value={description} onChange={handleDescriptionChange} style={{ marginTop: '1rem', width:'15rem'}}/>
-											<br></br>
+											<br/>
 
 											<span className="chalk" style={{ display: 'inline', '--fsize': '1.5rem'}}> To be resolved by... </span>
 											<input placeholder="Deadline" id="deadline" type='date' value={deadline} onChange={handleDeadlineChange} />
-											<br></br>
+											<br/>
 
 											<button class="orange_Button" id="submit" style={{marginTop: '0.5em', marginBottom: '2em'}}>Submit </button>
 										</form>
