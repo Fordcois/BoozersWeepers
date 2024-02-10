@@ -10,13 +10,16 @@ const SingleOngoingWager = (wagerData) => {
     const wager = wagerData.wagerData
     let ActiveUser;
     let OtherUser;
+    let ViewerInvolvedInbet = false;
     
     if (loggedInUser === wager.peopleInvolved[0]._id) {
         ActiveUser = wager.peopleInvolved[0];
         OtherUser = wager.peopleInvolved[1];
+        ViewerInvolvedInbet = true
     } else if (loggedInUser === wager.peopleInvolved[1]._id){
         ActiveUser = wager.peopleInvolved[1];
         OtherUser = wager.peopleInvolved[2];
+        ViewerInvolvedInbet = true
     } 
 
     const dateParts = wager.deadline.slice(0, 10).split("-");
@@ -30,7 +33,6 @@ const SingleOngoingWager = (wagerData) => {
         })
           .then(response => {
             if (response.status === 200) {
-              console.log(`Wager winner updated to ${WinnerID}`)
               return response.json();
             } else {console.log("Wager winner failed to be updated")}
           })
@@ -50,7 +52,6 @@ const SingleOngoingWager = (wagerData) => {
           })
           .then(response => {
             if (response.status === 201) {
-              console.log(`A Pint for ${WinnerID} has been created`);
               return response.json();
             } else {console.log("Failed to create a pint");}
           })
@@ -63,37 +64,58 @@ const SingleOngoingWager = (wagerData) => {
       }
     };
 
+    return (
+      <div>
+          {ViewerInvolvedInbet ? 
+              new Date(wager.deadline) > new Date() ? 
+              // Viewer Involved - Deadline Not Passed
+              <>
+                  <span className="chalk" style={{ marginTop: '1%', paddingLeft: '12%', '--fsize': '22px', '--talign': 'left', color: '#cd561b' }}> Will happen by...</span>
+                  <span className="chalk" style={{ marginTop: '1%', paddingLeft: '17%', '--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span> 
 
-  return(
-  <div>
-        {new Date(wager.deadline) > new Date() ? 
-        // 'Deadline Not Passed'
-        <>
-          <span className="chalk" style={{ marginTop:'1%',paddingLeft:'12%','--fsize': '22px', '--talign': 'left', color: '#cd561b'}}> Will happen by...</span>
-          <span className="chalk" style={{ marginTop:'1%', paddingLeft:'17%','--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span> 
+                  <span className="chalk" style={{ marginTop: '4%', '--fsize': '27px', '--talign': 'center', color: 'whitesmoke' }}>Throw in the towel early?</span>
+                  <span className="chalk" style={{ marginTop: '1%', '--fsize': '19px', '--talign': 'center', color: 'whitesmoke', opacity: '0.8' }}>(Lost your bottle?)</span>
+                  
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '3%' }}>
+                      <button id='accept-button' className='orange_Button' onClick={() => handleWinner(OtherUser._id, ActiveUser._id)}>Concede Wager</button>
+                  </div>
+              </>
+              :
+              // Viewer Involved - Deadline Passed
+              <>
+                  <span className="chalk" style={{ marginTop: '1%', paddingLeft: '12%', '--fsize': '22px', '--talign': 'left', color: '#cd561b' }}> Would happen by...</span>
+                  <span className="chalk" style={{ marginTop: '1%', paddingLeft: '17%', '--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span>  
 
-          <span className="chalk" style={{ marginTop:'4%','--fsize': '27px', '--talign': 'center', color: 'whitesmoke' }}>Throw in the towel early?</span>
-          <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', '--talign': 'center', color: 'whitesmoke', opacity:'0.8' }}>(Lost your bottle?)</span>
-          
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop:'3%'}}>
-            <button id='accept-button' className='orange_Button' onClick={() => handleWinner(OtherUser._id,ActiveUser._id,)}>Concede Wager</button>
+                  <span className="chalk" style={{ marginTop: '4%', '--fsize': '27px', '--talign': 'center', color: 'whitesmoke' }}>So, Times up! Who won?</span>
+                  <span className="chalk" style={{ marginTop: '1%', '--fsize': '19px', '--talign': 'center', color: 'whitesmoke', opacity: '0.8' }}>(Who's the real guv'nor round 'ere?)</span>
+              
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '3%' }}>
+                      <button id='accept-button' className='orange_Button' style={{ marginRight: '7%' }} onClick={() => handleWinner(ActiveUser._id, OtherUser._id)}>I won</button>
+                      <button id='reject-button' className='orange_Button' style={{ marginLeft: '7%' }} onClick={() => handleWinner(OtherUser._id, ActiveUser._id)}>{OtherUser.firstName} Won</button>
+                  </div>
+              </>
+          :
+          new Date(wager.deadline) > new Date() ?
+          // Viewer Not Involved - Deadline Not Passed
+          <div>
+              <span className="chalk" style={{ marginTop: '1%', paddingLeft: '12%', '--fsize': '22px', '--talign': 'left', color: '#cd561b' }}> Would happen by...</span>
+              <span className="chalk" style={{ marginTop: '1%', paddingLeft: '17%', '--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span>  
+
+              <span className="chalk" style={{ marginTop: '4%', '--fsize': '27px', '--talign': 'center', color: 'whitesmoke' }}>There's no Winner yet</span>
+              <span className="chalk" style={{ marginTop: '1%', '--fsize': '19px', '--talign': 'center', color: 'whitesmoke', opacity: '0.8' }}>(Times ticking ...)</span>
           </div>
-        </>
-        : 
-        // 'Deadline Passed'
-        <>
-          <span className="chalk" style={{ marginTop:'1%',paddingLeft:'12%','--fsize': '22px', '--talign': 'left', color: '#cd561b'}}> Would happen by...</span>
-          <span className="chalk" style={{ marginTop:'1%', paddingLeft:'17%','--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span>  
+          :
+          // Viewer Not Involved - Deadline Passed
+          <div>
+              <span className="chalk" style={{ marginTop: '1%', paddingLeft: '12%', '--fsize': '22px', '--talign': 'left', color: '#cd561b' }}> Would happen by...</span>
+              <span className="chalk" style={{ marginTop: '1%', paddingLeft: '17%', '--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span>  
 
-          <span className="chalk" style={{ marginTop:'4%','--fsize': '27px', '--talign': 'center', color: 'whitesmoke' }}>So, Times up! Who won?</span>
-          <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', '--talign': 'center', color: 'whitesmoke', opacity:'0.8' }}>(Who's the real guv'nor round 'ere?)</span>
-        
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop:'3%'}}>
-            <button id='accept-button' className='orange_Button' style={{marginRight:'7%'}} onClick={() => handleWinner(ActiveUser._id, OtherUser._id)}>I won</button>
-            <button id='reject-button' className='orange_Button' style={{marginLeft:'7%'}} onClick={() => handleWinner(OtherUser._id,ActiveUser._id)}>{OtherUser.firstName} Won</button>
+              <span className="chalk" style={{ marginTop: '4%', '--fsize': '27px', '--talign': 'center', color: 'whitesmoke' }}>Times Up but they still haven't decided who won!</span>
+              <span className="chalk" style={{ marginTop: '1%', '--fsize': '19px', '--talign': 'center', color: 'whitesmoke', opacity: '0.8' }}>(What a pair of muppets)</span>
           </div>
-        </>}
-  </div>)
+          }
+      </div>
+  );
 };
 
 export default SingleOngoingWager;
