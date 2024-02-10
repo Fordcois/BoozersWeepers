@@ -53,6 +53,7 @@
   box-shadow: 0px 0px 6px 5px rgba(58, 18, 13, 0), 0px 0px 0px 2px #c2a782, 0px 0px 0px 4px #a58e6f, 3px 4px 8px 5px rgba(0, 0, 0, 0.5);
   background-image: radial-gradient(circle at left 30%, rgba(34, 34, 34, 0.3), rgba(34, 34, 34, 0.3) 80px, rgba(34, 34, 34, 0.5) 100px, rgba(51, 51, 51, 0.5) 160px, rgba(51, 51, 51, 0.5)), linear-gradient(215deg, transparent, transparent 100px, #222 260px, #222 320px, transparent), radial-gradient(circle at right, #111, rgba(51, 51, 51, 1));
   background-color: #333;
+  overflow: auto;
 }
 
 .blackboard:before {
@@ -262,4 +263,12 @@ input[type=password] {
           transform: translate(-50%,-50%);
 }
 
-
+input[type="date"] {
+  padding: 5px;
+  border: 2px solid #cd561b;
+  border-radius: 4px;
+  background-color: transparent;
+  color: whitesmoke;
+  font-family: 'Permanent Marker';
+  font-size: 16px;
+}

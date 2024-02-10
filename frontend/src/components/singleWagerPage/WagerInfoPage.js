@@ -38,7 +38,6 @@ const WagerInfoPage = ({ navigate }) => {
   }, [token, wagerID]);
 
 const toggleExpand = () => {setExpanded(!expanded);};
-console.log(wagerData);
 
 return (
   <div className='shade'>
