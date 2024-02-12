@@ -18,7 +18,7 @@ const SingleOngoingWager = (wagerData) => {
         ViewerInvolvedInbet = true
     } else if (loggedInUser === wager.peopleInvolved[1]._id){
         ActiveUser = wager.peopleInvolved[1];
-        OtherUser = wager.peopleInvolved[2];
+        OtherUser = wager.peopleInvolved[0];
         ViewerInvolvedInbet = true
     } 
 
@@ -66,6 +66,7 @@ const SingleOngoingWager = (wagerData) => {
 
     return (
       <div>
+        ID: {OtherUser._id}
           {ViewerInvolvedInbet ? 
               new Date(wager.deadline) > new Date() ? 
               // Viewer Involved - Deadline Not Passed
