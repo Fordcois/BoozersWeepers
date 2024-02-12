@@ -19,11 +19,11 @@ return (
           
           <div style={{flex: '60%', backgroundColor: 'transparent',padding:'1%'}}>
               <span className="chalk" style={{ '--fsize': '24px', '--talign': 'left', color: '#cd561b' }}> {challenger.username}</span> 
-              <span className="chalk" style={{ '--fsize': '34px', 'text-decoration': 'underline #cd561b', 'text-decoration-thickness': '3px' }}> {challenger.firstName} {challenger.lastName}</span>
+              <span className="chalk" style={{ '--fsize': '34px', 'textDecoration': 'underline #cd561b', 'textDecorationThickness': '3px' }}> {challenger.firstName} {challenger.lastName}</span>
               
               <span className="chalk" style={{ '--fsize': '46px', '--talign': 'center', color: 'whitesmoke' }}> VS</span> 
 
-              <span className="chalk" style={{ '--fsize': '34px','--talign': 'right', 'text-decoration': 'underline #cd561b', 'text-decoration-thickness': '3px' }}> {challengedUser.firstName} {challengedUser.lastName}</span>
+              <span className="chalk" style={{ '--fsize': '34px','--talign': 'right', 'textDecoration': 'underline #cd561b', 'textDecorationThickness': '3px' }}> {challengedUser.firstName} {challengedUser.lastName}</span>
               <span className="chalk" style={{ '--fsize': '24px', '--talign': 'right', color: '#cd561b' }}> {challengedUser.username}</span> 
           </div>
 
