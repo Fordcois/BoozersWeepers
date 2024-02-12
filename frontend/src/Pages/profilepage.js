@@ -51,7 +51,7 @@ const ProfilePage = () => {
 <>
 <div style={{ display: 'flex' }}>
   <div style={{ paddingRight: '5em'}}>
-      <span className="chalk" style={{ '--fsize': '34px', '--talign': 'left', 'text-decoration': 'underline #cd561b', 'text-decoration-thickness': '3px' }}>{userData.username}</span>
+      <span className="chalk" style={{ '--fsize': '34px', '--talign': 'left', 'textDecoration': 'underline #cd561b', 'textDecorationThickness': '3px' }}>{userData.username}</span>
       <span className="chalk" style={{ '--fsize': '24px', '--talign': 'left', color: '#cd561b' }}> {userData.firstName} {userData.lastName}</span>
       <div className="profilepageportrait"><img src={userData.profilepicurl} alt="User Avatar" /></div>
   </div>

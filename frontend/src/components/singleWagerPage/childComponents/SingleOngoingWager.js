@@ -16,9 +16,11 @@ const SingleOngoingWager = (wagerData) => {
         ActiveUser = wager.peopleInvolved[0];
         OtherUser = wager.peopleInvolved[1];
         ViewerInvolvedInbet = true
+        console.log(wager.peopleInvolved)
+
     } else if (loggedInUser === wager.peopleInvolved[1]._id){
         ActiveUser = wager.peopleInvolved[1];
-        OtherUser = wager.peopleInvolved[2];
+        OtherUser = wager.peopleInvolved[0];
         ViewerInvolvedInbet = true
     } 
 
