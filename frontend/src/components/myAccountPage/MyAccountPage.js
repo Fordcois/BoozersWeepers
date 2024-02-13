@@ -113,7 +113,7 @@ const toggleHistory = (event) =>{
           <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
           <BlackboardHeader />
           
-          <span className='chalktitle'>My Wagers</span>
+          <div className='chalktitle'>My Wagers</div>
           
           {wagerRequests.length > 0 && (
           <button onClick={toggleIncoming} className='NotificationButton'>

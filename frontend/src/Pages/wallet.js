@@ -3,7 +3,7 @@ import isTokenValid from '../components/Utility/isTokenValid';
 import getSessionUserID from '../components/Utility/getSignedInUser_id';
 import VertNavbar from '../components/VertNavBar/VertNavBar';
 import '../Pages/style.css'
-import Header from '../components/header/Header';
+import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import WalletComponent from '../components/walletComponent/WalletComponent';
 
 const WalletPage = ({ navigate }) => {
@@ -17,22 +17,31 @@ const WalletPage = ({ navigate }) => {
   
 
   return (
-    <div>
-        <Header/>
-      <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+<div className='shade'>
       <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-        <h1 className="page_subheading">Wallet</h1>
-        {isLoggedIn ? (
+        <div className='blackboard'>
+            <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+            <BlackboardHeader /> 
+
+
+
+       {isLoggedIn ? (
           <div>
-            {/* Additional content for logged-in users */}
+            {/* Content for logged-in users */}
+            <div className='chalktitle'>Wallet </div>
             <WalletComponent UserID={SessionUserId}/>
           </div>
+        
+        
+        
+        
         ) : (
           <div>
             {/* Content for non-logged-in users */}
             <p>Please <a href="/login">log in</a> to access this page</p>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
