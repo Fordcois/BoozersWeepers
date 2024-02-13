@@ -76,6 +76,7 @@
   font-family: 'Permanent Marker';
   font-size: 40px;
   color: whitesmoke;
+  text-align: center;
 }
 
 .chalk{
@@ -271,4 +272,29 @@ input[type="date"] {
   color: whitesmoke;
   font-family: 'Permanent Marker';
   font-size: 16px;
+}
+
+.chalk-link,
+.chalk-link:visited {
+  font-family: 'Permanent Marker';
+  color: whitesmoke;
+  text-decoration: underline #cd561b;
+}
+
+.chalk-link:hover,
+.chalk-link:visited:hover {
+  color: #cd561b;
+}
+
+.chalk-link:active,
+.chalk-link:visited:active {
+  color: #e57036;
+}
+
+.black-pen{
+  font-family: 'Permanent Marker';
+  font-size: var(--fsize);
+  text-align: var(--talign);
+  display: block;
+  /* margin: 10;  */
 }

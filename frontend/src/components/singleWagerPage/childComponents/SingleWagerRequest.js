@@ -28,10 +28,17 @@ const SingleWagerRequest = (wagerData) => {
   } navigate("/myAccount");
   }
 
-  const handleRejectClick  = () => {
-    console.log("Wager rejected")
-    navigate('/myAccount')}
-    
+  const handleRejectClick = () => {
+    fetch( `/wagers/${wager._id}/cancel`, {
+    method: 'post',
+    headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    }
+    })      
+    navigate("/myAccount")
+    }
+
   return (
   <div id='single-wager-request' className='preamble'>
 

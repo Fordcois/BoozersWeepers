@@ -46,7 +46,8 @@ const Leaderboard = () => {
 
   return (
     <div>
-      <span className='chalktitle'>Diamond Geezers..</span>
+       <div className='chalktitle'>Leaderboard</div>
+      <span className='chalktitle'>Diamond Geezers...</span>
       <ul>
         {userObject.map((user, index) => (
           <li key={index} className='leadertext'>
