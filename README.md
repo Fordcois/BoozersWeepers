@@ -1,10 +1,27 @@
 # Boozers Weepers
 
-## Project Overview
+<div style="text-align:center;">
+  <img src="frontend/src/Assets/BoozersWeepersLogo_trans.png" height="150" alt="Boozers Weepers Logo">
+</div>
 
-BoozersWeepers is a social & lifestyle web application for tracking and settling informal pub bets and IOUs between friend groups. Users are able to register accounts, create wagers as well as collect and claimed owed drinks in a user wallet.
+This branch represents an extension of [Team Tavern](https://github.com/Catherine-Russell/TeamTavern), developed in collaboration between [Sam Ford](https://github.com/Fordcois) & [Rachel Roberts](https://github.com/Rachel853). The modifications made to this branch focus on styling and refactoring the code structure.
 
-This is a personal continuation of a [group project](https://github.com/Catherine-Russell/TeamTavern) which was built in 2 weeks featuring contributions from myself, [Ben Dixon](https://github.com/BenDixon96), [Catherine Russell](https://github.com/Catherine-Russell), and [Rachel Roberts](https://github.com/Rachel853)
+Originally, the project was executed within a two-week timeframe, building upon a legacy codebase. It features the contributions of myself, [Rachel Roberts](https://github.com/Rachel853), [Ben Dixon](https://github.com/BenDixon96), and [Catherine Russell](https://github.com/Catherine-Russell), with [Karys Barbrook](https://github.com/karysbarbrook) and [Manuela Iacobovici](https://github.com/ManuelaIacobovici) serving as quality engineers for the project.
+
+## Features
+<div style="text-align:center;">
+<img src='public/images/Activebet Screenshot.png' style='border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); height: 350; width: auto;'>
+</div>
+
+<b>BoozersWeepers</b> is a lifestyle web application for tracking and settling pub bets and IOUs between friends. <br/>
+
+🟠 Users are able to register accounts using unique credentials and log-in securely<br>
+
+🟠 Users can use live search for other users on the site either using their unique username or by searching for their real name. 
+
+🟠 Users can challenge another User to a Wager, giving a condition for a win and a date by which the condition must be met.
+
+🟠 Users can see incoming wager requests and approve/deny before the wager is counted against them.<br>
 
 
 ## Technology Stack
@@ -38,20 +55,16 @@ This is a personal continuation of a [group project](https://github.com/Catherin
    brew services start mongodb-community@5.0
    ```
 
-### How to run the server and use the app (as a human)
-
+### How to run the server and use the app 
 1. Start the server application (in the `api` directory)
 
   **Note the use of an environment variable for the JWT secret**
-
    ```
    ; cd api
    ; JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 npm start
    ```
 2. Start the front end application (in the `frontend` directory)
-
   In a new terminal session...
-
   ```
   ; cd frontend
   ; npm start
@@ -60,15 +73,12 @@ This is a personal continuation of a [group project](https://github.com/Catherin
 You should now be able to open your browser and go to `http://localhost:3000/` 
 
 ### How to run automated tests
-
 The automated tests run by sending actual HTTP requests to the API. Therefore, before anything, you'll need to start the backend server in test mode (so that it connects to the test DB).
 
 **Note the use of an environment variable for the JWT secret**
-
 ```bash
 # Make sure you're in the api directory
 ; cd api
-
 ; JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 npm run start:test
 ```
 
@@ -79,30 +89,24 @@ Then, you can either run tests for the backend or the frontend following the ste
 #### Running tests for the backend
 
 Run the tests in a new terminal session:
-
 ```bash
 # Make sure you're in the api directory
 ; cd api
-
 ; JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 npm run test
 ```
 
 ####  Running tests for the frontend
 
 Start the front end in a new terminal session
-
 ```bash
 # Make sure you're in the frontend directory
 ; cd frontend
-
 ; JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 npm start
 ```
 
 Then run the tests in a new terminal session
-
 ```bash
 # Make sure you're in the frontend directory
 ; cd frontend
-
 ; JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 npm run test
 ```

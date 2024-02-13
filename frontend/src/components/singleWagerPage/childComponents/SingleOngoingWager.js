@@ -66,7 +66,6 @@ const SingleOngoingWager = (wagerData) => {
 
     return (
       <div>
-        ID: {OtherUser._id}
           {ViewerInvolvedInbet ? 
               new Date(wager.deadline) > new Date() ? 
               // Viewer Involved - Deadline Not Passed
