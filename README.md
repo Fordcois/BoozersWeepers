@@ -1,35 +1,39 @@
-# Boozers Weepers
 
-<div style="text-align:center;">
-  <img src="frontend/src/Assets/BoozersWeepersLogo_trans.png" height="150" alt="Boozers Weepers Logo">
+# Boozers Weepers
+<div align="center">
+  <img src="frontend/src/Assets/BoozersWeepersLogo_trans.png" alt="BoozersWeepers Logo" title="Title" height="200">
 </div>
+
 
 This branch represents an extension of [Team Tavern](https://github.com/Catherine-Russell/TeamTavern), developed in collaboration between [Sam Ford](https://github.com/Fordcois) & [Rachel Roberts](https://github.com/Rachel853). The modifications made to this branch focus on styling and refactoring the code structure.
 
 Originally, the project was executed within a two-week timeframe, building upon a legacy codebase. It features the contributions of myself, [Rachel Roberts](https://github.com/Rachel853), [Ben Dixon](https://github.com/BenDixon96), and [Catherine Russell](https://github.com/Catherine-Russell), with [Karys Barbrook](https://github.com/karysbarbrook) and [Manuela Iacobovici](https://github.com/ManuelaIacobovici) serving as quality engineers for the project.
 
 ## Features
-<div style="text-align:center;">
-<img src='public/images/Activebet Screenshot.png' style='border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); height: 350; width: auto;'>
+
+**BoozersWeepers** is a lifestyle web application for tracking and settling informal pub bets and IOUs between friends.
+
+<div align="center">
+  <img src="public/images/ActivebetScreenshot.png" alt="Making a Bet on BoozersWeepers" height="300">
 </div>
 
-<b>BoozersWeepers</b> is a lifestyle web application for tracking and settling pub bets and IOUs between friends. <br/>
+🟠 **User Registration and Secure Login:** Users can easily register accounts with unique credentials and securely log in to the platform.
 
-🟠 Users are able to register accounts using unique credentials and log-in securely<br>
+🟠 **Live User Search:** Utilise live search functionality to find other users on the platform by their unique username or real name, facilitating challenges for wagers.
 
-🟠 Users can use live search for other users on the site either using their unique username or by searching for their real name. 
+🟠 **Wager Challenges:** Users can initiate wager challenges, specifying win conditions and deadlines. They can also review incoming wager requests and approve or deny them before commitments are finalised.
 
-🟠 Users can challenge another User to a Wager, giving a condition for a win and a date by which the condition must be met.
+🟠 **Deadline Notifications:** Users receive notifications when wager deadlines are up. After the deadline, users are prompted to select a winner, with the victor receiving an IOU for a pint, stored securely in their Wallet.
 
-🟠 Users can see incoming wager requests and approve/deny before the wager is counted against them.<br>
+🟠 **Wallet Management:** View and claim pints won from successful bets through the user's Wallet.
 
+🟠 **Global Leaderboard:** Explore the site's top performers with a dynamic leaderboard showcasing the top 10 users based on win percentages, the user with the highest won pint count, and the person who owes the most outstanding pints.
+
+🟠 **Friend Groups:** Create and join friend groups, allowing users to track the bets of other group members.
 
 ## Technology Stack
-
-- MongoDB
-- Express.js
-- React.js
-- Node.js
+<img src="https://img.shields.io/badge/-mongo%20db-47A248?logo=mongodb&logoColor=white&style=for-the-badge"><img src="https://img.shields.io/badge/-express-000000?logo=express&logoColor=white&style=for-the-badge"><img src="https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=for-the-badge"><img src="https://img.shields.io/badge/-node.js-339933?logo=nodedotjs&logoColor=white&style=for-the-badge"><br>
+<img src="https://img.shields.io/badge/-Jest-C21325?logo=jest&logoColor=white&style=for-the-badge"><img src="https://img.shields.io/badge/-Selenium-43B02A?logo=Selenium&logoColor=white&style=for-the-badge">
 
 ## Set up 
 
@@ -41,9 +45,8 @@ Originally, the project was executed within a two-week timeframe, building upon 
    ; npm install
    ```
 
-> You might get warning messages about the installed dependencies at this point. You can ignore them, as long as the installation process doesn't fail. If the setup fails at this point, don't wait for too long and reach out to your coach.
-
 2. Install an ESLint plugin for your editor. For example: [`linter-eslint`](https://github.com/AtomLinter/linter-eslint) for Atom.
+
 3. Install MongoDB
    ```
    brew tap mongodb/brew
@@ -86,7 +89,7 @@ You should leave this running in a terminal.
 
 Then, you can either run tests for the backend or the frontend following the steps below. 
 
-#### Running tests for the backend
+### Running tests for the backend
 
 Run the tests in a new terminal session:
 ```bash
@@ -95,7 +98,7 @@ Run the tests in a new terminal session:
 ; JWT_SECRET=f6d278bb34e1d0e146a80b16ec254c05 npm run test
 ```
 
-####  Running tests for the frontend
+###  Running tests for the frontend
 
 Start the front end in a new terminal session
 ```bash
