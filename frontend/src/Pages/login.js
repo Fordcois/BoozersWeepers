@@ -23,7 +23,7 @@ const LogInPage = ({ navigate }) => {
   <div className='shade'>
   <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
     <div className='blackboard'>
-      <div className='form'>
+      {/* <div className='form'> */}
       <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
       <BlackboardHeader/>
 
@@ -42,7 +42,7 @@ const LogInPage = ({ navigate }) => {
   
 
 
-      </div>
+    
     </div>
   </div>
 </div>
