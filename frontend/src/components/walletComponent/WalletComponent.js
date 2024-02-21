@@ -30,20 +30,50 @@ const WalletComponent = ({ UserID }) => {
     setSelectedPint(null); // Clear the selected pint to close the pop-up
   };
 
+  const claimPint = (ID) => {
+    const pintId=ID
+    if (userToken) {
+      fetch(`/pints/claim/${pintId}`, {
+        method: 'post',
+        headers: {
+          'Authorization': `Bearer ${userToken}`,
+          'Content-Type': 'application/json' 
+        }
+      })
+      .then(response => {
+        if (response.status === 200) {console.log("Pint Claimed!");} 
+        else {console.log("Pint failed to be Claimed.");}
+      })
+      .catch(error => {console.error('Error claiming pint:', error);})
+      .finally(() => {
+        window.location.reload();
+      });
+    }
+  };
+
+
+
   return (
     <div>
-<div style={{display:'flex', flexWrap:'wrap'}}>
+<div style={{display:'flex', flexWrap:'wrap',justifyContent:'center'}}>
       {WalletData && WalletData.pints.length > 0 ? (
         WalletData.pints.map((pint) => (
 
           <div className='post-it' key={pint._id}>
             <div className="note">
             
-               <span className='penfont-large' style={{color:'black',fontSize:'36px'}}>I.O.U.</span>
-               <span className='penfont-large' style={{color:'black',fontSize:'24px'}}>A PINT</span>
-               <span className='penfont-large' style={{color:'black',fontSize:'18px'}}>signed by:</span>
-               <span className='penfont-large' style={{color:'#cd561b'}}>{pint.owed_by.username}</span>
-               <button className="singlepint_Button">Claim</button>
+              <span className='penfont-large' style={{color:'black',fontSize:'40px'}}>I.O.U.</span>
+              <span className='penfont-large' style={{color:'black',fontSize:'24px',marginBottom:'11%'}}>ONE PINT</span>
+              <span className='penfont-large' style={{color:'black',fontSize:'18px',marginBottom:'0'}}>SIGNED BY:</span>
+              <span className='penfont-large' style={{marginTop:'-17px', color:'#cd561b',marginBottom:'13%',fontSize:'40px',textDecoration: 'underline dotted #e3e294'}}>{pint.owed_by.username}</span>
+               
+               
+               
+              <button className="orange_Button" style={{marginBottom:'2%'}} onClick={() => claimPint(pint._id)}>Claim</button>
+
+              
+
+
             </div>
           </div>
         ))

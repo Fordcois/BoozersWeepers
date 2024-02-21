@@ -23,6 +23,7 @@
   padding: 6px 10px;
   border: none;
   cursor: pointer;
+  border-radius: 15px;
 }
 
 .singlepint_Button:hover {
