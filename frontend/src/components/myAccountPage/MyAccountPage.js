@@ -73,11 +73,11 @@ return (
         
         <div className='chalktitle'>My Wagers</div>
         
-        <AccountPageList List={wagerRequests} showState={showIncoming} updateStateFunction={setShowIncoming} Heading={'My incoming Wagers'} ResultsComponent={IncomingWagers} />
-        <AccountPageList List={unresolvedWagers} showState={showUnresolved} updateStateFunction={setShowUnresolved} Heading={'My Unresolved Wagers'} ResultsComponent={UnresolvedWagers} />
-        <AccountPageList List={pendingWagers} showState={showPending} updateStateFunction={setShowPending} Heading={'My Pending Wagers'} ResultsComponent={PendingWagers} />
-        <AccountPageList List={ongoingWagers} showState={showOngoing} updateStateFunction={setShowOngoing} Heading={'My Ongoing Wagers'} ResultsComponent={OngoingWagers} />
-        <AccountPageList List={pastWagers} showState={showHistory} updateStateFunction={setShowHistory} Heading={'My Past Wagers'} ResultsComponent={PastWagers} />
+        <AccountPageList list={wagerRequests} showState={showIncoming} updateStateFunction={setShowIncoming} heading={'My Incoming Wagers'} ResultsComponent={IncomingWagers} color={'#cd561b'}/>
+        <AccountPageList list={unresolvedWagers} showState={showUnresolved} updateStateFunction={setShowUnresolved} heading={'My Unresolved Wagers'} ResultsComponent={UnresolvedWagers} color={'whitesmoke'} />
+        <AccountPageList list={pendingWagers} showState={showPending} updateStateFunction={setShowPending} heading={'My Pending Wagers'} ResultsComponent={PendingWagers} color={'whitesmoke'} />
+        <AccountPageList list={ongoingWagers} showState={showOngoing} updateStateFunction={setShowOngoing} heading={'My Ongoing Wagers'} ResultsComponent={OngoingWagers} color={'whitesmoke'}/>
+        <AccountPageList list={pastWagers} showState={showHistory} updateStateFunction={setShowHistory} heading={'My Past Wagers'} ResultsComponent={PastWagers} color={'whitesmoke'} />
         
       </div>
     </div>
