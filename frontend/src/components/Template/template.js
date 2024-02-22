@@ -30,7 +30,7 @@ const Template = ({ navigate }) => {
 
                 <a href='/workshop?expanded=true'>Expanded View</a><br/>
                 <a href='/workshop?expanded=false'>Collapsed View</a><br/>
-                <a href={`/workshop?expanded=${expanded.toString()}`}>Carry On View</a><br/>
+                <a href={`/workshop?expanded=${expanded}`}>Carry On View</a><br/>
             
             </p>
 
