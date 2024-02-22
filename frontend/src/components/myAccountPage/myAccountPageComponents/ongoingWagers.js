@@ -5,27 +5,22 @@ import NotificationDetails from './NotificationDetails';
 import './notification.css'
 
 
-const OngoingWagers = ({ navigate, Wagers }) => {
+const OngoingWagers = ({ navigate, wagers }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const loggedInUser = getSessionUserID(token)
 
   if (token) {
     return (
       <div id="ongoing-wagers-feed">
-        {Wagers.map((wager, index) => (
-          <div key={index}>
+        {wagers.map((wager) => (
+          <div key={wager._id}>
             {wager.peopleInvolved[0]._id === loggedInUser ? 
             (
-
-              <p>
               <a className="notificationdetails" href={`/wager/${wager._id}`}>You bet {wager.peopleInvolved[1].username} that {wager.description}</a>
-              </p>
             ) 
             : 
             (
-              <p>
               <a className="notificationdetails" href={`/wager/${wager._id}`}>{wager.peopleInvolved[0].username} bet you that {wager.description}</a>
-              </p>
             )}
           </div>
         ))}

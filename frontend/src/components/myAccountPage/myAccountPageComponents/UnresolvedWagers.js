@@ -3,7 +3,7 @@ import "../MyAccountPage.css"
 import './notification.css'
 import getSessionUserID from '../../Utility/getSignedInUser_id';
 
-const UnresolvedWagers = ({ navigate, unresolvedWagers }) => {
+const UnresolvedWagers = ({ navigate, wagers }) => {
 	const [token, setToken] = useState(window.localStorage.getItem("token"));
 	const loggedInUser = getSessionUserID(token)
 
@@ -12,8 +12,8 @@ const UnresolvedWagers = ({ navigate, unresolvedWagers }) => {
 			return(
 				<div id="unresolved-wagers-feed">
 				
-					{unresolvedWagers.map((wager) => (
-					<div key={wager.id}>
+					{wagers.map((wager) => (
+					<div key={wager._id}>
 						
 					<a className="notificationdetails" href={`/Wager/${wager._id}`} >
 						Who won the wager that {wager.description}?

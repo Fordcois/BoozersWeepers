@@ -5,6 +5,11 @@ import VertNavbar from '../VertNavBar/VertNavBar';
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 import AccountPageList from './myAccountPageComponents/accountpageList';
 import '../../Pages/style.css'
+import OngoingWagers from './myAccountPageComponents/ongoingWagers';
+import PastWagers from './myAccountPageComponents/PastWagers';
+import UnresolvedWagers from './myAccountPageComponents/UnresolvedWagers';
+import IncomingWagers from './myAccountPageComponents/IncomingWagers';
+import PendingWagers from './myAccountPageComponents/PendingWagers';
 
 const MyAccountPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -68,11 +73,11 @@ return (
         
         <div className='chalktitle'>My Wagers</div>
         
-        <AccountPageList List={wagerRequests} showState={showIncoming} updateStateFunction={setShowIncoming} Heading={'My incoming Wagers'} resultsComponent={'Incoming'} />
-        <AccountPageList List={unresolvedWagers} showState={showUnresolved} updateStateFunction={setShowUnresolved} Heading={'My Unresolved Wagers'} resultsComponent={'Unresolved'} />
-        <AccountPageList List={pendingWagers} showState={showPending} updateStateFunction={setShowPending} Heading={'My Pending Wagers'} resultsComponent={'Pending'} />
-        <AccountPageList List={ongoingWagers} showState={showOngoing} updateStateFunction={setShowOngoing} Heading={'My Ongoing Wagers'} resultsComponent={'Ongoing'} />
-        <AccountPageList List={pastWagers} showState={showHistory} updateStateFunction={setShowHistory} Heading={'My Past Wagers'} resultsComponent={'Past'} />
+        <AccountPageList List={wagerRequests} showState={showIncoming} updateStateFunction={setShowIncoming} Heading={'My incoming Wagers'} ResultsComponent={IncomingWagers} />
+        <AccountPageList List={unresolvedWagers} showState={showUnresolved} updateStateFunction={setShowUnresolved} Heading={'My Unresolved Wagers'} ResultsComponent={UnresolvedWagers} />
+        <AccountPageList List={pendingWagers} showState={showPending} updateStateFunction={setShowPending} Heading={'My Pending Wagers'} ResultsComponent={PendingWagers} />
+        <AccountPageList List={ongoingWagers} showState={showOngoing} updateStateFunction={setShowOngoing} Heading={'My Ongoing Wagers'} ResultsComponent={OngoingWagers} />
+        <AccountPageList List={pastWagers} showState={showHistory} updateStateFunction={setShowHistory} Heading={'My Past Wagers'} ResultsComponent={PastWagers} />
         
       </div>
     </div>
