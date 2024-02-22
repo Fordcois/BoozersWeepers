@@ -33,7 +33,7 @@ const SignUpPage = ({ navigate }) => {
      
        <div style={{ marginTop: '40px' }}>
        <span className="chalk" style={{ '--fsize': '18px', '--talign': 'center' }}>Already have an account?</span>
-       <Link to={{ pathname: '/login', state: { name: 'John' } }} className="Homepage-link">Login</Link>
+       <Link to={{ pathname: '/login', state: expanded }} className="Homepage-link">Login</Link>
        </div>
      </div>
        

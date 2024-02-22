@@ -10,7 +10,7 @@ const LogInPage = ({ navigate }) => {
   // const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState();
 
   const toggleExpand = () => {setExpanded(!expanded);};
 
@@ -34,7 +34,7 @@ const LogInPage = ({ navigate }) => {
       
         <div style={{ marginTop: '40px' }}>
         <span className="chalk" style={{ '--fsize': '18px', '--talign': 'center' }}>Don't have an account?</span>
-        <Link to={{ pathname: '/signup', state: { name: 'John' } }} className="Homepage-link">Register</Link>
+        <Link to={{ pathname: '/signup', state: expanded }} className="Homepage-link">Register</Link>
         </div>
       </div>
         
