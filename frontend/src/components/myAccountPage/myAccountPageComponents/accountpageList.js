@@ -15,11 +15,11 @@ return (
         <>
             {list.length > 0 && (
                 <>
-                <span className="chalk" style={{ '--fsize': '1.5rem', color: color }} onClick={() => toggleState(updateStateFunction)}>
-                    <IoIosArrowDown /> {heading} ({list.length})
-                </span>
+                    <span className="chalk" style={{ '--fsize': '1.5rem', color: color }} onClick={() => toggleState(updateStateFunction)}>
+                        <IoIosArrowDown /> {heading} ({list.length})
+                    </span>
                     <div style={{marginBottom :'1em'}}>
-                    <ResultsComponent wagers={list} />
+                        <ResultsComponent wagers={list} />
                     </div>
                 </>
             )}
