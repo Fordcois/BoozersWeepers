@@ -18,7 +18,9 @@ return (
                 <span className="chalk" style={{ '--fsize': '1.5rem', color: color }} onClick={() => toggleState(updateStateFunction)}>
                     <IoIosArrowDown /> {heading} ({list.length})
                 </span>
-                <ResultsComponent wagers={list} />
+                    <div style={{marginBottom :'1em'}}>
+                    <ResultsComponent wagers={list} />
+                    </div>
                 </>
             )}
         </>
