@@ -20,10 +20,10 @@ const IncomingWagers = (props, { navigate }) => {
         
 
           <div>{props.wagers.map((wager) => (
-            <a className="notificationdetails" key={wager._id} href={`/Wager/${wager._id}`} >
+            <div key={wager._id}>
               <a className="notificationdetails" href={`/wager/${wager._id}`}>{wager.peopleInvolved[0].username} would like to wager!</a><br />
 
-            </a>))}
+            </div>))}
           </div>
 
         </div>

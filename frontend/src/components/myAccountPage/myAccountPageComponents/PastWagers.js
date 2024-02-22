@@ -10,7 +10,6 @@ import './notification.css'
 const PastWagers = ({ navigate, wagers }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const loggedInUser = getSessionUserID(token)
-  console.log(wagers)
     if(token) {
       return(
         <div id="past-wagers">
