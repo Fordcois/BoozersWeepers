@@ -6,14 +6,15 @@ import { useLocation } from 'react-router-dom';
 
 const Template = ({ navigate }) => {
   const [token, setUserToken] = useState(window.localStorage.getItem('token'));
-  const [expanded, setExpanded] = useState(true);
+
+  // Get expanded from URL params, defaulting to true
+  const location = useLocation();
+  const expandedParam = new URLSearchParams(location.search).get('expanded');
+  const [expanded, setExpanded] = useState(expandedParam ? expandedParam === 'true' : true);
+
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
-  
-  const location = useLocation();
-  const nameParam = new URLSearchParams(location.search).get('name');
-  const name = nameParam || 'John Doe'; // Use 'John Doe' as default if nameParam is falsy
 
   return (
     <div className='shade'>
@@ -23,8 +24,15 @@ const Template = ({ navigate }) => {
             <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
             <BlackboardHeader /> 
           
-            <span className='chalktitle'>Welcome to the Workshop, {name} </span>
-            The status is {expanded.toString()}
+            <span className='chalktitle'>Welcome to the Workshop</span>
+
+            <p style={{color:'white'}}>
+
+                <a href='/workshop?expanded=true'>Expanded View</a><br/>
+                <a href='/workshop?expanded=false'>Collapsed View</a><br/>
+                <a href={`/workshop?expanded=${expanded.toString()}`}>Carry On View</a><br/>
+            
+            </p>
 
           </div>
         </div>
