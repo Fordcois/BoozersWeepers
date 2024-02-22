@@ -7,15 +7,15 @@ import './notification.css'
 
 
 
-const PastWagers = ({ navigate, pastWagers }) => {
+const PastWagers = ({ navigate, wagers }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const loggedInUser = getSessionUserID(token)
-  console.log(pastWagers)
+  console.log(wagers)
     if(token) {
       return(
         <div id="past-wagers">
 
-          {pastWagers.map((wager) => (
+          {wagers.map((wager) => (
         <div key={wager._id}>
           {loggedInUser === wager.winner._id && wager.peopleInvolved[0]._id !== loggedInUser ?( 
 
