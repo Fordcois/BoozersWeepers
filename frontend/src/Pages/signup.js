@@ -20,7 +20,6 @@ const SignUpPage = ({ navigate}) => {
     if (isLoggedIn) {navigate('/myAccount');}
     }, [token, navigate, isLoggedIn]);
 
-
     return (
 
       <div className='shade'>
@@ -28,7 +27,7 @@ const SignUpPage = ({ navigate}) => {
           <div className='blackboard'>
             <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
             <BlackboardHeader/>
-            
+
             <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Register</span>
               
             <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
@@ -44,11 +43,7 @@ const SignUpPage = ({ navigate}) => {
           </div>
         </div>
       </div>
-
-
-
-
-
+      
     )};
   
 export default SignUpPage;

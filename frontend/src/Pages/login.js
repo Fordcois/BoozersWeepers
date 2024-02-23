@@ -22,6 +22,7 @@ const LogInPage = ({ navigate }) => {
     }, [token,navigate]);
 
   return (
+
     <div className='shade'>
       <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
         <div className='blackboard'>
@@ -43,6 +44,7 @@ const LogInPage = ({ navigate }) => {
         </div>
       </div>
     </div>
+    
   )};
   
 export default LogInPage;
