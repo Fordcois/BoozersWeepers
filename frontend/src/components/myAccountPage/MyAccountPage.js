@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import isTokenValid from '../Utility/isTokenValid';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import VertNavbar from '../VertNavBar/VertNavBar';
@@ -15,7 +16,9 @@ const MyAccountPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [wagers, setWagers] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
-  const [expanded, setExpanded] = useState(true);
+  const location = useLocation();
+  const expandedState = location.state?.expandedState;
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
   const [LoggedInUserID, setLoggedInUserID] = useState (getSessionUserID(token))
   const [showIncoming, setShowIncoming] = useState(null)
   const [showOngoing, setShowOngoing] = useState(null)

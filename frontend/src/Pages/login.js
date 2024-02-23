@@ -32,7 +32,7 @@ const LogInPage = ({ navigate }) => {
           <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Log in</span>
             
           <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
-            <LogInForm navigate={navigate} />
+            <LogInForm navigate={navigate} expanded={expanded}/>
             
             <div style={{ marginTop: '40px' }}>
               <span className="chalk" style={{ '--fsize': '18px', '--talign': 'center' }}>Don't have an account?</span>
