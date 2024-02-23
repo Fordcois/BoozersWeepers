@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import isTokenValid from '../components/Utility/isTokenValid';
 import VertNavbar from '../components/VertNavBar/VertNavBar';
 import LogInForm from '../components/auth/LoginForm';
@@ -7,10 +8,12 @@ import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import '../Pages/style.css'
 
 const LogInPage = ({ navigate }) => {
-  // const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
-  const [expanded, setExpanded] = useState();
+  const location = useLocation();
+  const expandedState = location.state?.expandedState;
+  console.log(expandedState)
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
 
   const toggleExpand = () => {setExpanded(!expanded);};
 
@@ -34,7 +37,7 @@ const LogInPage = ({ navigate }) => {
       
         <div style={{ marginTop: '40px' }}>
         <span className="chalk" style={{ '--fsize': '18px', '--talign': 'center' }}>Don't have an account?</span>
-        <Link to={{ pathname: '/signup', state: expanded }} className="Homepage-link">Register</Link>
+        <Link to='/signup' state = {{expandedState: expanded }} className="Homepage-link"> Register</Link>
         </div>
       </div>
         
