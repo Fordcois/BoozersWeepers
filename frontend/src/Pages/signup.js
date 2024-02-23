@@ -10,7 +10,6 @@ import '../Pages/style.css'
 const SignUpPage = ({ navigate}) => {
   const location = useLocation();
   const expandedState = location.state?.expandedState;
-  console.log(expandedState)
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
   const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
@@ -24,32 +23,27 @@ const SignUpPage = ({ navigate}) => {
 
     return (
 
- <div className='shade'>
- <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-   <div className='blackboard'>
-     <div className='form'>
-     <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-     <BlackboardHeader/>
+      <div className='shade'>
+        <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
+          <div className='blackboard'>
+            <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+            <BlackboardHeader/>
+            
+            <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Register</span>
+              
+            <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
+              <SignUpForm navigate={navigate} />
 
-     <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Register</span>
-       
-     <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
-      <SignUpForm navigate={navigate} />
-     
-       <div style={{ marginTop: '40px' }}>
-       <span className="chalk" style={{ '--fsize': '18px', '--talign': 'center' }}>Already have an account?</span>
-       <Link to="/login" state={{expandedState : expanded }} className="Homepage-link">Login</Link>
-       </div>
-     </div>
-       
-       
- 
+              <div style={{ marginTop: '40px' }}>
+                <span className="chalk" style={{ '--fsize': '18px', '--talign': 'center' }}>Already have an account?</span>
+                <Link to="/login" state={{expandedState : expanded }} className="Homepage-link">Login</Link>
+              </div>
 
+            </div>
 
-     </div>
-   </div>
- </div>
-</div>
+          </div>
+        </div>
+      </div>
 
 
 

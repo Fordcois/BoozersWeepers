@@ -12,7 +12,6 @@ const LogInPage = ({ navigate }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
   const location = useLocation();
   const expandedState = location.state?.expandedState;
-  console.log(expandedState)
   const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
 
   const toggleExpand = () => {setExpanded(!expanded);};
@@ -23,34 +22,27 @@ const LogInPage = ({ navigate }) => {
     }, [token,navigate]);
 
   return (
-  <div className='shade'>
-  <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-    <div className='blackboard'>
-      {/* <div className='form'> */}
-      <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-      <BlackboardHeader/>
+    <div className='shade'>
+      <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
+        <div className='blackboard'>
+          <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+          <BlackboardHeader/>
 
-      <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Log in</span>
-        
-      <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
-      <LogInForm navigate={navigate} />
-      
-        <div style={{ marginTop: '40px' }}>
-        <span className="chalk" style={{ '--fsize': '18px', '--talign': 'center' }}>Don't have an account?</span>
-        <Link to='/signup' state = {{expandedState: expanded }} className="Homepage-link"> Register</Link>
+          <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Log in</span>
+            
+          <div style={{textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
+            <LogInForm navigate={navigate} />
+            
+            <div style={{ marginTop: '40px' }}>
+              <span className="chalk" style={{ '--fsize': '18px', '--talign': 'center' }}>Don't have an account?</span>
+              <Link to='/signup' state = {{expandedState: expanded }} className="Homepage-link"> Register</Link>
+            </div>
+
+          </div>
+
         </div>
       </div>
-        
-        
-  
-
-
-    
     </div>
-  </div>
-</div>
-  
-  
   )};
   
 export default LogInPage;
