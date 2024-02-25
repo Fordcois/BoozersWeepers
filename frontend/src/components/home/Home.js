@@ -30,7 +30,7 @@ const Home = ({ navigate }) => {
       <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Home of the Pint-Sized bet</span>
 
       <div style={{ paddingTop: '25px', textAlign: 'center' }}>
-        <Link to={{ pathname: '/login', state: { name: 'John' } }} className="Homepage-link">Sign-in</Link>
+        <Link to={{ pathname: '/login', state: expanded }} className="Homepage-link"> Sign-in</Link>
         <p>
         <span className="chalk" style={{ '--fsize': '18px' ,'--talign': 'center'}}>Don't have an account?</span>
         <Link to={{ pathname: '/signup', state: { name: 'John' } }} className="Homepage-link">Register</Link></p>

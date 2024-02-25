@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaPencil } from "react-icons/fa6";
 
-const LogInForm = ({ navigate }) => {
+const LogInForm = ({ navigate,expanded }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -17,7 +17,7 @@ const LogInForm = ({ navigate }) => {
     if(response.status === 201) {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
-      navigate('/myAccount');
+      navigate('/myAccount', { state: { expandedState: expanded } });
     } 
     else {
       const errorData = await response.json();
