@@ -12,32 +12,32 @@ const PastWagers = ({ navigate, wagers }) => {
   const loggedInUser = getSessionUserID(token)
     if(token) {
       return(
-        <div id="past-wagers">
+        <div id="past-wagers" className="notificationdetails">
 
           {wagers.map((wager) => (
             <div key={wager._id}>
               {loggedInUser === wager.winner._id && wager.peopleInvolved[0]._id !== loggedInUser ?( 
 
                 <div id="past-wager" className='wager' >
-                  <a className="notificationdetails" href={`/wager/${wager._id}`}>You won your wager with {wager.peopleInvolved[0].username}</a>
+                  <a  className='individualwagerlink' href={`/wager/${wager._id}`}>You won your wager with {wager.peopleInvolved[0].username} that {wager.description}</a>
                 </div>
 
               ) : loggedInUser === wager.winner._id && wager.peopleInvolved[1]._id !== loggedInUser ? (
 
                 <div id="past-wager" className='wager' >
-                  <a className="notificationdetails" href={`/wager/${wager._id}`}>You won your wager with {wager.peopleInvolved[1].username}</a>
+                  <a className='individualwagerlink' href={`/wager/${wager._id}`}>You won your wager with {wager.peopleInvolved[1].username} that {wager.description} </a>
                 </div>
 
               ) : loggedInUser !== wager.winner._id && wager.peopleInvolved[0]._id !== loggedInUser? (
 
                 <div id="past-wager" className='wager' >
-                  <a className="notificationdetails" href={`/wager/${wager._id}`}>You lost your wager with {wager.peopleInvolved[0].username}</a>
+                  <a className='individualwagerlink' href={`/wager/${wager._id}`}>You lost your wager with {wager.peopleInvolved[0].username} that {wager.description}</a>
                 </div>
 
               ) : (
 
                 <div id="past-wager" className='wager' >
-                  <a className="notificationdetails" href={`/wager/${wager._id}`}>You lost your wager with {wager.peopleInvolved[1].username}</a>
+                  <a className='individualwagerlink' href={`/wager/${wager._id}`}>You lost your wager with {wager.peopleInvolved[1].username} that {wager.description}</a>
                 </div>
                   
               )}

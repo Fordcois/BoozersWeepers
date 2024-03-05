@@ -4,21 +4,25 @@
     font-size: 24px;
     margin-bottom: 20px;
     color: white;
-    font-family: 'Caveat';
-}
+    font-family: 'Permanent Marker';
+} 
 
-.notificationdetails{
-    font-size: 25px;
+.notificationdetails {
+    font-size: 1.25rem;
     margin-bottom: 20px;
     color: white;
     text-decoration: none;
-    font-family: 'Caveat';
-		text-indent: 50px;
+    font-family: 'Permanent Marker';
+    padding-left: 40px;
 }
 
-.notificationdetails:hover {
-    text-decoration: underline;
+.notificationdetails a,.notificationdetails:visited{
     color: white;
-    font-family: 'Caveat'; 
+    text-decoration: none;
+}
+
+
+.individualwagerlink:hover {
+    text-decoration: underline;
   }
 

@@ -11,16 +11,16 @@ const OngoingWagers = ({ navigate, wagers }) => {
 
   if (token) {
     return (
-      <div id="ongoing-wagers-feed">
+      <div id="ongoing-wagers-feed" className="notificationdetails">
         {wagers.map((wager) => (
           <div key={wager._id}>
             {wager.peopleInvolved[0]._id === loggedInUser ? 
             (
-              <a className="notificationdetails" href={`/wager/${wager._id}`}>You bet {wager.peopleInvolved[1].username} that {wager.description}</a>
+              <a className='individualwagerlink' href={`/wager/${wager._id}`}>You bet {wager.peopleInvolved[1].username} that {wager.description}</a>
             ) 
             : 
             (
-              <a className="notificationdetails" href={`/wager/${wager._id}`}>{wager.peopleInvolved[0].username} bet you that {wager.description}</a>
+              <a className='individualwagerlink' href={`/wager/${wager._id}`}>{wager.peopleInvolved[0].username} bet you that {wager.description}</a>
             )}
           </div>
         ))}

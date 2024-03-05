@@ -19,9 +19,9 @@ const IncomingWagers = (props, { navigate }) => {
           user details for each   */}
         
 
-          <div>{props.wagers.map((wager) => (
+          <div className="notificationdetails">{props.wagers.map((wager) => (
             <div key={wager._id}>
-              <a className="notificationdetails" href={`/wager/${wager._id}`}>{wager.peopleInvolved[0].username} would like to wager!</a><br />
+              <a className='individualwagerlink' href={`/wager/${wager._id}`}>{wager.peopleInvolved[0].username} would like to wager!</a><br />
 
             </div>))}
           </div>

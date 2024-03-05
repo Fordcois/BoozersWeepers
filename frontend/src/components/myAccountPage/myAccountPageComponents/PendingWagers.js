@@ -11,12 +11,15 @@ const PendingWagers = ({ navigate, wagers }) => {
         <div id="pending-wagers">
 
 						<div id="pending-wager" className='wager'>
-              <div> {wagers.map((wager) => (
+              <div className="notificationdetails" > 
+                {wagers.map((wager) => (
 
-                  <a key = {wager._id} className="notificationdetails" href={`/wager/${wager._id}`}>
-                    Waiting for {wager.peopleInvolved[1].username} to respond to your wager <br />
-              </a>
-                ))}
+
+                  <a className='individualwagerlink' key = {wager._id} href={`/wager/${wager._id}`}>
+                    Waiting for {wager.peopleInvolved[1].username} to respond to your wager that {wager.description}<br />
+                  </a>
+
+              ))}
               </div>
             </div>
 

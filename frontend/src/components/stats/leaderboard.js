@@ -6,8 +6,8 @@ const Leaderboard = () => {
   const [userToken, setUserToken] = useState(window.localStorage.getItem("token"));
   const [pintsData, setpintsData] = useState([]);
   const [userObject, setuserObject] = useState([]);
-  const [topPintsOwedNotClaimed, setTopPintsOwedNotClaimed] = useState(null);
-  const [topPintsOwnedClaimed, setTopPintsOwnedClaimed] = useState(null);
+  const [userWithMostLosses, setUserWithMostLosses] = useState(null);
+  const [userWithMostWins, setUserWithMostWins] = useState(null);
 
   useEffect(() => {
     const fetchPints = async () => {
@@ -31,16 +31,16 @@ const Leaderboard = () => {
     setuserObject(userObjectArray);
 
     // Find user with the most pintsOwedNotClaimed
-    const userWithTopPintsOwedNotClaimed = userObjectArray.reduce((prev, current) =>
-      prev.pintsOwedNotClaimed > current.pintsOwedNotClaimed ? prev : current, {});
+    const userWithMostLosses = userObjectArray.reduce((prev, current) =>
+      prev.betsLost > current.betsLost ? prev : current, {});
 
-    setTopPintsOwedNotClaimed(userWithTopPintsOwedNotClaimed);
+    setUserWithMostLosses(userWithMostLosses);
 
     // Find user with the highest pintsOwnedClaimed
-    const userWithTopPintsOwnedClaimed = userObjectArray.reduce((prev, current) =>
-      prev.pintsOwnedClaimed > current.pintsOwnedClaimed ? prev : current, {});
+    const userWithMostWins = userObjectArray.reduce((prev, current) =>
+      prev.betsWon > current.betsWon ? prev : current, {});
 
-    setTopPintsOwnedClaimed(userWithTopPintsOwnedClaimed);
+    setUserWithMostWins(userWithMostWins);
 
   }, [pintsData]);
 
@@ -58,9 +58,9 @@ const Leaderboard = () => {
 
       <div>
       <span className='chalktitle'>Top Boozer</span>
-        {topPintsOwedNotClaimed && (
+        {userWithMostWins && (
           <p className='leadertext'>
-            <b>{topPintsOwedNotClaimed.username}</b>  has {topPintsOwedNotClaimed.pintsOwedNotClaimed} pints with their name on it<br/>
+            {userWithMostWins.username} has won {userWithMostWins.betsWon} pints <br/>
             <span className='leadercomments'>(Absolutely Outrageous)</span>
           </p>
         )}
@@ -68,14 +68,16 @@ const Leaderboard = () => {
 
       <div>
       <span className='chalktitle'>Top Weeper</span>
-        {topPintsOwnedClaimed && (
+        {userWithMostLosses && (
           <p className='leadertext'>
-            {topPintsOwnedClaimed.username} still owes {topPintsOwnedClaimed.pintsOwnedClaimed} pints <br/>
-            <span className='leadercomments'>(Don't let 'em wriggle out of it!!)</span>
+            <b>{userWithMostLosses.username}</b> has had to buy {userWithMostLosses.betsLost} pints <br/>
+            <span className='leadercomments'>(What an absolute mug!!)</span>
           </p>
         )}
       </div>
+
     </div>
+
   );
 };
 

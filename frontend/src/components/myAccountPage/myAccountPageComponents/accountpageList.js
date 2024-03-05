@@ -8,14 +8,14 @@ const toggleState = (setStateFunction) => {setStateFunction(prevState => prevSta
 return (
 <div>
     {list.length > 0 && showState === null ? (
-        <span className="chalk" style={{ '--fsize': '1.5rem', color: color }} onClick={() => toggleState(updateStateFunction)}>
+        <span className="chalk" style={{ '--fsize': '1.8rem', color: color }} onClick={() => toggleState(updateStateFunction)}>
             <IoIosArrowForward/> {heading} ({list.length})
         </span> 
     ) : (
         <>
             {list.length > 0 && (
                 <>
-                    <span className="chalk" style={{ '--fsize': '1.5rem', color: color }} onClick={() => toggleState(updateStateFunction)}>
+                    <span className="chalk" style={{ '--fsize': '1.8rem', color: color }} onClick={() => toggleState(updateStateFunction)}>
                         <IoIosArrowDown /> {heading} ({list.length})
                     </span>
                     <div style={{marginBottom :'1em'}}>

@@ -75,9 +75,21 @@ return (
         <BlackboardHeader />
         
         <div className='chalktitle'>My Wagers</div>
+
+        {myWagers.length === 0 && 
+        wagerRequests.length === 0 && 
+        ongoingWagers.length === 0 && 
+        pendingWagers.length === 0 && 
+        unresolvedWagers.length === 0 && 
+        pastWagers.length === 0 ? 
+        <div style={{textAlign:'center', height:'20vh'}}>
+          <span className="chalk" style={{ marginTop:'5%','--fsize': '22px', color: '#cd561b'}}> No bets found!</span>
+          <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', color: 'whitesmoke' }}>(<a className="chalk-link" href={`/newWager/`}>Challenge Somebody to start earning Pints</a>)</span>                       
+        </div>
+          : null}
         
         <AccountPageList list={wagerRequests} showState={showIncoming} updateStateFunction={setShowIncoming} heading={'My Incoming Wagers'} ResultsComponent={IncomingWagers} color={'#cd561b'}/>
-        <AccountPageList list={unresolvedWagers} showState={showUnresolved} updateStateFunction={setShowUnresolved} heading={'My Unresolved Wagers'} ResultsComponent={UnresolvedWagers} color={'whitesmoke'} />
+        <AccountPageList list={unresolvedWagers} showState={showUnresolved} updateStateFunction={setShowUnresolved} heading={'My Unresolved Wagers'} ResultsComponent={UnresolvedWagers} color={'#cd561b'} />
         <AccountPageList list={pendingWagers} showState={showPending} updateStateFunction={setShowPending} heading={'My Pending Wagers'} ResultsComponent={PendingWagers} color={'whitesmoke'} />
         <AccountPageList list={ongoingWagers} showState={showOngoing} updateStateFunction={setShowOngoing} heading={'My Ongoing Wagers'} ResultsComponent={OngoingWagers} color={'whitesmoke'}/>
         <AccountPageList list={pastWagers} showState={showHistory} updateStateFunction={setShowHistory} heading={'My Past Wagers'} ResultsComponent={PastWagers} color={'whitesmoke'} />
