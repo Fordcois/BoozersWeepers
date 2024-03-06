@@ -10,14 +10,15 @@ import '../Pages/style.css'
 const SignUpPage = ({ navigate}) => {
   const location = useLocation();
   const expandedState = location.state?.expandedState;
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
-  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+
 
   const toggleExpand = () => {setExpanded(!expanded);};
 
   useEffect(() => {
-    if (isLoggedIn) {navigate('/myAccount');}
+    if (isLoggedIn) {navigate("/myAccount", { state: { expandedState: expanded } } );}
     }, [token, navigate, isLoggedIn]);
 
     return (
@@ -26,7 +27,7 @@ const SignUpPage = ({ navigate}) => {
         <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
           <div className='blackboard'>
             <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-            <BlackboardHeader/>
+            <BlackboardHeader expandedState={expanded}/>
 
             <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Register</span>
               

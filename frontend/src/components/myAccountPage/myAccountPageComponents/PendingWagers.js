@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './notification.css'
 import "../MyAccountPage.css"
 
 
-const PendingWagers = ({ navigate, wagers }) => {
+const PendingWagers = ({ navigate, wagers, expandedState }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+  
+  useEffect(() => {
+    setExpanded(expandedState);
+  }, [expandedState]);
 
     if(token) {
       return(
@@ -13,12 +19,9 @@ const PendingWagers = ({ navigate, wagers }) => {
 						<div id="pending-wager" className='wager'>
               <div className="notificationdetails" > 
                 {wagers.map((wager) => (
-
-
-                  <a className='individualwagerlink' key = {wager._id} href={`/wager/${wager._id}`}>
-                    Waiting for {wager.peopleInvolved[1].username} to respond to your wager that {wager.description}<br />
-                  </a>
-
+                    <Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}> 
+                      Waiting for {wager.peopleInvolved[1].username} to respond to your wager that {wager.description}
+                   <br/> </Link>
               ))}
               </div>
             </div>
@@ -26,7 +29,7 @@ const PendingWagers = ({ navigate, wagers }) => {
         </div>
       )
     } else {
-      navigate('/login')
+      navigate('/login', { state: { expandedState: expanded } });
     }
 }
 

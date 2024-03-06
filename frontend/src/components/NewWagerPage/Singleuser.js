@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './userlist.css';
 
-const SingleUser = ({ SelectedUser }) => {
+const SingleUser = ({ SelectedUser, key, expandedState }) => {
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+
+  useEffect(() => {
+    setExpanded(expandedState);
+  }, [expandedState]);
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -13,7 +18,7 @@ const SingleUser = ({ SelectedUser }) => {
 
 
 return (
-<Link to={`/profile/${SelectedUser._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+<Link to={`/profile/${SelectedUser._id}`} state={{expandedState: expanded}} style={{ textDecoration: 'none', color: 'inherit' }}>
   <div className='singleuser'>
 
     <div style={{ display: 'flex', marginBottom: '10px' }}>
@@ -23,7 +28,7 @@ return (
       </div>
 
       <div style={{ flex: '95%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-            <span className='SingleUserNameText'><b>{SelectedUser.username}</b></span> 
+            <span className='SingleUserNameText'><b>{SelectedUser.username} {expanded}</b></span> 
             <span className='RealNameText'>
               {SelectedUser.firstName !== '' || SelectedUser.lastName !== '' ? 
                 `(${capitalizeFirstLetter(SelectedUser.firstName)} ${capitalizeFirstLetter(SelectedUser.lastName)})` : null}

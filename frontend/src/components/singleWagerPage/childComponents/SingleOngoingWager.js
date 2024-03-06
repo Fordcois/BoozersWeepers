@@ -1,16 +1,21 @@
 import getSessionUserID from "../../Utility/getSignedInUser_id";
-import React, { navigate } from 'react';
+import React, { navigate, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 
-const SingleOngoingWager = (wagerData) => {
+const SingleOngoingWager = ({wagerData, expandedState}) => {
     const navigate = useNavigate()
     const token = window.localStorage.getItem('token');
     const loggedInUser = getSessionUserID(token)
-    const wager = wagerData.wagerData
+    const wager = wagerData
+    const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
     let ActiveUser;
     let OtherUser;
     let ViewerInvolvedInbet = false;
+
+    useEffect(() => {
+      setExpanded(expandedState);
+    }, [expandedState]);  
     
     if (loggedInUser === wager.peopleInvolved[0]._id) {
         ActiveUser = wager.peopleInvolved[0];
@@ -58,7 +63,7 @@ const SingleOngoingWager = (wagerData) => {
             } else {console.log("Failed to create a pint");}
           })
           .then(() => {
-            navigate("/myAccount");
+            navigate('/myAccount', { state: { expandedState: expanded } });
           })
           .catch(error => {
             console.error("Error occurred:", error);

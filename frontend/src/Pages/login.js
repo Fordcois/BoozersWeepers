@@ -18,7 +18,7 @@ const LogInPage = ({ navigate }) => {
 
   useEffect(() => {
 
-    if (isLoggedIn) {navigate('/myAccount');}
+    if (isLoggedIn) {navigate("/myAccount", { state: { expandedState: expanded } } );}
     }, [token,navigate]);
 
   return (
@@ -27,7 +27,7 @@ const LogInPage = ({ navigate }) => {
       <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
         <div className='blackboard'>
           <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-          <BlackboardHeader/>
+          <BlackboardHeader expandedState={expanded}/>
 
           <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Log in</span>
             

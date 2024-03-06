@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./NewWagerForm.css";
 import '../../Pages/style.css'
-import { useParams } from "react-router-dom"
+import { useParams, useLocation } from "react-router-dom"
 import VertNavbar from '../VertNavBar/VertNavBar';
 import { FaPencil } from "react-icons/fa6";
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
@@ -11,8 +11,10 @@ const NewWagerForm = ({ navigate }) => {
 	const [description, setDescription] = useState("");
 	const [deadline, setDeadline] = useState("");
 	const [token, setToken] = useState(window.localStorage.getItem("token"));
-	const [expanded, setExpanded] = useState(true);
 	const [userData, setUserData] = useState(null)
+  const location = useLocation();
+  const expandedState = location.state?.expandedState;
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
 
 	const toggleExpand = () => {setExpanded(!expanded);};
 
@@ -56,7 +58,7 @@ const NewWagerForm = ({ navigate }) => {
 				console.log("Failed to create a wager")
 			}
 		})
-	} navigate("/myAccount");
+	} navigate("/myAccount", { state: { expandedState: expanded } });
 	}
 	const handleDescriptionChange = (event) => {
     setDescription(event.target.value)
@@ -75,7 +77,7 @@ if (token) {
   <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
     <div className='blackboard'>
       <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-      <BlackboardHeader/>
+      <BlackboardHeader expandedState={expanded}/>
       <div className="NewWager"> 
         <form onSubmit={handleWagerSubmit} style={{width:'auto'}}>
           
@@ -105,7 +107,7 @@ if (token) {
 );
 	
 } else {
-	navigate("/../login");
+	navigate("/../login", { state: { expandedState: expanded } });
 }
 	
 }

@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
 import "../MyAccountPage.css"
 import './notification.css'
 import getSessionUserID from '../../Utility/getSignedInUser_id';
+import { Link } from 'react-router-dom';
 
-const UnresolvedWagers = ({ navigate, wagers }) => {
+const UnresolvedWagers = ({ navigate, wagers, expandedState }) => {
 	const [token, setToken] = useState(window.localStorage.getItem("token"));
 	const loggedInUser = getSessionUserID(token)
+	const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+	
+	useEffect(() => {
+		setExpanded(expandedState);
+	  }, [expandedState]);
 
 
 	if(token) {
@@ -14,17 +21,14 @@ const UnresolvedWagers = ({ navigate, wagers }) => {
 				
 					{wagers.map((wager) => (
 					<div key={wager._id}>
-						
-					<a className='individualwagerlink' href={`/Wager/${wager._id}`} >
-						Time's Up! Who won the wager that {wager.description}?
-					</a>
+						<Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}>Time's Up! Who won the wager that {wager.description}? </Link>
 					</div>))}
 				</div>
 
 				
 				
 			)} else {
-			navigate('/login')
+			navigate('/login', { state: { expandedState: expanded } });
 		}
 	}
 

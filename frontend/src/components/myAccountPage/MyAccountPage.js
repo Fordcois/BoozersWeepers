@@ -44,7 +44,7 @@ const MyAccountPage = ({ navigate }) => {
         })
       }
 
-    if (!isLoggedIn) {navigate('/');}
+    if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
     }, [navigate, isLoggedIn, token]);
 
     // added an extra filter to show wagers that the signed in user is involved with
@@ -63,7 +63,7 @@ const MyAccountPage = ({ navigate }) => {
     const toggleExpand = () => {setExpanded(!expanded);};
 
     useEffect(() => {
-      if (!isLoggedIn) {navigate('/');}
+      if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
       }, [navigate, isLoggedIn]);
   
 return (
@@ -72,7 +72,7 @@ return (
     <div className='blackboard'>
       <div className='form'>
         <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-        <BlackboardHeader />
+        <BlackboardHeader expandedState={expanded}/>
         
         <div className='chalktitle'>My Wagers</div>
 
@@ -88,11 +88,11 @@ return (
         </div>
           : null}
         
-        <AccountPageList list={wagerRequests} showState={showIncoming} updateStateFunction={setShowIncoming} heading={'My Incoming Wagers'} ResultsComponent={IncomingWagers} color={'#cd561b'}/>
-        <AccountPageList list={unresolvedWagers} showState={showUnresolved} updateStateFunction={setShowUnresolved} heading={'My Unresolved Wagers'} ResultsComponent={UnresolvedWagers} color={'#cd561b'} />
-        <AccountPageList list={pendingWagers} showState={showPending} updateStateFunction={setShowPending} heading={'My Pending Wagers'} ResultsComponent={PendingWagers} color={'whitesmoke'} />
-        <AccountPageList list={ongoingWagers} showState={showOngoing} updateStateFunction={setShowOngoing} heading={'My Ongoing Wagers'} ResultsComponent={OngoingWagers} color={'whitesmoke'}/>
-        <AccountPageList list={pastWagers} showState={showHistory} updateStateFunction={setShowHistory} heading={'My Past Wagers'} ResultsComponent={PastWagers} color={'whitesmoke'} />
+        <AccountPageList list={wagerRequests} showState={showIncoming} updateStateFunction={setShowIncoming} heading={'My Incoming Wagers'} ResultsComponent={IncomingWagers} color={'#cd561b'} expandedState={expanded} />
+        <AccountPageList list={unresolvedWagers} showState={showUnresolved} updateStateFunction={setShowUnresolved} heading={'My Unresolved Wagers'} ResultsComponent={UnresolvedWagers} color={'#cd561b'} expandedState={expanded}/>
+        <AccountPageList list={pendingWagers} showState={showPending} updateStateFunction={setShowPending} heading={'My Pending Wagers'} ResultsComponent={PendingWagers} color={'whitesmoke'} expandedState ={expanded}/>
+        <AccountPageList list={ongoingWagers} showState={showOngoing} updateStateFunction={setShowOngoing} heading={'My Ongoing Wagers'} ResultsComponent={OngoingWagers} color={'whitesmoke'} expandedState={expanded}/>
+        <AccountPageList list={pastWagers} showState={showHistory} updateStateFunction={setShowHistory} heading={'My Past Wagers'} ResultsComponent={PastWagers} color={'whitesmoke'} expandedState={expanded}/>
         
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 
-const AccountPageList = ({ list, showState, updateStateFunction, heading, ResultsComponent, color }) => {
+const AccountPageList = ({ list, showState, updateStateFunction, heading, ResultsComponent, color, expandedState }) => {
     
 const toggleState = (setStateFunction) => {setStateFunction(prevState => prevState === null ? true : null);}
 // list.approved === null && list.peopleInvolved[0] !== logged
@@ -19,7 +19,7 @@ return (
                         <IoIosArrowDown /> {heading} ({list.length})
                     </span>
                     <div style={{marginBottom :'1em'}}>
-                        <ResultsComponent wagers={list} />
+                        <ResultsComponent wagers={list} expandedState={expandedState} />
                     </div>
                 </>
             )}

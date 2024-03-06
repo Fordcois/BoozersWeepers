@@ -4,11 +4,14 @@ import VertNavbar from '../VertNavBar/VertNavBar';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 import './userlist.css'
+import { useLocation } from 'react-router-dom';
 
 const NewWagerPage = () => {
   const [ListOfUsers, setUsernames] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [expanded, setExpanded] = useState(true);
+  const location = useLocation();
+  const expandedState = location.state?.expandedState;
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
 
 
 
@@ -36,12 +39,12 @@ const NewWagerPage = () => {
     <div className='blackboard'>
       <div className='form'>
       <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-      <BlackboardHeader/>
+      <BlackboardHeader expandedState={expanded}/>
       <span className="chalktitle-center" style={{ '--fsize': '34px' ,'--talign': 'center'}}>New Wager</span>
 
       <span className="chalk" style={{ '--fsize': '24px' ,'--talign': 'left'}}> Who would you like to Challenge?</span>
       <span className="chalk" style={{ '--fsize': '16px' ,'--talign': 'left', 'marginBottom': '2%' }}>Enter atleast 3 Characters from the users name or username...</span>
-      <NewSearchBar SearchData={ListOfUsers}/>
+      <NewSearchBar SearchData={ListOfUsers} expandedState ={expanded}/>
 
     
   
