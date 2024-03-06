@@ -1,12 +1,17 @@
 import React, { navigate, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SingleWagerRequest = (wagerData) => {
+const SingleWagerRequest = ({ wagerData, expandedState }) => {
   const navigate = useNavigate()
   const token = window.localStorage.getItem('token');
-  const wager = wagerData.wagerData
+  const wager = wagerData
   const dateParts = wager.deadline.slice(0, 10).split("-");
   const deadlineDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+
+  useEffect(() => {
+    setExpanded(expandedState);
+  }, [expandedState]);
 
   const handleAcceptClick = () => {
     if(token) {
@@ -25,7 +30,7 @@ const SingleWagerRequest = (wagerData) => {
         console.log("Wager failed to update")
       }
     })
-  } navigate("/myAccount");
+  } navigate('/myAccount', { state: { expandedState: expanded } });
   }
 
   const handleRejectClick = () => {
@@ -36,7 +41,7 @@ const SingleWagerRequest = (wagerData) => {
     'Content-Type': 'application/json',
     }
     })      
-    navigate("/myAccount")
+    navigate('/myAccount', { state: { expandedState: expanded } });
     }
 
   return (
@@ -56,4 +61,6 @@ const SingleWagerRequest = (wagerData) => {
 </div>
 )};
 
+
 export default SingleWagerRequest;
+

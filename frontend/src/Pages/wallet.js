@@ -5,12 +5,17 @@ import VertNavbar from '../components/VertNavBar/VertNavBar';
 import '../Pages/style.css'
 import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import WalletComponent from '../components/walletComponent/WalletComponent';
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const WalletPage = ({ navigate }) => {
   const [token, setUserToken] = useState(window.localStorage.getItem('token'));
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
-  const [expanded, setExpanded] = useState(true);
   const [SessionUserId,setSessionUserId] = useState(getSessionUserID(token))
+  const location = useLocation();
+  const expandedState = location.state?.expandedState;
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+
 
   const toggleExpand = () => {setExpanded(!expanded);};
 
@@ -21,15 +26,15 @@ const WalletPage = ({ navigate }) => {
       <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
         <div className='blackboard'>
             <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-            <BlackboardHeader /> 
+            <BlackboardHeader expandedState={expanded}/> 
 
 
 
        {isLoggedIn ? (
           <div>
             {/* Content for logged-in users */}
-            <div className='chalktitle'>Wallet </div>
-            <WalletComponent UserID={SessionUserId}/>
+            <div className='chalktitle'>Wallet</div>
+            <WalletComponent UserID={SessionUserId} expandedState= {expanded}/>
           </div>
         
         
@@ -38,7 +43,7 @@ const WalletPage = ({ navigate }) => {
         ) : (
           <div>
             {/* Content for non-logged-in users */}
-            <p>Please <a href="/login">log in</a> to access this page</p>
+            <p>Please <Link to ="/login" state = {{expandedState: expanded}}>log in</Link> to access this page</p>
           </div>
         )}
         </div>

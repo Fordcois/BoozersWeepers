@@ -21,7 +21,7 @@ const LogInForm = ({ navigate,expanded }) => {
     } 
     else {
       const errorData = await response.json();
-      navigate('/login') 
+      navigate('/login', { state: { expandedState: expanded } });
       setErrorMsg(errorData.message)
       }
 

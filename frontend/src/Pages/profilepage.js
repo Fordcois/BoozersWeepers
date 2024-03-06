@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import isTokenValid from '../components/Utility/isTokenValid';
 import VertNavbar from '../components/VertNavBar/VertNavBar';
 import '../Pages/style.css';
@@ -10,8 +10,11 @@ const ProfilePage = () => {
   const { userID } = useParams();
   const [userToken, setUserToken] = useState(window.localStorage.getItem('token'));
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(userToken));
-  const [expanded, setExpanded] = useState(true);
   const [userData, setUserData] = useState(null);
+  const location = useLocation();
+  const expandedState = location.state?.expandedState;
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +40,7 @@ const ProfilePage = () => {
 
   const toggleExpand = () => {
     setExpanded(!expanded);
+    console.log(expanded.toString())
   };
 
   return (
@@ -51,7 +55,7 @@ const ProfilePage = () => {
 <>
 <div style={{ display: 'flex' }}>
   <div style={{ paddingRight: '5em'}}>
-      <span className="chalk" style={{ '--fsize': '34px', '--talign': 'left', 'textDecoration': 'underline #cd561b', 'textDecorationThickness': '3px' }}>{userData.username}</span>
+      <span className="chalk" style={{ '--fsize': '34px', '--talign': 'left', 'textDecoration': 'underline #cd561b', 'textDecorationThickness': '3px' }}>{userData.username} {expanded.toString()}</span>
       <span className="chalk" style={{ '--fsize': '24px', '--talign': 'left', color: '#cd561b' }}> {userData.firstName} {userData.lastName}</span>
       <div className="profilepageportrait"><img src={userData.profilepicurl} alt="User Avatar" /></div>
   </div>
@@ -61,7 +65,7 @@ const ProfilePage = () => {
       <p className="note"><SingleUserStats UserID={userID} /></p>
     
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <Link to={{ pathname: `/newWager/${userData._id}`, state: 'hello' }}>
+        <Link to={`/newWager/${userData._id}`} state={{expandedState: expanded}}>
           <button className="orange_Button">Challenge</button>
         </Link>
 

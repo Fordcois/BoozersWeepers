@@ -42,7 +42,7 @@ const Template = ({ navigate }) => {
         <div className='blackboard'>
           <div className='form'>
             <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-            <BlackboardHeader /> 
+            <BlackboardHeader expandedState={expanded}/> 
             <span className='chalktitle'>Welcome to the Workshop, {name} {lastName} </span>
 
 

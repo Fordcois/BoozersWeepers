@@ -23,7 +23,7 @@ const SignUpForm = ({ navigate }) => {
     })
     .then(async response => {
       if(response.status === 201) {
-        navigate('/login')
+        navigate('/login', { state: { expandedState: expanded } });
       } else {
         const errorData = await response.json();
           navigate('/signup') 

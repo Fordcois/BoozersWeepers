@@ -39,10 +39,10 @@ const NewGroupPage = ({ navigate }) => {
 		.then(async response => {
 			if (response.status === 201) {
 				console.log("Your group has been created")
-				navigate("/groups");
+				navigate("/groups", { state: { expandedState: expanded } });
 			} else {
 				const errorData = await response.json();
-				navigate('/groups/new') 
+				navigate('/groups/new', { state: { expandedState: expanded } }) 
 				setErrorMsg(errorData.message)
 				console.log(errorData.message)
 			}

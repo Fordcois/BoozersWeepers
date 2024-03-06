@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import SingleUser from '../NewWagerPage/Singleuser';
 import { FaPencil } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
-const NewSearchBar = (props) => {
+const NewSearchBar = ({SearchData, expandedState}) => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [SearchCriteria, setSearchCriteria] = useState('');
-    const UnfilteredList = props.SearchData;
-
+    const UnfilteredList = SearchData;
+    const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+  
     const handleInputChange = (event) => { setSearchCriteria(event.target.value); };
+
+    useEffect(() => {
+        setExpanded(expandedState);
+      }, [expandedState]);
 
     let FilteredList = [];
 
@@ -34,9 +40,9 @@ const NewSearchBar = (props) => {
     </div>
 
     <div style={{flex: '95%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-        <input type="text" value={SearchCriteria} onChange={handleInputChange} style={{marginBottom: '20px' }}placeholder="Find user..." />
+        <input type="text" value={SearchCriteria} onChange={handleInputChange} style={{marginBottom: '20px' }}placeholder={"Find user..."} />
             {FilteredList.map((user, index) => 
-             <SingleUser SelectedUser={user} key={user._id} />)}
+             <SingleUser SelectedUser={user} key={user._id} expandedState={expanded} />)}
     </div>
     </div>
 

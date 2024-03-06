@@ -5,19 +5,22 @@ import getSessionUserID from '../Utility/getSignedInUser_id';
 import '../../Pages/style.css'
 import SearchBar from "../SearchBar/SearchBar";
 import BlackboardHeader from "../blackboardHeader/blackboardHeader";
-
-
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const PubGroupsPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [pubGroups, setPubGroups] = useState([])
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
-  const [expanded, setExpanded] = useState(true);
+  const location = useLocation();
+  const expandedState = location.state?.expandedState;
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+
 
   const toggleExpand = () => {setExpanded(!expanded);};
 
 
-    useEffect((event) => {
+    useEffect(() => {
     
     // Gets pub groups data from backend
     if(token) {
@@ -32,7 +35,7 @@ const PubGroupsPage = ({ navigate }) => {
           setPubGroups(data.pubGroups)
         })
       }
-            if (!isLoggedIn) {navigate('/');}
+            if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
     }, [navigate, isLoggedIn, token]);
 
         // Gets a list of the groups which the logged-in user is a member of
@@ -49,17 +52,17 @@ return (
         <div className='blackboard'>
             <div className='form'>
             <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-            <BlackboardHeader /> 
+            <BlackboardHeader expandedState={expanded}/> 
 
             <div className="my-groups" >
+    
                 <h1 id='my-groups-header' className="page_subheading">Your groups:</h1>
 
                     {joinedGroups.map((pubGroup) => (
                         <p key={pubGroup.id} className="group-name">
-                        <a href={`/groups/${pubGroup._id}`} >
-                        {pubGroup.name}
-                        </a>
-                        </p>))}
+                        <Link to={`/groups/${pubGroup._id}`} state = {{expandedState: expanded }}>{pubGroup.name}</Link>
+                        </p>
+                        ))}
 
             </div>
                     

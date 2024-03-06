@@ -1,12 +1,17 @@
 import { useNavigate } from 'react-router-dom';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
-const SinglePendingWager = (wagerData) => {
+const SinglePendingWager = (props) => {
     const navigate = useNavigate()
-    const wager = wagerData.wagerData;
+    const wager = props.wagerData;
     const token = window.localStorage.getItem('token');
     const dateParts = wager.deadline.slice(0, 10).split("-");
     const deadlineDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`
+    const [expanded, setExpanded] = useState(props.expandedState !== undefined ? props.expandedState : true);
+
+    useEffect(() => {
+      setExpanded(props.expandedState);
+    }, [props.expandedState]);
 
     const handleCancelButtonClick = () => {
         fetch( `/wagers/${wager._id}/cancel`, {
@@ -17,11 +22,11 @@ const SinglePendingWager = (wagerData) => {
             }
         })      
         console.log("cancel button clicked")
-        navigate("/myAccount")
+        navigate("/myAccount", {state : {expandedState:expanded}});
+
     }
     return (
         <div id='single-pending-wager' className="single-wager-info">
-
             <span className="chalk" style={{ marginTop:'1%',paddingLeft:'12%','--fsize': '22px', '--talign': 'left', color: '#cd561b'}}> Will happen by...</span>
             <span className="chalk" style={{ marginTop:'1%', paddingLeft:'17%','--fsize': '19px', '--talign': 'left', color: 'whitesmoke' }}>{deadlineDate} </span>
 

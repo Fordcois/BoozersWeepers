@@ -1,6 +1,6 @@
 import VertNavbar from '../VertNavBar/VertNavBar';
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect} from 'react';
+import { Link,useLocation } from 'react-router-dom';
 import isTokenValid from '../Utility/isTokenValid';
 import '../../Pages/style.css'
 import LogoGraphic from '../../Assets/BoozersWeepersLogo_trans.png'
@@ -8,13 +8,16 @@ import QueenGraphic from '../../Assets/OrangeVic.png'
 
 
 const Home = ({ navigate }) => {
-  const [expanded, setExpanded] = useState(true);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
   const toggleExpand = () => {setExpanded(!expanded);};
+  const location = useLocation();
+  const expandedState = location.state?.expandedState;
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true)
+
 
   useEffect(() => {
-    if (isLoggedIn) {navigate('/MyAccount');}
+    if (isLoggedIn) {navigate('/MyAccount', {state : {expandedState: expanded }});}
   }, [isLoggedIn, navigate]);
 
   return(
@@ -30,11 +33,12 @@ const Home = ({ navigate }) => {
       <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Home of the Pint-Sized bet</span>
 
       <div style={{ paddingTop: '25px', textAlign: 'center' }}>
-        <Link to={{ pathname: '/login', state: expanded }} className="Homepage-link"> Sign-in</Link>
+        <Link to='/login' state={{expandedState: expanded}} className="Homepage-link"> Sign-in</Link>
         <p>
         <span className="chalk" style={{ '--fsize': '18px' ,'--talign': 'center'}}>Don't have an account?</span>
-        <Link to={{ pathname: '/signup', state: { name: 'John' } }} className="Homepage-link">Register</Link></p>
+        <Link to='/signup' state={{expandedState: expanded}} className="Homepage-link">Register</Link></p>
       </div>
+
  
  
       </div>

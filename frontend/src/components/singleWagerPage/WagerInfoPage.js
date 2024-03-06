@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import VertNavbar from '../VertNavBar/VertNavBar';
 import SinglePendingWager from './childComponents/SinglePendingWager';
@@ -15,8 +15,10 @@ const WagerInfoPage = ({ navigate }) => {
   const { wagerID } = useParams();
   const [wagerData, setWagerData] = useState(null);
   const [token, setToken] = useState(window.localStorage.getItem('token'));
-  const [expanded, setExpanded] = useState(true);
   const loggedInUser = getSessionUserID(token)
+  const location = useLocation();
+  const expandedState = location.state?.expandedState;
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +47,7 @@ return (
       <div className='blackboard'>
         <div className='form'>
           <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-          <BlackboardHeader /> 
+          <BlackboardHeader expandedState={expanded}/> 
 
           {!wagerData ? (
               <div style={{ 'textAlign': 'center' }}>
@@ -56,13 +58,13 @@ return (
             <>
               <WagerDetails wagerData={wagerData}/>
               {wagerData.approved === false && wagerData.peopleInvolved[0]._id === loggedInUser ? (
-                <SinglePendingWager wagerData={wagerData}/>
+                <SinglePendingWager wagerData={wagerData} expandedState={expanded}/>
               ) : wagerData.approved === false && wagerData.peopleInvolved[1]._id === loggedInUser ? (
-                <SingleWagerRequest wagerData={wagerData}/>
+                <SingleWagerRequest wagerData={wagerData} expandedState={expanded}/>
               ) : wagerData.approved === true && wagerData.winner === null ? (
-                <SingleOngoingWager wagerData={wagerData}/>
+                <SingleOngoingWager wagerData={wagerData} expandedState={expanded}/>
               ) : wagerData.winner !== null ? (
-                <SingleResolvedWager wagerData={wagerData}/>
+                <SingleResolvedWager wagerData={wagerData} expandedState={expanded}/>
               ) : (
                 <p>Error - return to account page</p>
               )}

@@ -5,6 +5,7 @@ import isTokenValid from '../Utility/isTokenValid';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import '../../Pages/style.css'
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
+import { useLocation } from 'react-router-dom';
 
 const SingleGroupPage = ({ navigate }) => {
 const { pubGroupId } = useParams();
@@ -12,9 +13,11 @@ const [pubGroupData, setPubGroupData] = useState(null);
 const [wagers, setWagers] = useState([]);
 const [token, setToken] = useState(window.localStorage.getItem("token"));
 const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
-const [expanded, setExpanded] = useState(true);
 const [hasJoinedGroup, setHasJoinedGroup] = useState(false);
 const [hasLeftGroup, setHasLeftGroup] = useState(false);
+const location = useLocation();
+const expandedState = location.state?.expandedState;
+const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
 
 // Get group and member info
   useEffect(() => {
@@ -30,7 +33,7 @@ const [hasLeftGroup, setHasLeftGroup] = useState(false);
           setPubGroupData(data.pubGroup)
         })
       }
-            if (!isLoggedIn) {navigate('/');}
+            if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
     }, [navigate, isLoggedIn, token]);
 
 // Gets all wager info with username and _id of people involved
@@ -47,7 +50,7 @@ const [hasLeftGroup, setHasLeftGroup] = useState(false);
                         setWagers(data.wagers)
                     })
                 }
-            if (!isLoggedIn) {navigate('/');}
+            if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
             }, [navigate, isLoggedIn, token]);
 
 // Sorts through data received from DB to make them usable in frontend
@@ -93,7 +96,7 @@ return (
 <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
 <div className='blackboard'>
 <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-<BlackboardHeader /> 
+<BlackboardHeader expandedState={expanded}/> 
 
 
 

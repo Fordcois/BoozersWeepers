@@ -2,11 +2,17 @@ import React, { useEffect, useState } from 'react';
 import PintInfo from '../singlepint/pintinfo';
 import './popup.css';
 import './WalletComponent.css';
+import { Link } from 'react-router-dom';
 
-const WalletComponent = ({ UserID }) => {
+const WalletComponent = ({ UserID, expandedState }) => {
   const [WalletData, setWalletData] = useState(null);
   const [userToken, setUserToken] = useState(window.localStorage.getItem('token'));
   const [selectedPint, setSelectedPint] = useState(null); // State to track selected pint
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+  
+  useEffect(() => {
+    setExpanded(expandedState);
+  }, [expandedState]);
 
   useEffect(() => {
     const fetchWalletData = async () => {
@@ -79,8 +85,8 @@ const WalletComponent = ({ UserID }) => {
         ))
       ) : (
     <div style={{textAlign:'center', height:'20vh'}}>
-        <span className="chalk" style={{ marginTop:'5%','--fsize': '22px', color: '#cd561b'}}> No Pints in Wallet</span>
-        <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', color: 'whitesmoke' }}>(<a className="chalk-link" href={`/newWager/`}>Challenge Somebody to Earn a Pint</a>)</span>                       
+        <span className="chalk" style={{ marginTop:'5%','--fsize': '22px', color: '#cd561b'}}> No Pints in Wallet </span>
+        <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', color: 'whitesmoke' }}>(<Link to = "/newWager/" state = {{expandedState: expanded }} className="chalk-link">Challenge Somebody to Earn a Pint</Link>)</span>                       
     </div>
 
       )}

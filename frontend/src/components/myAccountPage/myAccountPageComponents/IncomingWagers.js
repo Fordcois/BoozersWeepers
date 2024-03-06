@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import NotificationDetails from './NotificationDetails';
 import "../MyAccountPage.css"
 
@@ -8,8 +9,12 @@ const IncomingWagers = (props, { navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [wagers, setData] = useState(props.wagers)
   const [userBet, setUserBet] = useState(null)
+  const [expanded, setExpanded] = useState(props.expandedState !== undefined ? props.expandedState : true);
 
-  
+  useEffect(() => {
+    setExpanded(props.expandedState);
+  }, [props.expandedState]);
+
 
     if(token) {
       return(
@@ -21,7 +26,7 @@ const IncomingWagers = (props, { navigate }) => {
 
           <div className="notificationdetails">{props.wagers.map((wager) => (
             <div key={wager._id}>
-              <a className='individualwagerlink' href={`/wager/${wager._id}`}>{wager.peopleInvolved[0].username} would like to wager!</a><br />
+              <Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}>{wager.peopleInvolved[0].username} would like to wager! </Link>
 
             </div>))}
           </div>
@@ -30,7 +35,7 @@ const IncomingWagers = (props, { navigate }) => {
 
       )
     } else {
-    navigate('/login')
+    navigate('/login', { state: { expandedState: expanded } });
     }
 }
 
