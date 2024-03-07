@@ -43,7 +43,7 @@ const PubGroupsPage = ({ navigate }) => {
         console.log(joinedGroups)
 
         const handleCreateGroupButtonClick = () => {
-            navigate('/groups/new')
+            navigate('/groups/new', { state: { expandedState: expanded } })
         }
 
 return (

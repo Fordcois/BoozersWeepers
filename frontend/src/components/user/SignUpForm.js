@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaPencil } from "react-icons/fa6";
 
 
-const SignUpForm = ({ navigate }) => {
+const SignUpForm = ({ navigate, expandedState }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,6 +10,11 @@ const SignUpForm = ({ navigate }) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+
+  useEffect(() => {
+    setExpanded(expandedState);
+  }, [expandedState]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,7 +31,7 @@ const SignUpForm = ({ navigate }) => {
         navigate('/login', { state: { expandedState: expanded } });
       } else {
         const errorData = await response.json();
-          navigate('/signup') 
+          navigate('/signup', { state: { expandedState: expanded } }) 
           setErrorMsg(errorData.message)
           console.log(errorData.message)
       } 
