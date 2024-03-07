@@ -73,20 +73,35 @@ const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedS
 const toggleExpand = () => {setExpanded(!expanded);};
 
 
-const toggleGroupMembership = () => {
-    if (!isGroupMember) {
-        fetch(`/pubGroups/${pubGroupId}/addMember`, {
-            method: 'post',
-            headers: {'Authorization': `Bearer ${token}`}
-        })
-        window.location.reload();
+const toggleGroupMembership = async () => {
+    try {
+        if (!isGroupMember) {
+            const response = await fetch(`/pubGroups/${pubGroupId}/addMember`, {
+                method: 'post',
+                headers: {'Authorization': `Bearer ${token}`}
+            });
+            if (response.ok) {
+                console.log("Member added successfully.");
+                window.location.reload()
+            } else {
+                console.error("Failed to add member:", response.statusText);
+            }
+        } else {
+            const response = await fetch(`/pubGroups/${pubGroupId}/removeMember`, {
+                method: 'post',
+                headers: {'Authorization': `Bearer ${token}`}
+            });
+            if (response.ok) {
+                console.log("Member removed successfully.");
+                navigate(`/groups`);
+            } else {
+                console.error("Failed to remove member:", response.statusText);            
+                
+            }
+
         }
-    else {
-        fetch(`/pubGroups/${pubGroupId}/removeMember`, {
-            method: 'post',
-            headers: {'Authorization': `Bearer ${token}`}
-        })
-        navigate(`/groups`)
+    } catch (error) {
+        console.error("An error occurred:", error);
     }
 }
 
@@ -137,7 +152,7 @@ return (
     <div style={{display:'flex'}}>
     <div style={{backgroundColor:'GREEN',width:'50%'}}>
         <div id='TopStats' style={{backgroundColor:'white'}}>
-            Infomration about Stats here   
+            Information about Stats here   
         </div>
         <div id='UserBets'>
         <strong>Resolved Wagers</strong><br/>
