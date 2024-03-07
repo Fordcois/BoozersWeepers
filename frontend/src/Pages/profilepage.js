@@ -49,7 +49,7 @@ const ProfilePage = () => {
         <div className='blackboard'>
           <div className='form'>
             <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-            <BlackboardHeader />
+            <BlackboardHeader expandedState={expanded}/>
             
 {userData ? (
 <>

@@ -3,14 +3,21 @@ import React, { useEffect, useState } from 'react';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import '../../Pages/style.css'
 import Header from '../header/Header';
+import { useLocation } from 'react-router-dom';
 
 
-const NewGroupPage = ({ navigate }) => {
+const NewGroupPage = ({ navigate}) => {
 	const [token, setToken] = useState(window.localStorage.getItem("token"));
 	const loggedInUserId = getSessionUserID(token)
-  	const [expanded, setExpanded] = useState(true);
 	const [groupName, setGroupName] = useState("")
 	const [errorMsg, setErrorMsg] = useState("");
+	const location = useLocation();
+	const expandedState = location.state?.expandedState;
+	const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+  
+	useEffect(() => {
+	  setExpanded(expandedState);
+	}, [expandedState]);
 
   const toggleExpand = () => {setExpanded(!expanded);};
 
