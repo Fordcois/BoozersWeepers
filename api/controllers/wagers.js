@@ -117,7 +117,9 @@ const WagersController = {
         return res.status(200).json({ wagers: wagers, token: token });
     });
 },
-GroupWagers: (req, res) => {
+ReturnGroupWagers: (req, res) => {
+  const arrayOfMembers = req.body.arrayOfMembers; 
+  console.log("Array of Members:", arrayOfMembers);
   Wager.find()
   .exec((err, wagers) => {
     if (err) {
