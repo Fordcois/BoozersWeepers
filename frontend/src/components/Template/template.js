@@ -4,37 +4,33 @@ import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 import '../../Pages/style.css';
 import { useParams } from 'react-router-dom';
 
-import SingleUserStats from '../stats/getSingleUserStats';
+
 
 const Template = ({ navigate }) => {
   const [token, setUserToken] = useState(window.localStorage.getItem('token'));
   const [expanded, setExpanded] = useState(true);
-  const [list,setlist] = useState([])
-  const [ID,setID] = useState('65b3cb2aa30533d477e17ff2')
-  const { name, lastName } = useParams();
-  const toggleExpand = () => {
-    setExpanded(!expanded);
-  };
+
+  const toggleExpand = () => {setExpanded(!expanded);};
+  const [groupWagers,setGroupWagers] = useState([])
   
-  
+  useEffect(() => {
+    if(token) {
+        fetch("/wagers/groups", {
+            method: 'get',
+            headers: {'Authorization': `Bearer ${token}`}
+        })
+            .then(response => response.json())
+            .then(async data => {
+              window.localStorage.setItem("token", data.token)
+              setUserToken(window.localStorage.getItem("token"))
+              console.log(data)
+            })
+    }
+}, []);
 
-
-
-
-
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {const response = await fetch(`/wagers/findall/${ID}`, 
-  //     {headers: { Authorization: `Bearer ${token}` }});
-  //       if (!response.ok) {throw new Error('Network response was not ok');}
-  //       const userData = await response.json();
-  //       console.log(userData)
-  //   } catch (error) {console.error('Error fetching user data:', error);}
-  //   };
-
-  //   fetchData();
-  // }, [token]); 
+useEffect(() => {
+    console.log(groupWagers);
+}, [groupWagers]);
 
   return (
     <div className='shade'>
@@ -43,13 +39,13 @@ const Template = ({ navigate }) => {
           <div className='form'>
             <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
             <BlackboardHeader expandedState={expanded}/> 
-            <span className='chalktitle'>Welcome to the Workshop, {name} {lastName} </span>
+            <span className='chalktitle'>Welcome to the Workshop </span>
 
 
 
 
 
-            
+          Hello This is my stuff
 
           
           

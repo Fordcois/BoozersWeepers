@@ -15,6 +15,11 @@ const [token, setToken] = useState(window.localStorage.getItem("token"));
 const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
 const [hasJoinedGroup, setHasJoinedGroup] = useState(false);
 const [hasLeftGroup, setHasLeftGroup] = useState(false);
+
+const [groupWagers,setGroupWagers] = useState([])
+
+
+
 const location = useLocation();
 const expandedState = location.state?.expandedState;
 const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
@@ -36,35 +41,29 @@ const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedS
             if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
     }, [navigate, isLoggedIn, token]);
 
-// Gets all wager info with username and _id of people involved
-        useEffect(() => {
-            if(token) {
-                fetch("/wagers", {
-                    method: 'get',
-                    headers: {'Authorization': `Bearer ${token}`}
-                })
-                    .then(response => response.json())
-                    .then(async data => {
-                        window.localStorage.setItem("token", data.token)
-                        setToken(window.localStorage.getItem("token"))
-                        setWagers(data.wagers)
-                    })
-                }
-            if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
-            }, [navigate, isLoggedIn, token]);
+// SF WORK - This finds jsut the  Bets
+useEffect(() => {
+    if(token) {
+        fetch("/wagers", {
+            method: 'get',
+            headers: {'Authorization': `Bearer ${token}`}
+        })
+            .then(response => response.json())
+            .then(async data => {
+                window.localStorage.setItem("token", data.token)
+                setToken(window.localStorage.getItem("token"))
+                setWagers(data.wagers)
+            })
+        }
+    if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
+    }, [navigate, isLoggedIn, token]);
+
+
+
+
 
 // Sorts through data received from DB to make them usable in frontend
         const members = pubGroupData?.members
-        const allMemberIds = members?.map((member) => member._id) || [];
-        const allGroupWagers = wagers.filter((wager) => allMemberIds.includes(wager.peopleInvolved[0]._id) && allMemberIds.includes(wager.peopleInvolved[1]._id))
-        // For winners and losers:
-        const resolvedGroupWagers = allGroupWagers.filter(wager => wager.winner != null)
-        const checkIfOngoing = (deadline) => {
-            return new Date(deadline) > new Date()
-        }
-        // For ongoing wagers:
-        const ongoingGroupWagers = allGroupWagers.filter(wager => wager.approved === true && checkIfOngoing(wager.deadline) && wager.winner === null)
-        
         // checks to see whether the person who is logged in is in the group already - for join/leave button
         const memberIds = members?.map((member) => member._id) || [];
         let isGroupMember = (memberIds?.includes(getSessionUserID(token)))
@@ -121,9 +120,10 @@ return (
 <div id='members-only-section'>
 <div className='list-of-ongoing-wagers'>
 <h2 id='ongoing-group-wagers' className='page_subheading'> Ongoing wagers</h2>
-<ul>
 
-</ul>
+{members?.map((member) => <p key={member._id}>{member.username} - {member._id}</p>)}
+
+
 </div>
 </div>
 ) : (
@@ -135,7 +135,10 @@ return (
 <div className="column">
 {isGroupMember && (
 <div className='list-of-wins-losses'>
-<h2 id='wins-and-losses' className='page_subheading'>Wins and losses</h2>
+
+<h2 id='wins-and-losses' className='page_subheading'>Group members</h2>
+{members?.map((member) => <p key={member._id}>{member.username} - {member._id}</p>)}
+
 
 </div>
 )}
@@ -155,17 +158,10 @@ return (
             Information about Stats here   
         </div>
         <div id='UserBets'>
-        <strong>Resolved Wagers</strong><br/>
-            {resolvedGroupWagers.map((wager) => 
-            <span>
-                {wager.peopleInvolved[0].username} bet {wager.peopleInvolved[1].username} that {wager.description}<br/>
-            </span>)}
+
 
             <strong>Ongoing Wager</strong><br/>
-            {ongoingGroupWagers.map((wager) => 
-            <span>
-                {wager.peopleInvolved[0].username} bet {wager.peopleInvolved[1].username} that {wager.description}<br/>
-            </span>)}
+
 
         </div>
 

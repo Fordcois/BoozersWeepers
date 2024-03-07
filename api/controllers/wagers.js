@@ -116,7 +116,18 @@ const WagersController = {
         const token = TokenGenerator.jsonwebtoken(req.user_id);
         return res.status(200).json({ wagers: wagers, token: token });
     });
+},
+GroupWagers: (req, res) => {
+  Wager.find()
+  .exec((err, wagers) => {
+    if (err) {
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+    const token = TokenGenerator.jsonwebtoken(req.user_id);
+    return res.status(200).json({ wagers: wagers, token: token });
+  });
 }
+
 };
 
 module.exports = WagersController;
