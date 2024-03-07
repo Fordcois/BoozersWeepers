@@ -40,7 +40,6 @@ const ProfilePage = () => {
 
   const toggleExpand = () => {
     setExpanded(!expanded);
-    console.log(expanded.toString())
   };
 
   return (
