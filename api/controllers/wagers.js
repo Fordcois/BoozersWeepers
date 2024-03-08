@@ -117,17 +117,22 @@ const WagersController = {
         return res.status(200).json({ wagers: wagers, token: token });
     });
 },
+
 ReturnGroupWagers: (req, res) => {
-  const arrayOfMembers = req.body.arrayOfMembers; 
-  console.log("Array of Members:", arrayOfMembers);
-  Wager.find()
-  .exec((err, wagers) => {
-    if (err) {
-      return res.status(500).json({ error: 'Internal Server Error' });
-    }
-    const token = TokenGenerator.jsonwebtoken(req.user_id);
-    return res.status(200).json({ wagers: wagers, token: token });
-  });
+  const MemberArray = req.body.ArrayOfMembers;
+  const query = {
+    '$and': [
+      {'peopleInvolved.0': {'$in': MemberArray}}, 
+      {'peopleInvolved.1': {'$in': MemberArray}}
+            ]   };
+  Wager.find(query)
+    .exec((err, wagers) => {
+      if (err) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      return res.status(200).json({ wagers: wagers, token: token });
+    });
 }
 
 };

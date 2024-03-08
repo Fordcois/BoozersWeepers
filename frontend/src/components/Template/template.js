@@ -15,17 +15,21 @@ const Template = ({ navigate }) => {
   
   useEffect(() => {
     if(token) {
-        fetch("/wagers/groups/findgroupwagers", {
-            method: 'post',
-            headers: {'Authorization': `Bearer ${token}`},
-            body: JSON.stringify({ arrayOfMembers: ['65b3cb2aa30533d477e17ff2','65b3cb2aa30533d477e17ff3','65b3cb2aa30533d477e17ff1'] })
+        fetch( '/wagers/groups/findgroupwagers', {
+          method: 'post',
+          headers: 
+          {'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',},
+          body: JSON.stringify({
+            ArrayOfMembers: ['65b3cb2aa30533d477e17ff2','65b3cb09a30533d477e17fed','65bce0630af1114350ab7501']
+                                })
         })
-            .then(response => response.json())
-            .then(async data => {
-              window.localStorage.setItem("token", data.token)
-              setUserToken(window.localStorage.getItem("token"))
-              console.log(data.wagers)
-            })
+        .then(response => response.json())
+        .then(async data => {
+            window.localStorage.setItem("token", data.token) 
+            setUserToken(window.localStorage.getItem("token")) 
+            console.log(data.wagers) 
+        })
     }
 }, []);
 
