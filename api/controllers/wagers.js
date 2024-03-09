@@ -118,7 +118,7 @@ const WagersController = {
     });
 },
 
-ReturnGroupWagers: (req, res) => {
+ReturnLast10GroupWagers: (req, res) => {
   const MemberArray = req.body.ArrayOfMembers;
   const query = {
     '$and': [
@@ -127,7 +127,9 @@ ReturnGroupWagers: (req, res) => {
       {'peopleInvolved.1': {'$in': MemberArray}},
             ]   };
   Wager.find(query)
+    .limit(10) 
     .populate('peopleInvolved', '-password')
+    .populate('winner', '-password')
     .exec((err, wagers) => {
       if (err) {
         return res.status(500).json({ error: 'Internal Server Error' });

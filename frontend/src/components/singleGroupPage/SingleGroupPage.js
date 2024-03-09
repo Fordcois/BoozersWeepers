@@ -69,7 +69,7 @@ useEffect(() => {
             setGroupWagers(data.wagers)
         })
     }
-}, []);
+}, [members]);
 
 
 
@@ -123,25 +123,38 @@ return (
 
 {/* Rebuild Below */}
 <div className='chalktitle'>{pubGroupData?.name}</div>
-    <div style={{backgroundColor:'red'}}>
+    <div id='ButtonDiv'>
         <button onClick={toggleGroupMembership} className='orange_Button'> {!isGroupMember ? 'Join':'Leave'} </button>
     </div>
     <div style={{display:'flex'}}>
-    <div style={{backgroundColor:'GREEN',width:'50%'}}>
-        <div id='TopStats' style={{backgroundColor:'white'}}>
-            Information about Stats here   
+    <div style={{width:'50%'}}>
+        <div id='TopStats'>
+            <span className="orange-chalk">Biggest Boozer</span> <br/>
+            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}>WinningUser </div>
+            <span className="orange-chalk">Biggest Weeper</span> <br/>
+            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> Losinguser </div>
+            <span className="orange-chalk">Free Pints won in {pubGroupData?.name}</span> <br/>
+            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> number </div>
         </div>
+
         <div id='UserBets'>
-            <b>Members:</b>
-            {members?.map((member) => <p key={member._id}>{member.username} - {member._id}</p>)}
+            <div className="orange-chalk">Latest Wagers...</div>
             
-            <b>Groups Wagers:</b>
-            {groupWagers?.map((wager) => <p key={wager._id}>
-            
-            {/* TODO - Should change text based on win */}
-            {/* TODO - Should Hyperlink to Bet Page */}
-            {wager.peopleInvolved[0].username} bet {wager.peopleInvolved[1].username} that {wager.description} </p>
-                            )}
+            {groupWagers?.map((wager) => (
+            <div key={wager._id}>
+            {wager.winner ? (wager.winner._id===wager.peopleInvolved[0]._id ? 
+            // Winner & Person 0 is the Winner
+            <div className='small-chalk'>{wager.peopleInvolved[0].username} won their wager with {wager.peopleInvolved[1].username} that {wager.description}</div> :
+            // Winner & Person 1 is the winner
+            <div className='small-chalk'>{wager.peopleInvolved[1].username} won their wager with {wager.peopleInvolved[0].username} that {wager.description}</div>)
+            : 
+            // No Winner            
+            <div className='small-chalk'>
+            {wager.peopleInvolved[0].username} bet {wager.peopleInvolved[1].username} that {wager.description}
+            </div>
+            }</div>
+
+))}
 
         </div>
     </div>

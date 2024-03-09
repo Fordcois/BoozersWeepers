@@ -298,3 +298,15 @@ input[type="date"] {
   display: block;
   /* margin: 10;  */
 }
+
+.orange-chalk{
+color: #cd561b;
+font-family: 'Permanent Marker';
+font-size: 1.5rem;
+}
+
+.small-chalk{
+  color: whitesmoke;
+  font-family: 'Permanent Marker';
+  margin-bottom: 12px;
+  }

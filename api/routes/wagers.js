@@ -12,7 +12,7 @@ router.post("/", WagersController.Create);
 router.post("/:wager_id/cancel", WagersController.Cancel);
 router.get("/", WagersController.Index);
 router.get("/findall/:userId", WagersController.FindUserBets);
-router.post("/groups/findgroupwagers", WagersController.ReturnGroupWagers);
+router.post("/groups/findgroupwagers", WagersController.ReturnLast10GroupWagers);
 
 
 module.exports = router;
