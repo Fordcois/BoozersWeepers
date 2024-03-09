@@ -20,9 +20,7 @@ const Template = ({ navigate }) => {
           headers: 
           {'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json',},
-          body: JSON.stringify({
-            ArrayOfMembers: ['65b3cb2aa30533d477e17ff2','65b3cb09a30533d477e17fed','65bce0630af1114350ab7501']
-                                })
+          body: JSON.stringify({ArrayOfMembers: ['65b3cb2aa30533d477e17ff2','65b3cb09a30533d477e17fed','65bce0630af1114350ab7501']})
         })
         .then(response => response.json())
         .then(async data => {

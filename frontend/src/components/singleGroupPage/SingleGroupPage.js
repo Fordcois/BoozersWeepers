@@ -17,6 +17,7 @@ const [hasJoinedGroup, setHasJoinedGroup] = useState(false);
 const [hasLeftGroup, setHasLeftGroup] = useState(false);
 
 const [groupWagers,setGroupWagers] = useState([])
+const [groupMembers,setGroupMembers] = useState([])
 
 
 
@@ -41,32 +42,40 @@ const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedS
             if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
     }, [navigate, isLoggedIn, token]);
 
-// SF WORK - This finds jsut the  Bets
-useEffect(() => {
-    if(token) {
-        fetch("/wagers", {
-            method: 'get',
-            headers: {'Authorization': `Bearer ${token}`}
-        })
-            .then(response => response.json())
-            .then(async data => {
-                window.localStorage.setItem("token", data.token)
-                setToken(window.localStorage.getItem("token"))
-                setWagers(data.wagers)
-            })
-        }
-    if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
-    }, [navigate, isLoggedIn, token]);
-
-
-
-
 
 // Sorts through data received from DB to make them usable in frontend
         const members = pubGroupData?.members
         // checks to see whether the person who is logged in is in the group already - for join/leave button
         const memberIds = members?.map((member) => member._id) || [];
         let isGroupMember = (memberIds?.includes(getSessionUserID(token)))
+
+
+
+// SF WORK - This finds just the  Bets
+useEffect(() => {
+    if(token) {
+        fetch( '/wagers/groups/findgroupwagers', {
+          method: 'post',
+          headers: 
+          {'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',},
+          body: JSON.stringify({ArrayOfMembers:memberIds})
+        })
+        .then(response => response.json())
+        .then(async data => {
+            window.localStorage.setItem("token", data.token) 
+            setToken(window.localStorage.getItem("token")) 
+            console.log(data.wagers)
+            setGroupWagers(data.wagers)
+        })
+    }
+}, []);
+
+
+
+
+
+
         
 // for NavBar:
 const toggleExpand = () => {setExpanded(!expanded);};
@@ -112,41 +121,6 @@ return (
 <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
 <BlackboardHeader expandedState={expanded}/> 
 
-
-
-{/* Column 2 */}
-<div className="column">
-{isGroupMember ? (
-<div id='members-only-section'>
-<div className='list-of-ongoing-wagers'>
-<h2 id='ongoing-group-wagers' className='page_subheading'> Ongoing wagers</h2>
-
-{members?.map((member) => <p key={member._id}>{member.username} - {member._id}</p>)}
-
-
-</div>
-</div>
-) : (
-<p id='non-member-message' className='non-member'>You need to be a member of this group to see information</p>
-)}
-</div>
-
-{/* Column 3 */}
-<div className="column">
-{isGroupMember && (
-<div className='list-of-wins-losses'>
-
-<h2 id='wins-and-losses' className='page_subheading'>Group members</h2>
-{members?.map((member) => <p key={member._id}>{member.username} - {member._id}</p>)}
-
-
-</div>
-)}
-
-
-</div>
-</div>
-
 {/* Rebuild Below */}
 <div className='chalktitle'>{pubGroupData?.name}</div>
     <div style={{backgroundColor:'red'}}>
@@ -158,18 +132,25 @@ return (
             Information about Stats here   
         </div>
         <div id='UserBets'>
-
-
-            <strong>Ongoing Wager</strong><br/>
-
+            <b>Members:</b>
+            {members?.map((member) => <p key={member._id}>{member.username} - {member._id}</p>)}
+            
+            <b>Groups Wagers:</b>
+            {groupWagers?.map((wager) => <p key={wager._id}>
+            
+            {/* TODO - Should change text based on win */}
+            {/* TODO - Should Hyperlink to Bet Page */}
+            {wager.peopleInvolved[0].username} bet {wager.peopleInvolved[1].username} that {wager.description} </p>
+                            )}
 
         </div>
-
     </div>
     <div style={{backgroundColor:'BLUE',width:'50%'}}>LEADERBOARD POST IT HERE</div>
 </div>
 
 
+
+</div>
 </div>
 </div>
 

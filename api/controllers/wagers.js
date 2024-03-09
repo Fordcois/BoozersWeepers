@@ -122,10 +122,12 @@ ReturnGroupWagers: (req, res) => {
   const MemberArray = req.body.ArrayOfMembers;
   const query = {
     '$and': [
+      {'approved':'true'},
       {'peopleInvolved.0': {'$in': MemberArray}}, 
-      {'peopleInvolved.1': {'$in': MemberArray}}
+      {'peopleInvolved.1': {'$in': MemberArray}},
             ]   };
   Wager.find(query)
+    .populate('peopleInvolved', '-password')
     .exec((err, wagers) => {
       if (err) {
         return res.status(500).json({ error: 'Internal Server Error' });
