@@ -116,7 +116,29 @@ const WagersController = {
         const token = TokenGenerator.jsonwebtoken(req.user_id);
         return res.status(200).json({ wagers: wagers, token: token });
     });
+},
+
+ReturnLast10GroupWagers: (req, res) => {
+  const MemberArray = req.body.ArrayOfMembers;
+  const query = {
+    '$and': [
+      {'approved':'true'},
+      {'peopleInvolved.0': {'$in': MemberArray}}, 
+      {'peopleInvolved.1': {'$in': MemberArray}},
+            ]   };
+  Wager.find(query)
+    .limit(10) 
+    .populate('peopleInvolved', '-password')
+    .populate('winner', '-password')
+    .exec((err, wagers) => {
+      if (err) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+      const token = TokenGenerator.jsonwebtoken(req.user_id);
+      return res.status(200).json({ wagers: wagers, token: token });
+    });
 }
+
 };
 
 module.exports = WagersController;
