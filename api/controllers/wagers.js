@@ -118,7 +118,7 @@ const WagersController = {
     });
 },
 
-ReturnLast10GroupWagers: (req, res) => {
+ReturnGroupWagers: (req, res) => {
   const MemberArray = req.body.ArrayOfMembers;
   const query = {
     '$and': [
@@ -127,7 +127,6 @@ ReturnLast10GroupWagers: (req, res) => {
       {'peopleInvolved.1': {'$in': MemberArray}},
             ]   };
   Wager.find(query)
-    .limit(10) 
     .populate('peopleInvolved', '-password')
     .populate('winner', '-password')
     .exec((err, wagers) => {

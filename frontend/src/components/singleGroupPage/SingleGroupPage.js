@@ -6,6 +6,7 @@ import getSessionUserID from '../Utility/getSignedInUser_id';
 import '../../Pages/style.css'
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 import { useLocation } from 'react-router-dom';
+import calculateGroupStats from './groupLeaderBoard';
 
 const SingleGroupPage = ({ navigate }) => {
 const { pubGroupId } = useParams();
@@ -16,8 +17,9 @@ const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
 const [hasJoinedGroup, setHasJoinedGroup] = useState(false);
 const [hasLeftGroup, setHasLeftGroup] = useState(false);
 
-const [groupWagers,setGroupWagers] = useState([])
-const [groupMembers,setGroupMembers] = useState([])
+const [groupWagers,setGroupWagers] = useState([]);
+const [groupMembers,setGroupMembers] = useState([]);
+const [groupLeaderboardData,setGroupLeaderboardData] = useState([])
 
 
 
@@ -26,7 +28,7 @@ const expandedState = location.state?.expandedState;
 const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
 
 // Get group and member info
-  useEffect(() => {
+useEffect(() => {
     if (token) {
       fetch(`/pubGroups/${pubGroupId}`, {
         method: 'get',
@@ -37,44 +39,46 @@ const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedS
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPubGroupData(data.pubGroup)
+          
+          // Return the data to chain the promises
+          return data;
         })
-      }
-            if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
-    }, [navigate, isLoggedIn, token]);
+        .then(data => {
+          return fetch('/wagers/groups/findgroupwagers', {
+              method: 'post',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ ArrayOfMembers: memberIds })
+            })
+            .then(response => response.json())
+            .then(async data => {
+              window.localStorage.setItem("token", data.token);
+              setToken(window.localStorage.getItem("token"));
+              console.log(data.wagers);
+              setGroupWagers(data.wagers);
+              setGroupLeaderboardData(calculateGroupStats(members, data.wagers));
+
+            });
+        })
+        .catch(error => {
+          // Handle errors if any
+          console.error('Error:', error);
+        });
+    }
+
+    if (!isLoggedIn) {
+      navigate('/', { state: { expandedState: expanded } });
+    }
+}, [navigate, isLoggedIn, token]);
 
 
 // Sorts through data received from DB to make them usable in frontend
         const members = pubGroupData?.members
         // checks to see whether the person who is logged in is in the group already - for join/leave button
         const memberIds = members?.map((member) => member._id) || [];
-        let isGroupMember = (memberIds?.includes(getSessionUserID(token)))
-
-
-
-// SF WORK - This finds just the  Bets
-useEffect(() => {
-    if(token) {
-        fetch( '/wagers/groups/findgroupwagers', {
-          method: 'post',
-          headers: 
-          {'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',},
-          body: JSON.stringify({ArrayOfMembers:memberIds})
-        })
-        .then(response => response.json())
-        .then(async data => {
-            window.localStorage.setItem("token", data.token) 
-            setToken(window.localStorage.getItem("token")) 
-            console.log(data.wagers)
-            setGroupWagers(data.wagers)
-        })
-    }
-}, [members]);
-
-
-
-
-
+        let isGroupMember = (memberIds?.includes(getSessionUserID(token)));
 
         
 // for NavBar:
@@ -130,16 +134,16 @@ return (
     <div style={{width:'50%'}}>
         <div id='TopStats'>
             <span className="orange-chalk">Biggest Boozer</span> <br/>
-            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}>WinningUser </div>
+            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}>[ User with most won bets] </div>
             <span className="orange-chalk">Biggest Weeper</span> <br/>
-            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> Losinguser </div>
+            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> [user with most lost bets] </div>
             <span className="orange-chalk">Free Pints won in {pubGroupData?.name}</span> <br/>
-            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> number </div>
+            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> [Total Number of completed Bets] </div>
         </div>
 
         <div id='UserBets'>
             <div className="orange-chalk">Latest Wagers...</div>
-            
+            {/* TODO - Reduce this list to only the most recent 10 */}
             {groupWagers?.map((wager) => (
             <div key={wager._id}>
             {wager.winner ? (wager.winner._id===wager.peopleInvolved[0]._id ? 
@@ -158,7 +162,20 @@ return (
 
         </div>
     </div>
-    <div style={{backgroundColor:'BLUE',width:'50%'}}>LEADERBOARD POST IT HERE</div>
+    <div style={{backgroundColor:'BLUE',width:'50%'}}>
+
+    {/* const sortedArray = groupLeaderboardData.sort((a, b) => a.winPercentage - b.winPercentage) */}
+    
+    {groupLeaderboardData.map((item,index) => (
+  <div key={item.id}>
+    {index+1} - {item.username} - {item.winPercentage}
+  </div>
+))}
+
+
+
+        
+    </div>
 </div>
 
 
