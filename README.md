@@ -14,7 +14,7 @@ Originally, the project was executed within a two-week timeframe, building upon 
 **BoozersWeepers** is a lifestyle web application for tracking and settling informal pub bets and IOUs between friends.
 
 <div align="center">
-  <img src="public/images/activebetscreenshot.png" alt="Making a Bet on BoozersWeepers" height="300">
+  <img src="public/images/ongoingbetscreenshot.png" alt="Making a Bet on BoozersWeepers" height="300">
   <img src="public/images/walletscreenshot.png" alt="Making a Bet on BoozersWeepers" height="300">
 
 </div>
