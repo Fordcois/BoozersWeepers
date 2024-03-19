@@ -14,7 +14,9 @@ Originally, the project was executed within a two-week timeframe, building upon 
 **BoozersWeepers** is a lifestyle web application for tracking and settling informal pub bets and IOUs between friends.
 
 <div align="center">
-  <img src="public/images/ActivebetScreenshot.png" alt="Making a Bet on BoozersWeepers" height="300">
+  <img src="public/images/activebetscreenshot.png" alt="Making a Bet on BoozersWeepers" height="300">
+  <img src="public/images/walletscreenshot.png" alt="Making a Bet on BoozersWeepers" height="300">
+
 </div>
 
 🟠 **User Registration and Secure Login:** Users can easily register accounts with unique credentials and securely log in to the platform.
@@ -26,6 +28,7 @@ Originally, the project was executed within a two-week timeframe, building upon 
 🟠 **Deadline Notifications:** Users receive notifications when wager deadlines are up. After the deadline, users are prompted to select a winner, with the victor receiving an IOU for a pint, stored securely in their Wallet.
 
 🟠 **Wallet Management:** View and claim pints won from successful bets through the user's Wallet.
+
 
 🟠 **Global Leaderboard:** Explore the site's top performers with a dynamic leaderboard showcasing the top 10 users based on win percentages, the user with the highest won pint count, and the person who owes the most outstanding pints.
 
