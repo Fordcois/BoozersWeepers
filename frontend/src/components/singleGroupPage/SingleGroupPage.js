@@ -13,8 +13,6 @@ const { pubGroupId } = useParams();
 const [pubGroupData, setPubGroupData] = useState(null);
 const [token, setToken] = useState(window.localStorage.getItem("token"));
 const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
-const [hasJoinedGroup, setHasJoinedGroup] = useState(false);
-const [hasLeftGroup, setHasLeftGroup] = useState(false);
 
 const [groupWagers,setGroupWagers] = useState([]);
 const [groupMembers,setGroupMembers] = useState([]);
@@ -55,7 +53,6 @@ useEffect(() => {
             .then(async data => {
               window.localStorage.setItem("token", data.token);
               setToken(window.localStorage.getItem("token"));
-              console.log(data.wagers);
               setGroupWagers(data.wagers);
               setGroupLeaderboardData(calculateGroupStats(members, data.wagers));
 
@@ -99,31 +96,40 @@ const toggleExpand = () => {setExpanded(!expanded);};
 
 const toggleGroupMembership = async () => {
     try {
-        if (!isGroupMember) {
-            const response = await fetch(`/pubGroups/${pubGroupId}/addMember`, {
-                method: 'post',
-                headers: {'Authorization': `Bearer ${token}`}
-            });
-            if (response.ok) {
-                console.log("Member added successfully.");
-                window.location.reload()
-            } else {
-                console.error("Failed to add member:", response.statusText);
-            }
+      if (!isGroupMember) {
+        const response = await fetch(`/pubGroups/${pubGroupId}/addMember`, {
+          method: 'post',
+          headers: {'Authorization': `Bearer ${token}`}
+        });
+        if (response.ok) {
+            console.log("Member added successfully.");
+            window.location.reload()
         } else {
-            const response = await fetch(`/pubGroups/${pubGroupId}/removeMember`, {
-                method: 'post',
-                headers: {'Authorization': `Bearer ${token}`}
+            console.error("Failed to add member:", response.statusText);
+        }
+      } else {
+        const response = await fetch(`/pubGroups/${pubGroupId}/removeMember`, {
+            method: 'post',
+            headers: {'Authorization': `Bearer ${token}`}
+        });
+        if (response.ok) {
+          if (pubGroupData.members.length === 1) {
+            const response = await fetch(`/pubGroups/${pubGroupId}/deleteGroup`, {
+              method: 'post',
+              headers: {'Authorization': `Bearer ${token}`}
             });
             if (response.ok) {
-                console.log("Member removed successfully.");
-                navigate(`/groups`);
-            } else {
-                console.error("Failed to remove member:", response.statusText);            
+                console.log("Group deleted successfully as no members in group.");
                 
+            } else {
+                console.error("Failed to delete group:", response.statusText);
             }
-
+            navigate(`/groups`);
+          }
+        } else {
+          console.error("Failed to remove member:", response.statusText);            
         }
+      }
     } catch (error) {
         console.error("An error occurred:", error);
     }

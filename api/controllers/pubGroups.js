@@ -77,7 +77,26 @@ const PubGroupsController = {
 			console.error('Error removing new member:', error);
 			res.status(500).json({ error: 'Internal Server Error.' });
 		}
-},
+	},
+
+	// Deleting pub group from database using pubGroupID
+	DeleteGroup: async (req, res) => {
+		try{
+			const pubGroupId = req.params.pubGroupId;
+			if (!pubGroupId) {
+				return res.status(400).json({ error: 'Pub Group ID required.' });
+			}
+			const existingPubGroup = await PubGroup.findByIdAndDelete(pubGroupId);
+			if (!existingPubGroup) {
+				return res.status(404).json({ error: 'Group not found.' });
+			}
+			const token = TokenGenerator.jsonwebtoken(req.user_id)
+			res.status(200).json({ message: 'Group successfully removed from database', token: token });
+    		} catch (error) {
+				console.error('Error removing group', error);
+				res.status(500).json({ error: 'Internal Server Error.' });
+			}
+	},
 
 		FindMemberInfoByPubGroupID: (req, res) => {
 			const pubGroupID = req.params.pubGroupId;
