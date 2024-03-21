@@ -31,18 +31,18 @@ function calculateGroupStats(members,wagerdata) {
     const result = Object.keys(MemberObjects).map((user) => {
     const {betsWon, betsLost, username, ID } = MemberObjects[user];
 
+    const winPercentage = betsWon+betsLost > 0 ? ((betsWon / (betsWon + betsLost)) * 100).toFixed(2) : (0).toFixed(2);
+
     return {
         ID,
         username,
         betsWon,
         betsLost,
-        winPercentage: ((betsWon / (betsWon + betsLost)) * 100).toFixed(2),
+        winPercentage
     }});
 
 
 return result;
 };
 
-
 module.exports = calculateGroupStats;
-  

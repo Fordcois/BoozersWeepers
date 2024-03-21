@@ -171,21 +171,27 @@ return (
 
         </div>
     </div>
-    <div style={{backgroundColor:'BLUE',width:'50%'}}>
+    <div className='post-it' style={{width:'50%'}}>
+    <p className="note" style={{width:'90%'}}>
+
+    <span className="penfont-large centered">Leaderboard</span>
+
+      {sortedWinPercent.map((item,index) => (
+    <div key={item.id}>
+      <span className="penfont-small"> {index+1} {item.username} -  {item.winPercentage}% </span> 
+    </div>
+    ))}
 
 
-    
-    {sortedWinPercent.map((item,index) => (
-  <div key={item.id}>
-    {index+1} - {item.username} - {item.winPercentage}%
-  </div>
-))}
-
-
-
-        
+    </p>
     </div>
 </div>
+
+
+
+
+  
+
 
 
 
