@@ -80,15 +80,18 @@ useEffect(() => {
         let isGroupMember = (memberIds?.includes(getSessionUserID(token)));
 
         const sortedWinPercent = groupLeaderboardData.slice(0).sort((a, b) => b.winPercentage - a.winPercentage);
-        // console.log("SORTED WIN PERCENT !!!!!!!!!!!!!!!!!!!")
-        // console.log(sortedWinPercent)
-        // const reversed = sortedWinPercent.reverse()
-        // console.log(reversed);
+
         const sortedTotalWins = groupLeaderboardData.slice(0).sort((a, b) => b.betsWon - a.betsWon);
+        const mostTotalWinsUsername = sortedTotalWins[0]?.betsWon !== 0 ? sortedTotalWins[0]?.username : 'No winners yet!'
+
         const sortedTotalLosses = groupLeaderboardData.slice(0).sort((a, b) => b.betsLost - a.betsLost);
+        const mostTotallossesUsername = sortedTotalLosses[0]?.betsLost !== 0 ? sortedTotalLosses[0]?.username : 'No Losers yet!'
         const sortedWagersData = groupWagers.slice(0).sort((a, b) => new Date(b.datemade).getTime() - new Date(a.datemade).getTime());
 
         const totalPints = groupWagers.filter(wager => wager.winner).length;
+
+        const OnlyOneMember= sortedWinPercent.length === 1
+        const AllMembersOnZeroPercent = sortedWinPercent.every(obj => obj.winPercentage === '0.00')
         
 // for NavBar:
 const toggleExpand = () => {setExpanded(!expanded);};
@@ -134,7 +137,6 @@ return (
 <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
 <BlackboardHeader expandedState={expanded}/> 
 
-{/* Rebuild Below */}
 <div className='chalktitle'>{pubGroupData?.name}</div>
     <div id='ButtonDiv'>
         <button onClick={toggleGroupMembership} className='orange_Button'> {!isGroupMember ? 'Join':'Leave'} </button>
@@ -143,9 +145,10 @@ return (
     <div style={{width:'50%'}}>
         <div id='TopStats'>
             <span className="orange-chalk">Biggest Boozer</span> <br/>
-            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}>{sortedTotalWins[0]?.username}</div>
+            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}>
+              {mostTotalWinsUsername}</div>
             <span className="orange-chalk">Biggest Weeper</span> <br/>
-            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> {sortedTotalLosses[0]?.username} </div>
+            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> {mostTotallossesUsername} </div>
             <span className="orange-chalk">Free Pints won in {pubGroupData?.name}</span> <br/>
             <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> {totalPints}</div>
         </div>
@@ -171,21 +174,36 @@ return (
 
         </div>
     </div>
-    <div style={{backgroundColor:'BLUE',width:'50%'}}>
+    <div className='post-it' style={{width:'50%'}}>
+    <p className="note" style={{width:'90%'}}>
 
-
+    <span className="penfont-large centered">Leaderboard</span>
+    {OnlyOneMember || AllMembersOnZeroPercent ? (
+        <div style={{textAlign:'center'}} className="penfont-small">
+          Resolve a wager with other members to climb the Leaderboard
+        </div>
+) : (
+      sortedWinPercent.map((item, index) => (
+          <div key={item.id}>
+              <span className="penfont-small">{index + 1} {item.username} - {item.winPercentage}%</span>
+          </div>
+    ))
+)}
     
-    {sortedWinPercent.map((item,index) => (
-  <div key={item.id}>
-    {index+1} - {item.username} - {item.winPercentage}%
-  </div>
-))}
+
+      
 
 
 
-        
+    </p>
     </div>
 </div>
+
+
+
+
+  
+
 
 
 
