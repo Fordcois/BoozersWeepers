@@ -180,7 +180,7 @@ return (
     <span className="penfont-large centered">Leaderboard</span>
     {OnlyOneMember || AllMembersOnZeroPercent ? (
         <div style={{textAlign:'center'}} className="penfont-small">
-          Make a wager with other members to climb the Leaderboard
+          Resolve a wager with other members to climb the Leaderboard
         </div>
 ) : (
       sortedWinPercent.map((item, index) => (
