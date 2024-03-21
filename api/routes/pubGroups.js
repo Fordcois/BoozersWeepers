@@ -7,6 +7,7 @@ router.get("/:pubGroupId", PubGroupsController.FindMemberInfoByPubGroupID);
 router.get("/", PubGroupsController.Index);
 router.post("/:pubGroupId/addMember", PubGroupsController.UpdateAddMember)
 router.post("/:pubGroupId/removeMember", PubGroupsController.UpdateRemoveMember)
+router.post("/:pubGroupId/deleteGroup", PubGroupsController.DeleteGroup)
 router.post("/", PubGroupsController.Create);
 
 module.exports = router;
