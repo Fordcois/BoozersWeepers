@@ -11,7 +11,6 @@ import calculateGroupStats from './groupLeaderBoard';
 const SingleGroupPage = ({ navigate }) => {
 const { pubGroupId } = useParams();
 const [pubGroupData, setPubGroupData] = useState(null);
-const [wagers, setWagers] = useState([]);
 const [token, setToken] = useState(window.localStorage.getItem("token"));
 const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
 const [hasJoinedGroup, setHasJoinedGroup] = useState(false);
@@ -35,7 +34,7 @@ useEffect(() => {
         headers: { 'Authorization': `Bearer ${token}` }
       })
         .then(response => response.json())
-        .then(async data => {
+        .then( data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPubGroupData(data.pubGroup)
@@ -80,6 +79,16 @@ useEffect(() => {
         const memberIds = members?.map((member) => member._id) || [];
         let isGroupMember = (memberIds?.includes(getSessionUserID(token)));
 
+        const sortedWinPercent = groupLeaderboardData.slice(0).sort((a, b) => b.winPercentage - a.winPercentage);
+        // console.log("SORTED WIN PERCENT !!!!!!!!!!!!!!!!!!!")
+        // console.log(sortedWinPercent)
+        // const reversed = sortedWinPercent.reverse()
+        // console.log(reversed);
+        const sortedTotalWins = groupLeaderboardData.slice(0).sort((a, b) => b.betsWon - a.betsWon);
+        const sortedTotalLosses = groupLeaderboardData.slice(0).sort((a, b) => b.betsLost - a.betsLost);
+        const sortedWagersData = groupWagers.slice(0).sort((a, b) => new Date(b.datemade).getTime() - new Date(a.datemade).getTime());
+
+        const totalPints = groupWagers.filter(wager => wager.winner).length;
         
 // for NavBar:
 const toggleExpand = () => {setExpanded(!expanded);};
@@ -134,17 +143,17 @@ return (
     <div style={{width:'50%'}}>
         <div id='TopStats'>
             <span className="orange-chalk">Biggest Boozer</span> <br/>
-            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}>[ User with most won bets] </div>
+            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}>{sortedTotalWins[0]?.username}</div>
             <span className="orange-chalk">Biggest Weeper</span> <br/>
-            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> [user with most lost bets] </div>
+            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> {sortedTotalLosses[0]?.username} </div>
             <span className="orange-chalk">Free Pints won in {pubGroupData?.name}</span> <br/>
-            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> [Total Number of completed Bets] </div>
+            <div className='small-chalk' style={{textAlign:'center',marginBottom:'0px'}}> {totalPints}</div>
         </div>
 
         <div id='UserBets'>
             <div className="orange-chalk">Latest Wagers...</div>
-            {/* TODO - Reduce this list to only the most recent 10 */}
-            {groupWagers?.map((wager) => (
+            {/* Displays most recent 10 wagers in group */}
+            {sortedWagersData.slice(0,10)?.map((wager) => (
             <div key={wager._id}>
             {wager.winner ? (wager.winner._id===wager.peopleInvolved[0]._id ? 
             // Winner & Person 0 is the Winner
@@ -164,11 +173,11 @@ return (
     </div>
     <div style={{backgroundColor:'BLUE',width:'50%'}}>
 
-    {/* const sortedArray = groupLeaderboardData.sort((a, b) => a.winPercentage - b.winPercentage) */}
+
     
-    {groupLeaderboardData.map((item,index) => (
+    {sortedWinPercent.map((item,index) => (
   <div key={item.id}>
-    {index+1} - {item.username} - {item.winPercentage}
+    {index+1} - {item.username} - {item.winPercentage}%
   </div>
 ))}
 
