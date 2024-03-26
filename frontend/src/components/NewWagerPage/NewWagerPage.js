@@ -44,7 +44,7 @@ const NewWagerPage = () => {
 
       <span className="chalk" style={{ '--fsize': '24px' ,'--talign': 'left'}}> Who would you like to Challenge?</span>
       <span className="chalk" style={{ '--fsize': '16px' ,'--talign': 'left', 'marginBottom': '2%' }}>Enter atleast 3 Characters from the users name or username...</span>
-      <NewSearchBar SearchData={ListOfUsers} expandedState ={expanded}/>
+      <NewSearchBar searchData={ListOfUsers} expandedState ={expanded} searchMode={'users'}/>
 
     
   

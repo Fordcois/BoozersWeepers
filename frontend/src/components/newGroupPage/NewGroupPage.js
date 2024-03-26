@@ -2,11 +2,11 @@ import VertNavbar from "../VertNavBar/VertNavBar";
 import React, { useEffect, useState } from 'react';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import '../../Pages/style.css'
-import Header from '../header/Header';
-import { useLocation } from 'react-router-dom';
+import { FaPencil } from "react-icons/fa6";
+import { useLocation} from 'react-router-dom';
 
 
-const NewGroupPage = ({ navigate}) => {
+const NewGroupPage = ({navigate, change}) => {
 	const [token, setToken] = useState(window.localStorage.getItem("token"));
 	const loggedInUserId = getSessionUserID(token)
 	const [groupName, setGroupName] = useState("")
@@ -14,21 +14,21 @@ const NewGroupPage = ({ navigate}) => {
 	const location = useLocation();
 	const expandedState = location.state?.expandedState;
 	const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
-  
-	useEffect(() => {
-	  setExpanded(expandedState);
-	}, [expandedState]);
 
-  const toggleExpand = () => {setExpanded(!expanded);};
+  
+
+
 
 
 	const handlegroupNameChange = (event) => {
     setGroupName(event.target.value)
+
 	}
 
 	// When form is completed and submitted:
 	const handleGroupSubmit = async (event) => {
 		event.preventDefault();
+		setGroupName('');
 
     if(token) {
 			fetch( '/pubGroups', {
@@ -46,51 +46,42 @@ const NewGroupPage = ({ navigate}) => {
 		.then(async response => {
 			if (response.status === 201) {
 				console.log("Your group has been created")
-				navigate("/groups", { state: { expandedState: expanded } });
+				change();
+				
 			} else {
 				const errorData = await response.json();
-				navigate('/groups/new', { state: { expandedState: expanded } }) 
 				setErrorMsg(errorData.message)
 				console.log(errorData.message)
 			}
 		})
-	} 
+	}; 
 	}
 
 
-	return (
-		<div id='new-group-page'>
-			<VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-			<Header />
-			
-				<div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
-					<h1 id='new-group-page-title' className="page_subheading">Create a new group!</h1>
-<br></br>
-			
-					<form onSubmit={handleGroupSubmit}>
+return (
+	<form onSubmit={handleGroupSubmit} >
+		<div>
+		<div style={{display: 'flex', marginBottom: '10px' }}>
+			<div style={{flex: '1%', justifyContent: 'flex-end' }}>
+				<FaPencil style={{ transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px', marginRight:'2px',opacity:'0.2' }} />
+			</div>
 
-          <input placeholder="Enter your Group name" id="new-group-name" type='text' value={ groupName } onChange={handlegroupNameChange} />
-		  <br></br>
-		  <br></br>
-
-        <input id='submit' type="submit" value="Submit" />
-		<h2>{errorMsg}</h2>
-      </form>
+			<div style={{flex: '95%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+				<input placeholder="Enter your group name..." id="new-group-name" type='text' value={ groupName } onChange={handlegroupNameChange} />
+			</div>
+			</div>
+			<div style={{textAlign:'right'}}>
+				<input className='orange_Button_small' id='submit' type="submit" value="Submit" />
+			</div>
 		</div>
-		</div>
-    )
+		<span className='chalk-error'>{errorMsg}</span>
+	</form>
 
 
 
-}
+)}
 export default NewGroupPage;
+
+
+
+

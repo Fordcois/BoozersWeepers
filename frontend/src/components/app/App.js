@@ -30,7 +30,6 @@ const App = () => {
           <Route path='/profile/:userID' element={<ProfilePage navigate={ useNavigate() }/>}/>
           <Route path='/pint/:PintID' element={<SinglePint navigate={ useNavigate() }/>}/>
           <Route path='/wallet' element={<WalletPage navigate={ useNavigate() }/>}/>
-          <Route path='/groups/new' element={<NewGroupPage navigate={ useNavigate() }/>}/>
           <Route path='/groups/:pubGroupId' element={<SingleGroupPage navigate={ useNavigate() }/>}/>
           <Route path='/groups' element={<PubGroupsPage navigate={ useNavigate() }/>}/>
           <Route path='/leaderboard' element={<LeaderBoardPage navigate={ useNavigate() }/>}/>

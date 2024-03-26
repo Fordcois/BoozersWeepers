@@ -3,10 +3,11 @@ import isTokenValid from '../Utility/isTokenValid';
 import React, { useEffect, useState } from 'react';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import '../../Pages/style.css'
-import SearchBar from "../SearchBar/SearchBar";
 import BlackboardHeader from "../blackboardHeader/blackboardHeader";
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import NewGroupPage from "../newGroupPage/NewGroupPage";
+import NewSearchBar from "../NewSearch/NewSearch";
 
 const PubGroupsPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -15,9 +16,16 @@ const PubGroupsPage = ({ navigate }) => {
   const location = useLocation();
   const expandedState = location.state?.expandedState;
   const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+  const [groupCreated, setGroupCreated] = useState(0);
 
 
   const toggleExpand = () => {setExpanded(!expanded);};
+
+  const handleGroupCreatedState = () => {
+    console.log(groupCreated)
+    setGroupCreated(groupCreated + 1);
+  }
+  console.log(groupCreated)
 
 
     useEffect(() => {
@@ -36,50 +44,67 @@ const PubGroupsPage = ({ navigate }) => {
         })
       }
             if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } });;}
-    }, [navigate, isLoggedIn, token]);
+    }, [navigate, isLoggedIn, token, groupCreated]);
 
         // Gets a list of the groups which the logged-in user is a member of
         const joinedGroups = pubGroups.filter(pubGroup => pubGroup.members.includes(getSessionUserID(token)))
         console.log(joinedGroups)
 
-        const handleCreateGroupButtonClick = () => {
-            navigate('/groups/new', { state: { expandedState: expanded } })
-        }
 
 return (
 <div className='shade'>
-    <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-        <div className='blackboard'>
-            <div className='form'>
-            <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-            <BlackboardHeader expandedState={expanded}/> 
+  <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
+    <div className='blackboard'>
+      <div className='form'>
+        <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
+        <BlackboardHeader expandedState={expanded}/> 
 
-            <div className="my-groups" >
-    
-                <h1 id='my-groups-header' className="page_subheading">Your groups:</h1>
+        <div style={{display:'flex'}}>
+      
+      <div id='left' className='post-it' style={{width:'50%'}}>
+        <p className="note" style={{width:'90%'}}> 
+          <span className="penfont-large centered">My Groups</span>
+              
+              {joinedGroups.map((pubGroup) => (
+                <p key={pubGroup.id} className="group-name">
+                  <Link className='groupListLink' to={`/groups/${pubGroup._id}`} state = {{expandedState: expanded }}>
+                  {'>'} <span className="myGroupsInList">{pubGroup.name}</span>
+                  </Link>
+                </p>
+                                              ))
+              }
+        </p>
 
-                    {joinedGroups.map((pubGroup) => (
-                        <p key={pubGroup.id} className="group-name">
-                        <Link to={`/groups/${pubGroup._id}`} state = {{expandedState: expanded }}>{pubGroup.name}</Link>
-                        </p>
-                        ))}
 
-            </div>
-                    
-            <div id="search-groups">
-                <h1 id='search-group-header' className="page_subheading">Join a new group</h1>
-                <SearchBar message={"Search for a group..."} list={pubGroups} group={true}/>
-            </div>
 
-            <div id='create-new-group'>
-                <h1 id='new-group-header' className="page_subheading">Create a group</h1>
-                <button onClick={handleCreateGroupButtonClick}>Create group</button>
-            </div>
+      </div>
+      <div style={{width:'50%',padding:'50px 20px',marginLeft:'20px'}}>
+        
+      <div className="orange-chalk" style={{marginBottom:'5px'}}> Create New Group</div>
+      <div style={{marginLeft:'5px'}}><NewGroupPage navigate={navigate} change = {handleGroupCreatedState}/></div>
+
+      <div className="orange-chalk" style={{paddingTop: '25px',marginBottom:'5px'}}> Search all groups</div>
+      <div style={{marginLeft: '5px'}}><NewSearchBar searchData={pubGroups} expandedState ={expanded} searchMode={'groups'}/></div> 
+
+
+
+
+
+
+                
+
             
-            
-</div>
-</div>
-</div>
+
+
+      </div>
+    </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
 </div>
   )
 }
