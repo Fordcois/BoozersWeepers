@@ -10,7 +10,7 @@ const PubGroupsController = {
 			members: req.body.members
     });
 	
-		pubGroup.save((err) => {
+		pubGroup.save((err,newGroup) => {
 			if (err) {
 				console.log(err)
 				if(err.code === 11000){
@@ -20,6 +20,7 @@ const PubGroupsController = {
 				}
 			} else {
 				const token = TokenGenerator.jsonwebtoken(req.user_id);
+				console.log('New group created with ID:');
 				return res.status(201).json({ message: 'Group created', token: token });
 			}
 		})

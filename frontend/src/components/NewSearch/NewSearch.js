@@ -3,10 +3,10 @@ import SingleUser from '../NewWagerPage/Singleuser';
 import { FaPencil } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 
-const NewSearchBar = ({SearchData, expandedState}) => {
+const NewSearchBar = ({searchData, expandedState,searchMode}) => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [SearchCriteria, setSearchCriteria] = useState('');
-    const UnfilteredList = SearchData;
+    const UnfilteredList = searchData;
     const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
   
     const handleInputChange = (event) => { setSearchCriteria(event.target.value); };
@@ -17,7 +17,7 @@ const NewSearchBar = ({SearchData, expandedState}) => {
 
     let FilteredList = [];
 
-    if (SearchCriteria.length > 2) {
+    if (SearchCriteria.length > 2 && searchMode === 'users') {
         FilteredList = UnfilteredList.filter(user => {
             const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
             const searchValue = SearchCriteria.toLowerCase();
@@ -25,13 +25,14 @@ const NewSearchBar = ({SearchData, expandedState}) => {
         });
     }
 
+    if (SearchCriteria.length > 2 && searchMode === 'groups') {
+        FilteredList = UnfilteredList.filter(group => {
+            const searchValue = SearchCriteria.toLowerCase();
+            return group.name.toLowerCase().includes(searchValue);
+        });
+    }
+
     return (
-
-            
-
-        
-
-
 
 <div style={{display: 'flex', marginBottom: '10px' }}>
 
@@ -40,11 +41,21 @@ const NewSearchBar = ({SearchData, expandedState}) => {
     </div>
 
     <div style={{flex: '95%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-        <input type="text" value={SearchCriteria} onChange={handleInputChange} style={{marginBottom: '20px' }}placeholder={"Find user..."} />
-            {FilteredList.map((user, index) => 
-             <SingleUser SelectedUser={user} key={user._id} expandedState={expanded} />)}
+        <input type="text" value={SearchCriteria} onChange={handleInputChange} style={{marginBottom: '20px' }}placeholder={`Search ${searchMode}...`} />
+            
+            {searchMode==='users' && 
+                FilteredList.map((user, index) =>
+                <SingleUser SelectedUser={user} key={user._id} expandedState={expanded} />
+            )}
+
+            {searchMode==='groups' && 
+                FilteredList.map((group, index) =>
+                <Link className='groupSearchResult' to={`/groups/${group._id}`} state = {{expandedState: expanded }}> {'>'} {group.name} </Link>
+            )}
+
+            
     </div>
-    </div>
+</div>
 
 );}
 
