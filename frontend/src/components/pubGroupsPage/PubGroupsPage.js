@@ -53,7 +53,6 @@ return (
         <BlackboardHeader expandedState={expanded}/> 
 
         <div style={{display:'flex'}}>
-
         <div id='left' className='post-it' style={{width:'50%'}}>
           <p className="note" style={{width:'90%'}}> 
             <span className="penfont-large centered">My Groups</span>
@@ -89,21 +88,3 @@ return (
 </div>
 )};
 export default PubGroupsPage;
-
-
-
-
-
-
-
-
-
-            
-
-          
-        
-          
-          
-
-
-

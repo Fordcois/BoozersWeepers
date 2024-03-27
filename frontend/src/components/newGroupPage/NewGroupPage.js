@@ -61,12 +61,12 @@ const NewGroupPage = ({navigate, change}) => {
 return (
 	<form onSubmit={handleGroupSubmit} >
 		<div>
-		<div style={{display: 'flex', marginBottom: '10px' }}>
-			<div style={{flex: '1%', justifyContent: 'flex-end' }}>
+		<div style={{display: 'flex', marginBottom: '10px'}}>
+			<div style={{flex: '1%', justifyContent: 'flex-end'}}>
 				<FaPencil style={{ transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px', marginRight:'2px',opacity:'0.2' }} />
 			</div>
 
-			<div style={{flex: '95%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+			<div style={{flex: '95%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
 				<input placeholder="Enter your group name..." id="new-group-name" type='text' value={ groupName } onChange={handlegroupNameChange} />
 			</div>
 			</div>
@@ -76,6 +76,8 @@ return (
 		</div>
 		<span className='chalk-error'>{errorMsg}</span>
 	</form>
+
+	// , alignItems: 'flex-start'
 
 
 
