@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import VertNavbar from '../VertNavBar/VertNavBar';
 import isTokenValid from '../Utility/isTokenValid';
-import getSessionUserID from '../Utility/getSignedInUser_id';
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 import NewGroupPage from '../newGroupPage/NewGroupPage';
 import NewSearchBar from '../NewSearch/NewSearch';
@@ -20,6 +19,7 @@ const PubGroupsPage = ({ navigate }) => {
   const toggleExpand = () => {setExpanded(!expanded);};
   const handleGroupCreatedState = () => {setGroupCreated(groupCreated + 1);}
 
+
 useEffect(() => {
   
   if (!isLoggedIn) {
@@ -33,17 +33,14 @@ useEffect(() => {
   })
   .then(response => response.json())
   .then(async data => {
-    window.localStorage.setItem("token", data.token)
-    setToken(window.localStorage.getItem("token"))
+    window.localStorage.setItem("token", data.token);
+    setToken(window.localStorage.getItem("token"));
     setPubGroups(data.pubGroups)
   })
   }
 
   
 }, [navigate, isLoggedIn, token, groupCreated]);
-
-        // Gets a list of the groups which the logged-in user is a member of
-  const joinedGroups = pubGroups.filter(pubGroup => pubGroup.members.includes(getSessionUserID(token)))
 
 
 return (
@@ -61,7 +58,7 @@ return (
           <p className="note" style={{width:'90%'}}> 
             <span className="penfont-large centered">My Groups</span>
 
-            {joinedGroups.map((pubGroup) => (
+            {pubGroups.map((pubGroup) => (
             <p key={pubGroup.id} className="group-name">
               <Link className='groupListLink' to={`/groups/${pubGroup._id}`} state = {{expandedState: expanded }}>
                 {'>'} <span className="myGroupsInList">{pubGroup.name}</span>
