@@ -65,32 +65,26 @@ return (
         <p className="note" style={{width:'90%'}}> 
           <span className="penfont-large centered">My Groups</span>
               
-              {joinedGroups.map((pubGroup) => (
+            {joinedGroups.map((pubGroup) => (
                 <p key={pubGroup.id} className="group-name">
-                  <Link className='groupListLink' to={`/groups/${pubGroup._id}`} state = {{expandedState: expanded }}>
-                  {'>'} <span className="myGroupsInList">{pubGroup.name}</span>
-                  </Link>
+                    <Link className='groupListLink' to={`/groups/${pubGroup._id}`} state = {{expandedState: expanded }}>
+                    {'>'} <span className="myGroupsInList">{pubGroup.name}</span>
+                    </Link>
                 </p>
                                               ))
-              }
+            }
         </p>
 
-
-
       </div>
-        <div style={{width:'40%',padding:'50px 20px',marginLeft:'20px'}}>
-          
-          <div className="orange-chalk" style={{marginBottom:'5px'}}> Create New Group</div>
-          <div style={{marginLeft:'5px', marginRight: '5rem'}}><NewGroupPage navigate={navigate} change = {handleGroupCreatedState}/></div>
+    <div style={{width:'40%',padding:'50px 20px',marginLeft:'20px'}}>
+        
+        <div className="orange-chalk" style={{marginBottom:'5px'}}> Create New Group</div>
+        <div style={{marginLeft:'5px', marginRight: '5rem'}}><NewGroupPage navigate={navigate} change = {handleGroupCreatedState}/></div>
 
-          <div className="orange-chalk" style={{paddingTop: '25px',marginBottom:'5px'}}> Search all groups</div>
-          <div style={{marginLeft: '5px', marginRight: '5rem'}}><NewSearchBar searchData={pubGroups} expandedState ={expanded} searchMode={'groups'}/></div>
-        </div>
+        <div className="orange-chalk" style={{paddingTop: '25px',marginBottom:'5px'}}> Search all groups</div>
+        <div style={{marginLeft: '5px', marginRight: '5rem'}}><NewSearchBar searchData={pubGroups} expandedState ={expanded} searchMode={'groups'}/></div>
+    </div>
       </div>
-
-
-
-
       </div>
     </div>
   </div>
