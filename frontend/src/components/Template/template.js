@@ -14,26 +14,23 @@ const Template = ({ navigate }) => {
   const [groupWagers,setGroupWagers] = useState([])
   
   useEffect(() => {
+  
+ 
     if(token) {
-        fetch( '/wagers/groups/findgroupwagers', {
-          method: 'post',
-          headers: 
-          {'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',},
-          body: JSON.stringify({ArrayOfMembers: ['65b3cb2aa30533d477e17ff2','65b3cb09a30533d477e17fed','65bce0630af1114350ab7501']})
-        })
-        .then(response => response.json())
-        .then(async data => {
-            window.localStorage.setItem("token", data.token) 
-            setUserToken(window.localStorage.getItem("token")) 
-            console.log(data.wagers) 
-        })
+      fetch("/pubGroups/searchgroups/findUsersGroups", {
+      method: 'get',
+      headers: {'Authorization': `Bearer ${token}`}
+    })
+    .then(response => response.json())
+    .then(async data => {
+      console.log(data.pubGroups)
+    })
     }
-}, []);
+  
+    
+  }, []);
 
-useEffect(() => {
-    console.log(groupWagers);
-}, [groupWagers]);
+
 
   return (
     <div className='shade'>
