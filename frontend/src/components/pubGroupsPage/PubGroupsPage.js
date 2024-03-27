@@ -78,26 +78,15 @@ return (
 
 
       </div>
-      <div style={{width:'50%',padding:'50px 20px',marginLeft:'20px'}}>
-        
-      <div className="orange-chalk" style={{marginBottom:'5px'}}> Create New Group</div>
-      <div style={{marginLeft:'5px'}}><NewGroupPage navigate={navigate} change = {handleGroupCreatedState}/></div>
+        <div style={{width:'40%',padding:'50px 20px',marginLeft:'20px'}}>
+          
+          <div className="orange-chalk" style={{marginBottom:'5px'}}> Create New Group</div>
+          <div style={{marginLeft:'5px', marginRight: '5rem'}}><NewGroupPage navigate={navigate} change = {handleGroupCreatedState}/></div>
 
-      <div className="orange-chalk" style={{paddingTop: '25px',marginBottom:'5px'}}> Search all groups</div>
-      <div style={{marginLeft: '5px'}}><NewSearchBar searchData={pubGroups} expandedState ={expanded} searchMode={'groups'}/></div> 
-
-
-
-
-
-
-                
-
-            
-
-
+          <div className="orange-chalk" style={{paddingTop: '25px',marginBottom:'5px'}}> Search all groups</div>
+          <div style={{marginLeft: '5px', marginRight: '5rem'}}><NewSearchBar searchData={pubGroups} expandedState ={expanded} searchMode={'groups'}/></div>
+        </div>
       </div>
-    </div>
 
 
 

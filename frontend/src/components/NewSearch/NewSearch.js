@@ -40,7 +40,7 @@ const NewSearchBar = ({searchData, expandedState,searchMode}) => {
         <FaPencil style={{ transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px', marginRight:'2px',opacity:'0.2' }} />
     </div>
 
-    <div style={{flex: '95%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+    <div style={{flex: '95%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
         <input type="text" value={SearchCriteria} onChange={handleInputChange} style={{marginBottom: '20px' }}placeholder={`Search ${searchMode}...`} />
             
             {searchMode==='users' && 
