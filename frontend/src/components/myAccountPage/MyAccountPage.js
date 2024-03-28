@@ -16,10 +16,10 @@ const MyAccountPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [wagers, setWagers] = useState([]);
   const [location] = useState(useLocation());
-  const [expandedState, setExpandedState] = useState(location.state?.expandedState);
+  const expandedState = location.state?.expandedState;
   const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
   const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
-  const [LoggedInUserID, setLoggedInUserID] = useState(getSessionUserID(token));
+  const [loggedInUserID, setLoggedInUserID] = useState(getSessionUserID(token));
   const [showIncoming, setShowIncoming] = useState(null);
   const [showOngoing, setShowOngoing] = useState(null);
   const [showPending, setShowPending] = useState(null);
@@ -37,7 +37,7 @@ const MyAccountPage = ({ navigate }) => {
     if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } })};
     
     if(token) {
-        fetch(`/wagers/findall/${LoggedInUserID}`, {headers: {'Authorization': `Bearer ${token}`}})
+        fetch(`/wagers/findall/${loggedInUserID}`, {headers: {'Authorization': `Bearer ${token}`}})
           .then(response => response.json())
           .then(async data => {
             window.localStorage.setItem("token", data.token)
@@ -47,12 +47,32 @@ const MyAccountPage = ({ navigate }) => {
       }
     }, []);
 
+    // const claimPint = () => {
+    //   if (userToken) {
+    //     fetch(`/pints/claim/${pintId}`, {
+    //       method: 'post',
+    //       headers: {
+    //         'Authorization': `Bearer ${userToken}`,
+    //         'Content-Type': 'application/json' 
+    //       }
+    //     })
+    //     .then(response => {
+    //       if (response.status === 200) {console.log("Pint Claimed!");} 
+    //       else {console.log("Pint failed to be Claimed.");}
+    //     })
+    //     .catch(error => {console.error('Error claiming pint:', error);})
+    //     .finally(() => {
+    //       window.location.reload();
+    //     });
+    //   }
+    // };
+
     // Gets wagers which have been sent from other users to be approved by logged-in user
-    const wagerRequests = wagers.filter(wager => wager.approved === false && wager.peopleInvolved[1]._id === LoggedInUserID)
+    const wagerRequests = wagers.filter(wager => wager.approved === false && wager.peopleInvolved[1]._id === loggedInUserID)
     // Gets ongoing wagers -> they have been approved by both users and are still within the time limit
     const ongoingWagers = wagers.filter(wager => wager.approved === true && checkIfOngoing(wager.deadline) && wager.winner === null)
     // Gets pending wagers -> they have been sent but not yet approved by the person you sent it to
-    const pendingWagers = wagers.filter(wager => wager.peopleInvolved[0]._id === LoggedInUserID && wager.approved === false)
+    const pendingWagers = wagers.filter(wager => wager.peopleInvolved[0]._id === loggedInUserID && wager.approved === false)
     // Gets unresolved wagers -> they are past the deadline, have been approved  but haven't declared a winner yet
     const unresolvedWagers = wagers.filter(wager => checkIfOngoing(wager.deadline) === false && wager.winner === null && wager.approved !== false)
     // Gets past wagers -> wagers which have been resolved and have a winner declared

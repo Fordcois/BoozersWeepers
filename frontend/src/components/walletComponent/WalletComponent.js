@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PintInfo from '../singlepint/pintinfo';
-import './popup.css';
 import './WalletComponent.css';
 import { Link } from 'react-router-dom';
 
@@ -15,6 +13,7 @@ const WalletComponent = ({ UserID, expandedState }) => {
   }, [expandedState]);
 
   useEffect(() => {
+
     const fetchWalletData = async () => {
       try {
         const response = await fetch(`/pints/wallet/${UserID}`, {headers: { Authorization: `Bearer ${userToken}` }});
@@ -28,18 +27,13 @@ const WalletComponent = ({ UserID, expandedState }) => {
     fetchWalletData();
   }, [UserID, userToken]);
 
-  const openPintInfo = (pintId) => {
-    setSelectedPint(pintId); // Set the selected pint to display its info
-  };
 
-  const closePintInfo = () => {
-    setSelectedPint(null); // Clear the selected pint to close the pop-up
-  };
 
-  const claimPint = (ID) => {
+  const claimPint = async (ID) => {
     const pintId=ID
     if (userToken) {
-      fetch(`/pints/claim/${pintId}`, {
+      try {
+      await fetch(`/pints/claim/${pintId}`, {
         method: 'post',
         headers: {
           'Authorization': `Bearer ${userToken}`,
@@ -47,13 +41,14 @@ const WalletComponent = ({ UserID, expandedState }) => {
         }
       })
       .then(response => {
-        if (response.status === 200) {console.log("Pint Claimed!");} 
-        else {console.log("Pint failed to be Claimed.");}
+        if (response.status === 200) {
+          console.log("Pint Claimed!");
+          window.location.reload()
+        } 
       })
-      .catch(error => {console.error('Error claiming pint:', error);})
-      .finally(() => {
-        window.location.reload();
-      });
+      }
+      catch(error) {console.error('Error claiming pint:', error);}
+
     }
   };
 
@@ -92,18 +87,9 @@ const WalletComponent = ({ UserID, expandedState }) => {
       )}
 </div>
       
-      {/* Pop-up window */}
-      {selectedPint && (
-        <div className="popup">
-          <div className="popup_inner">
-            <span className="close_popup" onClick={closePintInfo}>
-              &times;
-            </span>
-            <PintInfo pintId={selectedPint} />
-          </div>
-        </div>
-      )}
-    </div>
+
+      
+  </div>
   );
 };
 
