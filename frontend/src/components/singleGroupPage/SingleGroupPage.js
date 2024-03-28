@@ -36,7 +36,7 @@ useEffect(() => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setPubGroupData(data.pubGroup)
-          
+
           // Return the data to chain the promises
           return data;
         })
