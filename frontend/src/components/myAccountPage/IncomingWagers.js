@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import NotificationDetails from './NotificationDetails';
-import "../MyAccountPage.css"
+import { FaCircle } from "react-icons/fa";
+import '../myAccountPage/MyAccountPage.css'
 
 
 
@@ -26,7 +26,7 @@ const IncomingWagers = (props, { navigate }) => {
 
           <div className="notificationdetails">{props.wagers.map((wager) => (
             <div key={wager._id}>
-              <Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}>{wager.peopleInvolved[0].username} would like to wager! </Link>
+              <Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}><FaCircle  size={10}/> {wager.peopleInvolved[0].username} would like to wager! </Link>
 
             </div>))}
           </div>

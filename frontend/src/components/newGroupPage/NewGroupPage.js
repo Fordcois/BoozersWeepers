@@ -1,28 +1,17 @@
-import VertNavbar from "../VertNavBar/VertNavBar";
 import React, { useEffect, useState } from 'react';
 import getSessionUserID from '../Utility/getSignedInUser_id';
-import '../../Pages/style.css'
 import { FaPencil } from "react-icons/fa6";
-import { useLocation} from 'react-router-dom';
+import '../../Pages/style.css'
 
-
-const NewGroupPage = ({navigate, change}) => {
+const NewGroupForm = ({ change}) => {
 	const [token, setToken] = useState(window.localStorage.getItem("token"));
 	const loggedInUserId = getSessionUserID(token)
 	const [groupName, setGroupName] = useState("")
 	const [errorMsg, setErrorMsg] = useState("");
-	const location = useLocation();
-	const expandedState = location.state?.expandedState;
-	const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
-
-  
-
-
 
 
 	const handlegroupNameChange = (event) => {
     setGroupName(event.target.value)
-
 	}
 
 	// When form is completed and submitted:
@@ -77,12 +66,8 @@ return (
 		<span className='chalk-error'>{errorMsg}</span>
 	</form>
 
-	// , alignItems: 'flex-start'
-
-
-
 )}
-export default NewGroupPage;
+export default NewGroupForm;
 
 
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import SingleUser from '../NewWagerPage/Singleuser';
+import SingleUser from '../searchResultSingleUser/Singleuser';
 import { FaPencil } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 
-const NewSearchBar = ({searchData, expandedState,searchMode}) => {
+const SearchBar = ({searchData, expandedState,searchMode}) => {
     const [token, setToken] = useState(window.localStorage.getItem("token"));
     const [SearchCriteria, setSearchCriteria] = useState('');
     const UnfilteredList = searchData;
@@ -59,4 +59,4 @@ const NewSearchBar = ({searchData, expandedState,searchMode}) => {
 
 );}
 
-export default NewSearchBar;
+export default SearchBar;

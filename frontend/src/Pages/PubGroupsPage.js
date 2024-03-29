@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import VertNavbar from '../VertNavBar/VertNavBar';
-import isTokenValid from '../Utility/isTokenValid';
-import BlackboardHeader from '../blackboardHeader/blackboardHeader';
-import NewGroupPage from '../newGroupPage/NewGroupPage';
-import NewSearchBar from '../NewSearch/NewSearch';
-import '../../Pages/style.css';
+import VertNavbar from '../components/VertNavBar/VertNavBar';
+import isTokenValid from '../components/Utility/isTokenValid';
+import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
+import NewGroupPage from '../components/newGroupPage/NewGroupPage';
+import SearchBar from '../components/searchbarComponent/Searchbar';
+import '../Pages/style.css';
 
 const PubGroupsPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -78,7 +78,7 @@ return (
             Search all groups
           </div>
           <div style={{marginLeft: '5px'}}>
-            <NewSearchBar searchData={pubGroups} expandedState ={expanded} searchMode={'groups'}/>
+            <SearchBar searchData={pubGroups} expandedState ={expanded} searchMode={'groups'}/>
           </div> 
         </div>
       </div>

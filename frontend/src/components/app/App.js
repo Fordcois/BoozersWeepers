@@ -1,19 +1,19 @@
 import './App.css';
 import React from 'react';
 import {useNavigate,Routes,Route,} from "react-router-dom";
-import LogInPage from '../../Pages/login';
-import NewWagerForm from '../wagers/NewWagerForm'
+import LogInPage from '../../Pages/loginPage';
+import NewWagerForm from '../../Pages/NewWagerFormPage'
 import Home from '../home/Home';
-import MyAccountPage from '../myAccountPage/MyAccountPage';
-import NewWagerPage from '../NewWagerPage/NewWagerPage';
-import WagerInfoPage from '../singleWagerPage/WagerInfoPage';
-import SignUpPage from '../../Pages/signup';
+import MyAccountPage from '../../Pages/MyAccountPage';
+import NewWagerPage from '../../Pages/NewWagerPage';
+import WagerInfoPage from '../../Pages/WagerInfoPage';
+import SignUpPage from '../../Pages/signupPage';
 import Workshop from '../Template/template';
-import ProfilePage from '../../Pages/profilepage';
-import WalletPage from '../../Pages/wallet';
-import PubGroupsPage from '../pubGroupsPage/PubGroupsPage'
-import SingleGroupPage from '../singleGroupPage/SingleGroupPage'
-import LeaderBoardPage from '../leaderboard/leaderboard';
+import ProfilePage from '../../Pages/profilePage';
+import WalletPage from '../../Pages/WalletPage';
+import PubGroupsPage from '../../Pages/PubGroupsPage'
+import SingleGroupPage from '../../Pages/SingleGroupPage'
+import LeaderBoardPage from '../../Pages/leaderboardPage';
 
 const App = () => {
     return (

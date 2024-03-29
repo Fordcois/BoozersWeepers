@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import getSessionUserID from '../Utility/getSignedInUser_id';
-import VertNavbar from '../VertNavBar/VertNavBar';
-import SinglePendingWager from './childComponents/SinglePendingWager';
-import SingleWagerRequest from './childComponents/SingleWagerRequest';
-import SingleOngoingWager from './childComponents/SingleOngoingWager';
-import SingleResolvedWager from './childComponents/SingleResolvedWager';
-import BlackboardHeader from '../blackboardHeader/blackboardHeader';
-import '../../Pages/style.css'
-import WagerDetails from './childComponents/WagerDetails';
+import getSessionUserID from '../components/Utility/getSignedInUser_id';
+import VertNavbar from '../components/VertNavBar/VertNavBar';
+import SinglePendingWager from '../components/singleWagerPageComponents/SinglePendingWager';
+import SingleWagerRequest from '../components/singleWagerPageComponents/SingleWagerRequest';
+import SingleOngoingWager from '../components/singleWagerPageComponents/SingleOngoingWager';
+import SingleResolvedWager from '../components/singleWagerPageComponents/SingleResolvedWager';
+import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
+import WagerDetails from '../components/singleWagerPageComponents/WagerDetails';
+import '../Pages/style.css'
 
 
 const WagerInfoPage = ({ navigate }) => {

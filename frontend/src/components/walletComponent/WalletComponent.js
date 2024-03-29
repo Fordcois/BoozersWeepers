@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './WalletComponent.css';
 import { Link } from 'react-router-dom';
+import './WalletComponent.css';
 
 const WalletComponent = ({ UserID, expandedState }) => {
   const [WalletData, setWalletData] = useState(null);
-  const [userToken, setUserToken] = useState(window.localStorage.getItem('token'));
-  const [selectedPint, setSelectedPint] = useState(null); // State to track selected pint
-  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+  const [userToken] = useState(window.localStorage.getItem('token'));
+  const [expanded] = useState(expandedState !== undefined ? expandedState : true);
   
   useEffect(() => {
-    setExpanded(expandedState);
-  }, [expandedState]);
-
-  useEffect(() => {
-
     const fetchWalletData = async () => {
       try {
         const response = await fetch(`/pints/wallet/${UserID}`, {headers: { Authorization: `Bearer ${userToken}` }});
@@ -48,7 +42,6 @@ const WalletComponent = ({ UserID, expandedState }) => {
       })
       }
       catch(error) {console.error('Error claiming pint:', error);}
-
     }
   };
 
@@ -67,13 +60,8 @@ const WalletComponent = ({ UserID, expandedState }) => {
               <span className='penfont-large' style={{color:'black',fontSize:'24px',marginBottom:'11%'}}>ONE PINT</span>
               <span className='penfont-large' style={{color:'black',fontSize:'18px',marginBottom:'0'}}>SIGNED BY:</span>
               <span className='penfont-large' style={{marginTop:'-17px', color:'#cd561b',marginBottom:'13%',fontSize:'40px',textDecoration: 'underline dotted #e3e294'}}>{pint.owed_by.username}</span>
-               
-               
-               
+
               <button className="orange_Button" style={{marginBottom:'2%'}} onClick={() => claimPint(pint._id)}>Claim</button>
-
-              
-
 
             </div>
           </div>

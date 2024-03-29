@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import "./NewWagerForm.css";
-import '../../Pages/style.css'
 import { useParams, useLocation } from "react-router-dom"
-import VertNavbar from '../VertNavBar/VertNavBar';
+import VertNavbar from '../components/VertNavBar/VertNavBar';
 import { FaPencil } from "react-icons/fa6";
-import BlackboardHeader from '../blackboardHeader/blackboardHeader';
+import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
+import '../Pages/style.css'
 
 const NewWagerForm = ({ navigate }) => {
 	const {challengedUserID} = useParams()
@@ -106,9 +105,7 @@ if (token) {
 </>
 );
 	
-} else {
-	navigate("/../login", { state: { expandedState: expanded } });
-}
+} else {navigate("/../login", { state: { expandedState: expanded } });}
 	
 }
 

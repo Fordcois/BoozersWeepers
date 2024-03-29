@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import isTokenValid from '../Utility/isTokenValid';
-import getSessionUserID from '../Utility/getSignedInUser_id';
-import VertNavbar from '../VertNavBar/VertNavBar';
-import BlackboardHeader from '../blackboardHeader/blackboardHeader';
-import AccountPageList from './myAccountPageComponents/accountpageList';
-import OngoingWagers from './myAccountPageComponents/ongoingWagers';
-import PastWagers from './myAccountPageComponents/PastWagers';
-import UnresolvedWagers from './myAccountPageComponents/UnresolvedWagers';
-import IncomingWagers from './myAccountPageComponents/IncomingWagers';
-import PendingWagers from './myAccountPageComponents/PendingWagers';
-import '../../Pages/style.css'
+import isTokenValid from '../components/Utility/isTokenValid';
+import getSessionUserID from '../components/Utility/getSignedInUser_id';
+import VertNavbar from '../components/VertNavBar/VertNavBar';
+import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
+import AccountPageList from '../components/myAccountPage/accountpageList';
+import OngoingWagers from '../components/myAccountPage/ongoingWagers';
+import PastWagers from '../components/myAccountPage/PastWagers';
+import UnresolvedWagers from '../components/myAccountPage/UnresolvedWagers';
+import IncomingWagers from '../components/myAccountPage/IncomingWagers';
+import PendingWagers from '../components/myAccountPage/PendingWagers';
+import '../Pages/style.css'
 
 const MyAccountPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -36,17 +36,16 @@ const MyAccountPage = ({ navigate }) => {
   useEffect(() => {
     if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } })};
     
-    // Fetches logged-in user's wagers data
     if(token) {
-      fetch(`/wagers/findall/${loggedInUserID}`, {headers: {'Authorization': `Bearer ${token}`}})
-        .then(response => response.json())
-        .then(data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setWagers(data.wagers)
-        })
-    }
-  }, []);
+        fetch(`/wagers/findall/${loggedInUserID}`, {headers: {'Authorization': `Bearer ${token}`}})
+          .then(response => response.json())
+          .then(async data => {
+            window.localStorage.setItem("token", data.token)
+            setToken(window.localStorage.getItem("token"))
+            setWagers(data.wagers)
+          })
+      }
+    }, []);
 
     // Gets wagers which have been sent from other users to be approved by logged-in user
     const wagerRequests = wagers.filter(wager => wager.approved === false && wager.peopleInvolved[1]._id === loggedInUserID)
