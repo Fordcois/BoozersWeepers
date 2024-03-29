@@ -3,9 +3,6 @@ const User = require("../models/user");
 const UsersController = {
   Create: (req, res) => {
     const user = new User(req.body);
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    console.log(user);
-
     let passwordErrorMsgs = "";
 
     if(user.password.length < 8) {

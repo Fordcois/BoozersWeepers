@@ -18,121 +18,117 @@ const [groupWagers,setGroupWagers] = useState([]);
 const [groupMembers,setGroupMembers] = useState([]);
 const [groupLeaderboardData,setGroupLeaderboardData] = useState([])
 
-
-
 const location = useLocation();
 const expandedState = location.state?.expandedState;
 const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
 
-// Get group and member info
+
 useEffect(() => {
-    if (token) {
-      fetch(`/pubGroups/${pubGroupId}`, {
-        method: 'get',
-        headers: { 'Authorization': `Bearer ${token}` }
+
+  if (!isLoggedIn) {
+    navigate('/', { state: { expandedState: expanded } });
+  }
+
+  if (token) {
+
+    // Get group and group member info
+    fetch(`/pubGroups/${pubGroupId}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+      .then(response => response.json())
+      .then( data => {
+        window.localStorage.setItem("token", data.token)
+        setToken(window.localStorage.getItem("token"))
+        setPubGroupData(data.pubGroup)
       })
-        .then(response => response.json())
-        .then( data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPubGroupData(data.pubGroup)
 
-          // Return the data to chain the promises
-          return data;
-        })
-        .then((data) => {
-          return fetch('/wagers/groups/findgroupwagers', {
-              method: 'post',
-              headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ ArrayOfMembers: memberIds })
-            })
-            .then(response => response.json())
-            .then(async data => {
-              window.localStorage.setItem("token", data.token);
-              setToken(window.localStorage.getItem("token"));
-              setGroupWagers(data.wagers);
-              setGroupLeaderboardData(calculateGroupStats(members, data.wagers));
-
-            });
-        })
-        .catch(error => {
-          // Handle errors if any
-          console.error('Error:', error);
+      // Get wager info for members of group, following on from above fetch
+      .then( async () => {
+        const response = await fetch('/wagers/groups/findgroupwagers', {
+          method: 'post',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ ArrayOfMembers: memberIds })
         });
-    }
-
-    if (!isLoggedIn) {
-      navigate('/', { state: { expandedState: expanded } });
-    }
+        const data = await response.json();
+        window.localStorage.setItem("token", data.token);
+        setToken(window.localStorage.getItem("token"));
+        setGroupWagers(data.wagers);
+        setGroupLeaderboardData(calculateGroupStats(members, data.wagers));
+      })
+      
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
 }, [navigate, isLoggedIn, token]);
 
 
 // Sorts through data received from DB to make them usable in frontend
-        const members = pubGroupData?.members
-        // checks to see whether the person who is logged in is in the group already - for join/leave button
-        const memberIds = members?.map((member) => member._id) || [];
-        let isGroupMember = (memberIds?.includes(getSessionUserID(token)));
+const members = pubGroupData?.members
+// checks to see whether the person who is logged in is in the group already - for join/leave button
+const memberIds = members?.map((member) => member._id) || [];
+let isGroupMember = (memberIds?.includes(getSessionUserID(token)));
 
-        const sortedWinPercent = groupLeaderboardData.slice(0).sort((a, b) => b.winPercentage - a.winPercentage);
+const sortedWinPercent = groupLeaderboardData.slice(0).sort((a, b) => b.winPercentage - a.winPercentage);
 
-        const sortedTotalWins = groupLeaderboardData.slice(0).sort((a, b) => b.betsWon - a.betsWon);
-        const mostTotalWinsUsername = sortedTotalWins[0]?.betsWon !== 0 ? sortedTotalWins[0]?.username : 'No winners yet!'
+const sortedTotalWins = groupLeaderboardData.slice(0).sort((a, b) => b.betsWon - a.betsWon);
+const mostTotalWinsUsername = sortedTotalWins[0]?.betsWon !== 0 ? sortedTotalWins[0]?.username : 'No winners yet!'
 
-        const sortedTotalLosses = groupLeaderboardData.slice(0).sort((a, b) => b.betsLost - a.betsLost);
-        const mostTotallossesUsername = sortedTotalLosses[0]?.betsLost !== 0 ? sortedTotalLosses[0]?.username : 'No Losers yet!'
-        const sortedWagersData = groupWagers.slice(0).sort((a, b) => new Date(b.datemade).getTime() - new Date(a.datemade).getTime());
+const sortedTotalLosses = groupLeaderboardData.slice(0).sort((a, b) => b.betsLost - a.betsLost);
+const mostTotallossesUsername = sortedTotalLosses[0]?.betsLost !== 0 ? sortedTotalLosses[0]?.username : 'No Losers yet!'
+const sortedWagersData = groupWagers.slice(0).sort((a, b) => new Date(b.datemade).getTime() - new Date(a.datemade).getTime());
 
-        const totalPints = groupWagers.filter(wager => wager.winner).length;
+const totalPints = groupWagers.filter(wager => wager.winner).length;
 
-        const OnlyOneMember= sortedWinPercent.length === 1
-        const AllMembersOnZeroPercent = sortedWinPercent.every(obj => obj.winPercentage === '0.00')
-        
+const OnlyOneMember= sortedWinPercent.length === 1
+const AllMembersOnZeroPercent = sortedWinPercent.every(obj => obj.winPercentage === '0.00')
+
 // for NavBar:
 const toggleExpand = () => {setExpanded(!expanded);};
 
 
 const toggleGroupMembership = async () => {
-    try {
-      if (!isGroupMember) {
-        const response = await fetch(`/pubGroups/${pubGroupId}/addMember`, {
+  try {
+    if (!isGroupMember) {
+      const response = await fetch(`/pubGroups/${pubGroupId}/addMember`, {
+        method: 'post',
+        headers: {'Authorization': `Bearer ${token}`}
+      });
+      if (response.ok) {
+          console.log("Member added successfully.");
+          window.location.reload()
+      } else {
+          console.error("Failed to add member:", response.statusText);
+      }
+    } else {
+      const response = await fetch(`/pubGroups/${pubGroupId}/removeMember`, {
           method: 'post',
           headers: {'Authorization': `Bearer ${token}`}
-        });
-        if (response.ok) {
-            console.log("Member added successfully.");
-            window.location.reload()
-        } else {
-            console.error("Failed to add member:", response.statusText);
-        }
-      } else {
-        const response = await fetch(`/pubGroups/${pubGroupId}/removeMember`, {
+      });
+      if (response.ok) {
+        if (pubGroupData.members.length === 1) {
+          const response = await fetch(`/pubGroups/${pubGroupId}/deleteGroup`, {
             method: 'post',
             headers: {'Authorization': `Bearer ${token}`}
-        });
-        if (response.ok) {
-          if (pubGroupData.members.length === 1) {
-            const response = await fetch(`/pubGroups/${pubGroupId}/deleteGroup`, {
-              method: 'post',
-              headers: {'Authorization': `Bearer ${token}`}
-            });
-            if (response.ok) {
-                console.log("Group deleted successfully as no members in group.");
-                
-            } else {
-                console.error("Failed to delete group:", response.statusText);
-            }
-            navigate(`/groups`);
+          });
+          if (response.ok) {
+              console.log("Group deleted successfully as no members in group.");
+              
+          } else {
+              console.error("Failed to delete group:", response.statusText);
           }
-        } else {
-          console.error("Failed to remove member:", response.statusText);            
+          navigate(`/groups`);
         }
+      } else {
+        console.error("Failed to remove member:", response.statusText);            
       }
-    } catch (error) {
-        console.error("An error occurred:", error);
     }
+  } catch (error) {
+      console.error("An error occurred:", error);
+  }
 }
 
 return (

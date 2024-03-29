@@ -36,36 +36,17 @@ const MyAccountPage = ({ navigate }) => {
   useEffect(() => {
     if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } })};
     
+    // Fetches logged-in user's wagers data
     if(token) {
-        fetch(`/wagers/findall/${loggedInUserID}`, {headers: {'Authorization': `Bearer ${token}`}})
-          .then(response => response.json())
-          .then(async data => {
-            window.localStorage.setItem("token", data.token)
-            setToken(window.localStorage.getItem("token"))
-            setWagers(data.wagers)
-          })
-      }
-    }, []);
-
-    // const claimPint = () => {
-    //   if (userToken) {
-    //     fetch(`/pints/claim/${pintId}`, {
-    //       method: 'post',
-    //       headers: {
-    //         'Authorization': `Bearer ${userToken}`,
-    //         'Content-Type': 'application/json' 
-    //       }
-    //     })
-    //     .then(response => {
-    //       if (response.status === 200) {console.log("Pint Claimed!");} 
-    //       else {console.log("Pint failed to be Claimed.");}
-    //     })
-    //     .catch(error => {console.error('Error claiming pint:', error);})
-    //     .finally(() => {
-    //       window.location.reload();
-    //     });
-    //   }
-    // };
+      fetch(`/wagers/findall/${loggedInUserID}`, {headers: {'Authorization': `Bearer ${token}`}})
+        .then(response => response.json())
+        .then(data => {
+          window.localStorage.setItem("token", data.token)
+          setToken(window.localStorage.getItem("token"))
+          setWagers(data.wagers)
+        })
+    }
+  }, []);
 
     // Gets wagers which have been sent from other users to be approved by logged-in user
     const wagerRequests = wagers.filter(wager => wager.approved === false && wager.peopleInvolved[1]._id === loggedInUserID)
