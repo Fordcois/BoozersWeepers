@@ -1,7 +1,4 @@
-
-
 // adds a way to get the signed in user from the token
-
 
 const parseJwt = (token) => {
   try {
@@ -12,15 +9,10 @@ const parseJwt = (token) => {
   };
   
 
-
-
 const getSessionUserID = (token) => {
- 
   const decodedToken = parseJwt(token);    
   const userID = decodedToken ? decodedToken.user_id : null;
- 
   return userID;
-
 }
 
 export default getSessionUserID;

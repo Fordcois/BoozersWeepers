@@ -50,7 +50,8 @@ const PintsController = {
   SwitchClaimedToTrue: async (req, res) => {
     const pintID = req.params.id;
     const pint = await Pint.updateOne({_id: pintID}, {$set: {claimed: true}});
-    if (!pint) {return res.status(400).json({message: "pint not found"})}
+    console.log(pint);
+    if (pint.nModified===0) {return res.status(400).json({error: "Pint not modified"})}
     else {
       const token = TokenGenerator.jsonwebtoken(req.user_id)
       res.status(200).json({ message: 'OK', token: token });
