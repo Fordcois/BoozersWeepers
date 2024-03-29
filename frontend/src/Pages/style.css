@@ -354,3 +354,21 @@ font-size: 1.5rem;
 .groupSearchResult:hover{
   color: #cd561b;
 }
+
+.NewWager {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+
+.NewWager form {
+  width: 260px; 
+  text-align: center;
+}
+
+.NewWager input {
+  margin-bottom: 10px;
+}

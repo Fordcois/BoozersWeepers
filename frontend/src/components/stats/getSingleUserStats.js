@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './leaderstats.css'
+import '../leaderboard/leaderstats.css'
 
 const SingleUserStats = ({ UserID }) => {
   const [token, setUserToken] = useState(window.localStorage.getItem('token'));

@@ -1,4 +1,4 @@
-import getSessionUserID from '../../Utility/getSignedInUser_id';
+import getSessionUserID from '../Utility/getSignedInUser_id';
 import React from 'react';
 
 const SingleResolvedWager = (wagerData) => {

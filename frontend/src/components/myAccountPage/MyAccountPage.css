@@ -70,6 +70,32 @@
     margin-top: -30px;
     z-index: 1;
   }
+
+.notification{
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: white;
+    font-family: 'Permanent Marker';
+} 
+
+.notificationdetails {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Permanent Marker';
+    padding-left: 40px;
+}
+
+.notificationdetails a,.notificationdetails:visited{
+    color: white;
+    text-decoration: none;
+}
+
+
+.individualwagerlink:hover {
+    text-decoration: underline;
+  }
   body {
 		height: 100%;
 		background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/50598/concrete-wall-background.jpg) center center fixed;

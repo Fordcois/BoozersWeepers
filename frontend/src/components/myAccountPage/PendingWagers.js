@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './notification.css'
-import "../MyAccountPage.css"
+import { FaCircle } from "react-icons/fa";
+import '../myAccountPage/MyAccountPage.css'
 
 
 const PendingWagers = ({ navigate, wagers, expandedState }) => {
@@ -20,8 +20,9 @@ const PendingWagers = ({ navigate, wagers, expandedState }) => {
               <div className="notificationdetails" > 
                 {wagers.map((wager) => (
                     <Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}> 
-                      Waiting for {wager.peopleInvolved[1].username} to respond to your wager that {wager.description}
-                   <br/> </Link>
+                      <FaCircle  size={10}/> Waiting for {wager.peopleInvolved[1].username} to respond to your wager that {wager.description}
+                      <br/> 
+                    </Link>
               ))}
               </div>
             </div>
