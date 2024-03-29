@@ -40,7 +40,7 @@ useEffect(() => {
           // Return the data to chain the promises
           return data;
         })
-        .then(data => {
+        .then((data) => {
           return fetch('/wagers/groups/findgroupwagers', {
               method: 'post',
               headers: {
