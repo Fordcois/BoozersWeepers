@@ -1,151 +1,62 @@
-import React, { useState } from 'react';
-import './SearchBar.css';
-import SingleUser from '../NewWagerPage/Singleuser';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import SingleUser from '../searchResultSingleUser/Singleuser';
+import { FaPencil } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
-
-
-const SearchBar = (props) =>{
-  const [search, setSearch] = useState("");
-  const [searchRes, setSearchRes] = useState(null)
-  const [searchSubmit, setSearchSubmit] = useState(null)
-  const [searchMessage, setSearchMessage] = useState("")
-  const [group, setGroup] = useState(props.group)
-
-
-
-  const [token, setToken] = useState(window.localStorage.getItem("token"))
-
-  const navigate = useNavigate();
-
-  const handleButtonClick = (event)=>{
-    setSearchMessage(null)
-    event.preventDefault()
-  }
-
-
-  const handleChange =(event) => {
-    setSearch(event.target.value)
-    if(group && search.length > 0){
-      const result = props.list.filter(group => group.name.toLowerCase().includes(search.toLowerCase()))
-    
-      setSearchRes(result)
-      event.preventDefault();
-
-    }
-    if(search.length > 0 && group != true){
-      const result = props.list.filter(user => user.username.toLowerCase().includes(search.toLowerCase()))
-    
-      setSearchRes(result)
-      event.preventDefault();
-
-    }
+const SearchBar = ({searchData, expandedState,searchMode}) => {
+    const [token, setToken] = useState(window.localStorage.getItem("token"));
+    const [SearchCriteria, setSearchCriteria] = useState('');
+    const UnfilteredList = searchData;
+    const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
   
-  }
+    const handleInputChange = (event) => { setSearchCriteria(event.target.value); };
 
+    useEffect(() => {
+        setExpanded(expandedState);
+      }, [expandedState]);
 
+    let FilteredList = [];
 
-
-
-
-
-  const handleSubmit = (event) =>{
-    if(group != true){
-      const result = props.list.filter(user => user.username.toLowerCase().includes(search.toLowerCase()))
-      setSearchRes(result)
-      setSearchSubmit(result)
-      event.preventDefault();
-    if(result.length === 1){
-      navigate(`/newWager/${result[0]._id}`);
-      console.log(searchSubmit[0])
-      event.preventDefault();
-
-    }
-    else if(result.length === 0){
-      setSearchMessage("user not found")
-      console.log(searchSubmit[0])
-      event.preventDefault();
-
-
-    }
-   
-
-
+    if (SearchCriteria.length > 2 && searchMode === 'users') {
+        FilteredList = UnfilteredList.filter(user => {
+            const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+            const searchValue = SearchCriteria.toLowerCase();
+            return fullName.includes(searchValue) || user.username.toLowerCase().includes(searchValue);
+        });
     }
 
-    if(group){
-      const result = props.list.filter(group => group.name.toLowerCase().includes(search.toLowerCase()))
-      setSearchRes(result)
-      setSearchSubmit(result)
-      event.preventDefault();
-    if(result.length === 1){
-      navigate(`/groups/${result[0]._id}`)
-      console.log(searchSubmit[0])
-      event.preventDefault();
-
-    }
-    else if(result.length === 0){
-      setSearchMessage("group not found")
-      console.log(searchSubmit[0])
-      event.preventDefault();
-
-
+    if (SearchCriteria.length > 2 && searchMode === 'groups') {
+        FilteredList = UnfilteredList.filter(group => {
+            const searchValue = SearchCriteria.toLowerCase();
+            return group.name.toLowerCase().includes(searchValue);
+        });
     }
 
+    return (
 
+<div style={{display: 'flex', marginBottom: '10px' }}>
 
-
-
-    }
-    
-    
-    
-    
-  
-
-  }
-
-
-  return (
-    <form className="search-bar" onSubmit={handleSubmit}>
-    <div className="search-container">
-      <input 
-        type="text" 
-        className="search-field" 
-        placeholder={props.message}
-        value={search}
-        onChange={handleChange} 
-      />
-      <button type="submit">Search</button>
+    <div style={{flex: '1%', justifyContent: 'flex-end' }}>
+        <FaPencil style={{ transform: 'scaleX(-1)', color: 'whitesmoke', fontSize: '24px', marginRight:'2px',opacity:'0.2' }} />
     </div>
-    {searchRes  && !group && (
-      <div className="result-container">
-        <ul>
-          {searchRes.map((user) => (
-             <a href={`/newWager/${user._id}`} key={user._id} className='searchRes'>{user.username} </a>
-          ))}
-        </ul>
-      </div>
-    )}
-    {searchRes  && group && (
-      <div className="result-container">
-        <ul>
-          {searchRes.map((group) => (
-             <a href={`/groups/${group._id}`} key={group._id} className='searchRes'>{group.name} </a>
-          ))}
-        </ul>
-      </div>
-    )}
-    {searchMessage && <button className="searchMessage" onClick={handleButtonClick}>{searchMessage}<span className="close-icon">×</span></button>}
-  </form>
-);
 
+    <div style={{flex: '95%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
+        <input type="text" value={SearchCriteria} onChange={handleInputChange} style={{marginBottom: '20px' }}placeholder={`Search ${searchMode}...`} />
+            
+            {searchMode==='users' && 
+                FilteredList.map((user, index) =>
+                <SingleUser SelectedUser={user} key={user._id} expandedState={expanded} />
+            )}
 
+            {searchMode==='groups' && 
+                FilteredList.map((group, index) =>
+                <Link className='groupSearchResult' to={`/groups/${group._id}`} state = {{expandedState: expanded }}> {'>'} {group.name} </Link>
+            )}
 
-}
+            
+    </div>
+</div>
 
+);}
 
-
-
-export default SearchBar
-
+export default SearchBar;

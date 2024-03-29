@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import getSessionUserID from '../../Utility/getSignedInUser_id';
-import NotificationDetails from './NotificationDetails';
-import "../MyAccountPage.css"
-import './notification.css'
 import { Link } from 'react-router-dom';
-
-
-
+import getSessionUserID from '../Utility/getSignedInUser_id';
+import { FaCircle } from "react-icons/fa";
+import '../myAccountPage/MyAccountPage.css'
 
 const PastWagers = ({ navigate, wagers, expandedState }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -27,7 +23,7 @@ const PastWagers = ({ navigate, wagers, expandedState }) => {
 
                 <div id="past-wager" className='wager' >
                   <Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}>
-                    You won your wager with {wager.peopleInvolved[0].username} that {wager.description}
+                    <FaCircle  size={10}/> You won your wager with {wager.peopleInvolved[0].username} that {wager.description}
                   </Link>
                 </div>
 
@@ -35,7 +31,7 @@ const PastWagers = ({ navigate, wagers, expandedState }) => {
 
                 <div id="past-wager" className='wager' >
                   <Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}>
-                  You won your wager with {wager.peopleInvolved[1].username} that {wager.description}
+                    <FaCircle  size={10}/> You won your wager with {wager.peopleInvolved[1].username} that {wager.description}
                   </Link>
                 </div>
 
@@ -43,7 +39,7 @@ const PastWagers = ({ navigate, wagers, expandedState }) => {
 
                 <div id="past-wager" className='wager' >
                   <Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}>
-                  You lost your wager with {wager.peopleInvolved[0].username} that {wager.description}
+                    <FaCircle  size={10}/> You lost your wager with {wager.peopleInvolved[0].username} that {wager.description}
                   </Link>
                 </div>
 
@@ -51,7 +47,7 @@ const PastWagers = ({ navigate, wagers, expandedState }) => {
 
                 <div id="past-wager" className='wager' >
                   <Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}>
-                  You lost your wager with {wager.peopleInvolved[1].username} that {wager.description}
+                    <FaCircle  size={10}/> You lost your wager with {wager.peopleInvolved[1].username} that {wager.description}
                   </Link>
                 </div>
                   

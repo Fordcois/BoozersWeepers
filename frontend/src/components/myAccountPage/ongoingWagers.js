@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import "../MyAccountPage.css"
-import getSessionUserID from '../../Utility/getSignedInUser_id';
-import NotificationDetails from './NotificationDetails';
-import './notification.css'
 import { Link } from 'react-router-dom';
-
+import getSessionUserID from '../Utility/getSignedInUser_id';
+import { FaCircle } from "react-icons/fa";
+import '../myAccountPage/MyAccountPage.css'
 
 const OngoingWagers = ({ navigate, wagers, expandedState }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -23,14 +21,14 @@ const OngoingWagers = ({ navigate, wagers, expandedState }) => {
             {wager.peopleInvolved[0]._id === loggedInUser ? 
             (
             <Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}>
-              You bet {wager.peopleInvolved[1].username} that {wager.description} <br/>
+              <FaCircle  size={10}/> You bet {wager.peopleInvolved[1].username} that {wager.description} <br/>
             </Link>
 
             ) 
             : 
             (
             <Link to ={`/wager/${wager._id}`} className='individualwagerlink' state = {{expandedState: expanded }}>
-              {wager.peopleInvolved[0].username} bet you that {wager.description} <br/>
+              <FaCircle  size={10}/> {wager.peopleInvolved[0].username} bet you that {wager.description} <br/>
             </Link>
             )}
           </div>

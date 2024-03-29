@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import NewSearchBar from '../NewSearch/NewSearch';
-import VertNavbar from '../VertNavBar/VertNavBar';
-import getSessionUserID from '../Utility/getSignedInUser_id';
-import BlackboardHeader from '../blackboardHeader/blackboardHeader';
-import './userlist.css'
 import { useLocation } from 'react-router-dom';
+import SearchBar from '../components/searchbar/Searchbar';
+import VertNavbar from '../components/VertNavBar/VertNavBar';
+import getSessionUserID from '../components/Utility/getSignedInUser_id';
+import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
+import '../components/searchResultSingleUser/userlist.css'
+
 
 const NewWagerPage = () => {
   const [ListOfUsers, setUsernames] = useState([]);
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [token] = useState(window.localStorage.getItem("token"));
   const location = useLocation();
   const expandedState = location.state?.expandedState;
   const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
@@ -44,7 +45,7 @@ const NewWagerPage = () => {
 
       <span className="chalk" style={{ '--fsize': '24px' ,'--talign': 'left'}}> Who would you like to Challenge?</span>
       <span className="chalk" style={{ '--fsize': '16px' ,'--talign': 'left', 'marginBottom': '2%' }}>Enter atleast 3 Characters from the users name or username...</span>
-      <NewSearchBar searchData={ListOfUsers} expandedState ={expanded} searchMode={'users'}/>
+      <SearchBar searchData={ListOfUsers} expandedState ={expanded} searchMode={'users'}/>
 
     
   
