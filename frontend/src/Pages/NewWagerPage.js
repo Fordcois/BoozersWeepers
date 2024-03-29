@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import SearchBar from '../components/searchbar/Searchbar';
 import VertNavbar from '../components/VertNavBar/VertNavBar';
 import getSessionUserID from '../components/Utility/getSignedInUser_id';
 import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
+import SearchBar from '../components/searchbarComponent/Searchbar';
 import '../components/searchResultSingleUser/userlist.css'
 
 

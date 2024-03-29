@@ -4,7 +4,7 @@ import VertNavbar from '../components/VertNavBar/VertNavBar';
 import isTokenValid from '../components/Utility/isTokenValid';
 import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import NewGroupPage from '../components/newGroupPage/NewGroupPage';
-import SearchBar from '../components/searchbar/Searchbar';
+import SearchBar from '../components/searchbarComponent/Searchbar';
 import '../Pages/style.css';
 
 const PubGroupsPage = ({ navigate }) => {
