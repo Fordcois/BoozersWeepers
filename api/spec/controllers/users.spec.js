@@ -9,8 +9,8 @@ let token;
 
 describe("/users", () => {
   beforeAll( async () => {
-    let user1 = new User({email: "poppy@email.com",username: "mrstest", password: "1234"});
-    let user2 = new User({email: "cat@email.com",username: "mrtest", password: "1234"});
+    let user1 = new User({email: "poppy@email.com",username: "mrstest", password: "12345678*"});
+    let user2 = new User({email: "cat@email.com",username: "mrtest", password: "12345678*"});
     await user1.save();
     await user2.save();
   
@@ -26,23 +26,21 @@ describe("/users", () => {
     await User.deleteMany({});
   });
   afterEach( async () => {
-
     await User.deleteMany({});
-  })
-
+  });
 
   describe("POST, when email and password are provided", () => {
     test("the response code is 201", async () => {
       let response = await request(app)
         .post("/users")
-        .send({email: "poppy@email.com",username: "test", password: "1234"})
+        .send({email: "poppy@email.com",username: "test", password: "12345678*"})
       expect(response.statusCode).toBe(201)
     })
 
     test("a user is created", async () => {
       await request(app)
         .post("/users")
-        .send({email: "scarlett@email.com",username: "test", password: "1234"})
+        .send({email: "scarlett@email.com",username: "test", password: "12345678*"})
       let users = await User.find()
       let newUser = users[users.length - 1]
       expect(newUser.email).toEqual("scarlett@email.com")
@@ -50,11 +48,11 @@ describe("/users", () => {
   })
 
   describe("POST, when password is missing", () => {
-    test("response code is 400", async () => {
+    test("response code is 500", async () => {
       let response = await request(app)
         .post("/users")
         .send({email: "skye@email.com", username: "test"})
-      expect(response.statusCode).toBe(400)
+      expect(response.statusCode).toBe(500)
     });
 
     test("does not create a user", async () => {

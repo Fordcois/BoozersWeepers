@@ -35,8 +35,8 @@ const SingleUserStats = ({ UserID }) => {
         usersWagers.forEach((pint) => {
           if (pint.approved===true) updatedResults.BetsMade++;
           if (pint.winner !== null) updatedResults.BetsComplete++;
-          if (pint.winner !== null && pint.winner === UserID) updatedResults.Wins++;
-          if (pint.winner !== null && pint.winner !== UserID) updatedResults.Losses++;
+          if (pint.winner !== null && pint.winner._id === UserID) updatedResults.Wins++;
+          if (pint.winner !== null && pint.winner._id !== UserID) updatedResults.Losses++;
         });
 
         setResults(updatedResults);

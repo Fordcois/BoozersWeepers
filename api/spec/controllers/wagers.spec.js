@@ -35,12 +35,12 @@ describe("POST /wagers -> create new wager", () => {
 
   beforeEach( async () => {
     await Wager.deleteMany({});
-  })
+  });
 
   afterAll( async () => {
     await User.deleteMany({});
     await Wager.deleteMany({});
-  })
+  });
 
 // TESTS for creating a new wager when the user is logged in (successful)
 
