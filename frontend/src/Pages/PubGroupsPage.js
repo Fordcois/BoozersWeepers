@@ -5,6 +5,7 @@ import isTokenValid from '../components/Utility/isTokenValid';
 import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import NewGroupPage from '../components/newGroupPage/NewGroupPage';
 import SearchBar from '../components/searchbarComponent/Searchbar';
+import getSessionUserID from '../components/Utility/getSignedInUser_id';
 import '../Pages/style.css';
 
 const PubGroupsPage = ({ navigate }) => {
@@ -27,21 +28,20 @@ useEffect(() => {
   }
 
   if(token) {
-    fetch("/pubGroups/searchgroups/findUsersGroups", {
-    method: 'get',
-    headers: {'Authorization': `Bearer ${token}`}
-  })
-  .then(response => response.json())
-  .then(async data => {
-    window.localStorage.setItem("token", data.token);
-    setToken(window.localStorage.getItem("token"));
-    setPubGroups(data.pubGroups)
-  })
-  }
+      fetch("/pubGroups", {
+        method: 'get',
+        headers: {'Authorization': `Bearer ${token}`}
+      })
+        .then(response => response.json())
+        .then(async data => {
+          window.localStorage.setItem("token", data.token)
+          setToken(window.localStorage.getItem("token"))
+          setPubGroups(data.pubGroups)
+        })
+      }
+    }, [navigate, isLoggedIn, token, groupCreated]);
 
-  
-}, [navigate, isLoggedIn, token, groupCreated]);
-
+const joinedGroups = pubGroups.filter(pubGroup => pubGroup.members.includes(getSessionUserID(token)))
 
 return (
 <div className='shade'>
@@ -57,7 +57,7 @@ return (
           <p className="note" style={{width:'90%'}}> 
             <span className="penfont-large centered">My Groups</span>
 
-            {pubGroups.map((pubGroup) => (
+            {joinedGroups.map((pubGroup) => (
             <p key={pubGroup.id} className="group-name">
               <Link className='groupListLink' to={`/groups/${pubGroup._id}`} state = {{expandedState: expanded }}>
                 {'>'} <span className="myGroupsInList">{pubGroup.name}</span>
