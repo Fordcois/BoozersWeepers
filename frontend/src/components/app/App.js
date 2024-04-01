@@ -9,7 +9,7 @@ import NewWagerPage from '../../Pages/NewWagerPage';
 import WagerInfoPage from '../../Pages/WagerInfoPage';
 import SignUpPage from '../../Pages/signupPage';
 import Workshop from '../Template/template';
-import ProfilePage from '../../Pages/profilePage';
+import ProfilePage from '../../Pages/userprofilepage';
 import WalletPage from '../../Pages/WalletPage';
 import PubGroupsPage from '../../Pages/PubGroupsPage'
 import SingleGroupPage from '../../Pages/SingleGroupPage'
