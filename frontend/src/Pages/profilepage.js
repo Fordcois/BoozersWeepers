@@ -61,7 +61,9 @@ const ProfilePage = () => {
 
   <div >
       <div className='post-it'>
-      <p className="note"><SingleUserStats UserID={userID} /></p>
+        <p className="note">
+          <SingleUserStats UserID={userID} />
+        </p>
     
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
         <Link to={`/newWager/${userData._id}`} state={{expandedState: expanded}}>
