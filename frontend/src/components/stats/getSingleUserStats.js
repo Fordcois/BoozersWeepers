@@ -30,8 +30,6 @@ const SingleUserStats = ({ UserID }) => {
           Losses: 0,
         };
 
-        console.log(usersWagers);
-
         usersWagers.forEach((pint) => {
           if (pint.approved===true) updatedResults.BetsMade++;
           if (pint.winner !== null) updatedResults.BetsComplete++;
