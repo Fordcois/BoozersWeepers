@@ -12,8 +12,8 @@ let user1;
 describe("GET, when token is present", () => {
   
     beforeAll( async () => {
-      let user1 = new User({email: "poppy@email.com",username: "mrstest", password: "1234"});
-      let user2 = new User({email: "cat@email.com",username: "mrtest", password: "1234"});
+      let user1 = new User({email: "poppy@email.com",username: "mrstest", password: "12345678*"});
+      let user2 = new User({email: "cat@email.com",username: "mrtest", password: "12345678*"});
       await user1.save();
       await user2.save();
     

@@ -7,14 +7,13 @@ const testDate = new Date("2022-03-25");
 const testDate2 = new Date("2022-03-27");
 
 
-
-
 describe("wager model", () =>{
   beforeEach((done) => {
     mongoose.connection.collections.wagers.drop(() => {
       done();
     });
   });
+
   it("creates a wager with two people", () => {
     const wager = new Wager({
       peopleInvolved:["65784c406fc0bb57df3dde04", "657873ecd1d828674360e3dc"],
