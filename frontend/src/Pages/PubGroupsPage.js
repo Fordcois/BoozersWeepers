@@ -11,7 +11,7 @@ import '../Pages/style.css';
 const PubGroupsPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [pubGroups, setPubGroups] = useState([])
-  const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
+  const [isLoggedIn] = useState(isTokenValid(token));
   const location = useLocation();
   const expandedState = location.state?.expandedState;
   const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
