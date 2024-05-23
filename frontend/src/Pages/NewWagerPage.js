@@ -22,7 +22,7 @@ const NewWagerPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {const response = await fetch(`${baseUrl}//userdata`, {headers: { Authorization: `Bearer ${token}` }});
+      try {const response = await fetch(`${baseUrl}/userdata`, {headers: { Authorization: `Bearer ${token}` }});
         if (!response.ok) {throw new Error('Network response was not ok');}
         const userData = await response.json();
         const userList1 = userData.users

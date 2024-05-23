@@ -13,7 +13,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchPints = async () => {
       try {
-        const response = await fetch(`${baseUrl}//pints`, {
+        const response = await fetch(`${baseUrl}/pints`, {
         headers: { Authorization: `Bearer ${userToken}` }
         });
         if (!response.ok) {throw new Error('Network response was not ok');}

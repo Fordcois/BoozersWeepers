@@ -21,7 +21,7 @@ const NewGroupForm = ({ change}) => {
 		setGroupName('');
 
     if(token) {
-			fetch( `${baseUrl}//pubGroups`, {
+			fetch( `${baseUrl}/pubGroups`, {
 				method: 'post',
 				headers: {
 					'Authorization': `Bearer ${token}`,

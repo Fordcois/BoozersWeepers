@@ -43,7 +43,7 @@ useEffect(() => {
 
       // Get wager info for members of group, following on from above fetch
       .then( async () => {
-        const response = await fetch(`${baseUrl}//wagers/groups/findgroupwagers`, {
+        const response = await fetch(`${baseUrl}/wagers/groups/findgroupwagers`, {
           method: 'post',
           headers: {
             'Authorization': `Bearer ${token}`,
