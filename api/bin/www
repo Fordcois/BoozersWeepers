@@ -1,8 +1,5 @@
 #!/usr/bin/env node
 
-// The Below line is needed to read from a .env file
-require('dotenv').config()
-
 const User = require("../models/user")
 if (!process.env.JWT_SECRET) {
   console.error("\nThe JWT_SECRET environment variable wasn't set before running the server. Did you forget it?\n\n",
