@@ -41,7 +41,7 @@ const tokenChecker = (req, res, next) => {
     }
   });
 };
-
+console.log('Server Contacted!')
 // route setup
 app.use("/tokens", authenticationRouter);
 app.use("/users", usersRouter);

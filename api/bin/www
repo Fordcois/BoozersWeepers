@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+
+// The Below line is needed to read from a .env file
+require('dotenv').config()
+
 const User = require("../models/user")
 if (!process.env.JWT_SECRET) {
   console.error("\nThe JWT_SECRET environment variable wasn't set before running the server. Did you forget it?\n\n",
@@ -27,6 +31,8 @@ app.set("port", port);
  **/
 
 var mongoDbUrl = process.env.MONGODB_URL || "mongodb://0.0.0.0/tavern";
+console.log('env_file',env_file)
+console.log('env2',env_2)
 mongoose.connect(mongoDbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
