@@ -1,6 +1,7 @@
 import getSessionUserID from "../Utility/getSignedInUser_id";
 import React, { navigate, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import baseUrl from "../Utility/baseurl";
 
 
 const SingleOngoingWager = ({wagerData, expandedState}) => {
@@ -34,7 +35,7 @@ const SingleOngoingWager = ({wagerData, expandedState}) => {
 
     const handleWinner = (WinnerID,LoserID) => {
       if (token) {
-        fetch(`/wagers/updateWinner/${wager._id}/${WinnerID}`, {
+        fetch(`${baseUrl}/wagers/updateWinner/${wager._id}/${WinnerID}`, {
           method: 'post',
           headers: {'Authorization': `Bearer ${token}`,}
         })
@@ -44,7 +45,7 @@ const SingleOngoingWager = ({wagerData, expandedState}) => {
             } else {console.log("Wager winner failed to be updated")}
           })
           .then(() => {
-            return fetch('/pints', {
+            return fetch(`${baseUrl}/pints`, {
               method: 'post',
               headers: {
                 'Authorization': `Bearer ${token}`,

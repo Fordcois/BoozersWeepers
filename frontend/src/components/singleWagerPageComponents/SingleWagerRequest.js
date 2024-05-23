@@ -1,5 +1,6 @@
 import React, { navigate, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import baseUrl from '../Utility/baseurl';
 
 const SingleWagerRequest = ({ wagerData, expandedState }) => {
   const navigate = useNavigate()
@@ -15,7 +16,7 @@ const SingleWagerRequest = ({ wagerData, expandedState }) => {
 
   const handleAcceptClick = () => {
     if(token) {
-      fetch( `/wagers/${wager._id}/accept`, {
+      fetch( `${baseUrl}/wagers/${wager._id}/accept`, {
         method: 'post',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -34,7 +35,7 @@ const SingleWagerRequest = ({ wagerData, expandedState }) => {
   }
 
   const handleRejectClick = () => {
-    fetch( `/wagers/${wager._id}/cancel`, {
+    fetch( `${baseUrl}/wagers/${wager._id}/cancel`, {
     method: 'post',
     headers: {
     'Authorization': `Bearer ${token}`,

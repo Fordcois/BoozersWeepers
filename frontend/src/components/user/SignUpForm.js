@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaPencil } from "react-icons/fa6";
+import baseUrl from '../Utility/baseurl';
 
 
 const SignUpForm = ({ navigate, expandedState }) => {
@@ -19,7 +20,7 @@ const SignUpForm = ({ navigate, expandedState }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    fetch( '/users', {
+    fetch( `${baseUrl}/users`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',

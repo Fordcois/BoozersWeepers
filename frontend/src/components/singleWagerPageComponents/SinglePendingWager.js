@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
+import baseUrl from '../Utility/baseurl';
 
 const SinglePendingWager = (props) => {
     const navigate = useNavigate()
@@ -14,7 +15,7 @@ const SinglePendingWager = (props) => {
     }, [props.expandedState]);
 
     const handleCancelButtonClick = () => {
-        fetch( `/wagers/${wager._id}/cancel`, {
+        fetch( `${baseUrl}/wagers/${wager._id}/cancel`, {
             method: 'post',
             headers: {
                 'Authorization': `Bearer ${token}`,

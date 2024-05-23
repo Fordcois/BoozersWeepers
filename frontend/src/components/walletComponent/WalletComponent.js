@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import baseUrl from '../Utility/baseurl';
 import './WalletComponent.css';
 
 const WalletComponent = ({ UserID, expandedState }) => {
@@ -10,7 +11,7 @@ const WalletComponent = ({ UserID, expandedState }) => {
   useEffect(() => {
     const fetchWalletData = async () => {
       try {
-        const response = await fetch(`/pints/wallet/${UserID}`, {headers: { Authorization: `Bearer ${userToken}` }});
+        const response = await fetch(`${baseUrl}/pints/wallet/${UserID}`, {headers: { Authorization: `Bearer ${userToken}` }});
         if (!response.ok) {throw new Error('Network response was not ok');}
         const fetchedData = await response.json();
         setWalletData(fetchedData);
@@ -27,7 +28,7 @@ const WalletComponent = ({ UserID, expandedState }) => {
     const pintId=ID
     if (userToken) {
       try {
-      await fetch(`/pints/claim/${pintId}`, {
+      await fetch(`${baseUrl}/pints/claim/${pintId}`, {
         method: 'post',
         headers: {
           'Authorization': `Bearer ${userToken}`,
