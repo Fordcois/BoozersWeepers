@@ -5,6 +5,7 @@ import isTokenValid from '../components/Utility/isTokenValid';
 import getSessionUserID from '../components/Utility/getSignedInUser_id';
 import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import calculateGroupStats from '../components/groupLeaderboard/groupLeaderBoard';
+import baseUrl from '../components/Utility/baseurl';
 import '../Pages/style.css'
 
 const SingleGroupPage = ({ navigate }) => {
@@ -30,7 +31,7 @@ useEffect(() => {
   if (token) {
 
     // Get group and group member info
-    fetch(`/pubGroups/${pubGroupId}`, {
+    fetch(`${baseUrl}/pubGroups/${pubGroupId}`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(response => response.json())
@@ -42,7 +43,7 @@ useEffect(() => {
 
       // Get wager info for members of group, following on from above fetch
       .then( async () => {
-        const response = await fetch('/wagers/groups/findgroupwagers', {
+        const response = await fetch(`${baseUrl}//wagers/groups/findgroupwagers`, {
           method: 'post',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -91,7 +92,7 @@ const toggleExpand = () => {setExpanded(!expanded);};
 const toggleGroupMembership = async () => {
   try {
     if (!isGroupMember) {
-      const response = await fetch(`/pubGroups/${pubGroupId}/addMember`, {
+      const response = await fetch(`${baseUrl}/pubGroups/${pubGroupId}/addMember`, {
         method: 'post',
         headers: {'Authorization': `Bearer ${token}`}
       });
@@ -102,13 +103,13 @@ const toggleGroupMembership = async () => {
           console.error("Failed to add member:", response.statusText);
       }
     } else {
-      const response = await fetch(`/pubGroups/${pubGroupId}/removeMember`, {
+      const response = await fetch(`${baseUrl}/pubGroups/${pubGroupId}/removeMember`, {
           method: 'post',
           headers: {'Authorization': `Bearer ${token}`}
       });
       if (response.ok) {
         if (pubGroupData.members.length === 1) {
-          const response = await fetch(`/pubGroups/${pubGroupId}/deleteGroup`, {
+          const response = await fetch(`${baseUrl}/pubGroups/${pubGroupId}/deleteGroup`, {
             method: 'post',
             headers: {'Authorization': `Bearer ${token}`}
           });

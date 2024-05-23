@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaPencil } from "react-icons/fa6";
+import baseUrl from '../Utility/baseurl';
 
 const LogInForm = ({ navigate,expanded }) => {
   const [email, setEmail] = useState("");
@@ -8,7 +9,7 @@ const LogInForm = ({ navigate,expanded }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let response = await fetch( '/tokens', {
+    let response = await fetch( `${baseUrl}/tokens`, {
       method: 'post',
       headers: {'Content-Type': 'application/json',},
       body: JSON.stringify({ email: email, password: password })

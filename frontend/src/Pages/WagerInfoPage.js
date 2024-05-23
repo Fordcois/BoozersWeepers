@@ -8,6 +8,7 @@ import SingleOngoingWager from '../components/singleWagerPageComponents/SingleOn
 import SingleResolvedWager from '../components/singleWagerPageComponents/SingleResolvedWager';
 import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import WagerDetails from '../components/singleWagerPageComponents/WagerDetails';
+import baseUrl from '../components/Utility/baseurl';
 import '../Pages/style.css'
 
 
@@ -23,7 +24,7 @@ const WagerInfoPage = ({ navigate }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/wagers/${wagerID}`, 
+        const response = await fetch(`${baseUrl}/wagers/${wagerID}`, 
         {headers: { Authorization: `Bearer ${token}` }});
         
         if (!response.ok) { throw new Error('Network response was not ok');}

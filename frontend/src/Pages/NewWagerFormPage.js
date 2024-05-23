@@ -4,6 +4,7 @@ import VertNavbar from '../components/VertNavBar/VertNavBar';
 import { FaPencil } from "react-icons/fa6";
 import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import '../Pages/style.css'
+import baseUrl from '../components/Utility/baseurl';
 
 const NewWagerForm = ({ navigate }) => {
 	const {challengedUserID} = useParams()
@@ -20,7 +21,7 @@ const NewWagerForm = ({ navigate }) => {
 
 	useEffect(() => {
     if (token) {
-      fetch(`/userData/${challengedUserID}`, {
+      fetch(`${baseUrl}/userData/${challengedUserID}`, {
         headers: {'Authorization': `Bearer ${token}`}
       })
       .then(response => response.json())
@@ -37,7 +38,7 @@ const NewWagerForm = ({ navigate }) => {
 		event.preventDefault();
 
     if(token) {
-		fetch( '/wagers', {
+		fetch( `${baseUrl}/wagers`, {
 			method: 'post',
 			headers: {
 				'Authorization': `Bearer ${token}`,

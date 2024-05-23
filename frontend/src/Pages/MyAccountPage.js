@@ -10,6 +10,7 @@ import PastWagers from '../components/myAccountPage/PastWagers';
 import UnresolvedWagers from '../components/myAccountPage/UnresolvedWagers';
 import IncomingWagers from '../components/myAccountPage/IncomingWagers';
 import PendingWagers from '../components/myAccountPage/PendingWagers';
+import baseUrl from '../components/Utility/baseurl';
 import '../Pages/style.css'
 
 const MyAccountPage = ({ navigate }) => {
@@ -37,7 +38,7 @@ const MyAccountPage = ({ navigate }) => {
     if (!isLoggedIn) {navigate('/', { state: { expandedState: expanded } })};
     
     if(token) {
-        fetch(`/wagers/findall/${loggedInUserID}`, {headers: {'Authorization': `Bearer ${token}`}})
+        fetch(`${baseUrl}/wagers/findall/${loggedInUserID}`, {headers: {'Authorization': `Bearer ${token}`}})
           .then(response => response.json())
           .then(async data => {
             window.localStorage.setItem("token", data.token)

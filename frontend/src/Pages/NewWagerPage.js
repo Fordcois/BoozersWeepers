@@ -4,6 +4,7 @@ import VertNavbar from '../components/VertNavBar/VertNavBar';
 import getSessionUserID from '../components/Utility/getSignedInUser_id';
 import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import SearchBar from '../components/searchbarComponent/Searchbar';
+import baseUrl from '../components/Utility/baseurl';
 import '../components/searchResultSingleUser/userlist.css'
 
 
@@ -21,7 +22,7 @@ const NewWagerPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {const response = await fetch('/userdata', {headers: { Authorization: `Bearer ${token}` }});
+      try {const response = await fetch(`${baseUrl}//userdata`, {headers: { Authorization: `Bearer ${token}` }});
         if (!response.ok) {throw new Error('Network response was not ok');}
         const userData = await response.json();
         const userList1 = userData.users

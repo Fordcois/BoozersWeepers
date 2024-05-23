@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import calculateUserStats from '../stats/calculateuserstats';
+import baseUrl from '../Utility/baseurl';
 import './leaderstats.css'
 
 const Leaderboard = () => {
@@ -12,7 +13,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchPints = async () => {
       try {
-        const response = await fetch(`/pints`, {
+        const response = await fetch(`${baseUrl}//pints`, {
         headers: { Authorization: `Bearer ${userToken}` }
         });
         if (!response.ok) {throw new Error('Network response was not ok');}

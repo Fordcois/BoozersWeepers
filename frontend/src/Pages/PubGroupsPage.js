@@ -6,6 +6,7 @@ import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import NewGroupPage from '../components/newGroupPage/NewGroupPage';
 import SearchBar from '../components/searchbarComponent/Searchbar';
 import getSessionUserID from '../components/Utility/getSignedInUser_id';
+import baseUrl from '../components/Utility/baseurl';
 import '../Pages/style.css';
 
 const PubGroupsPage = ({ navigate }) => {
@@ -28,7 +29,7 @@ useEffect(() => {
   }
 
   if(token) {
-      fetch("/pubGroups", {
+      fetch(`${baseUrl}/pubGroups`, {
         method: 'get',
         headers: {'Authorization': `Bearer ${token}`}
       })

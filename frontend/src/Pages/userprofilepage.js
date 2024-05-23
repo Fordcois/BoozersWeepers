@@ -5,6 +5,7 @@ import VertNavbar from '../components/VertNavBar/VertNavBar';
 import '../Pages/style.css';
 import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import SingleUserStats from '../components/stats/getSingleUserStats';
+import baseUrl from '../components/Utility/baseurl';
 
 const ProfilePage = () => {
   const { userID } = useParams();
@@ -19,7 +20,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/userdata/${userID}`, {
+        const response = await fetch(`${baseUrl}/userdata/${userID}`, {
           headers: { Authorization: `Bearer ${userToken}` }
         });
         if (!response.ok) {

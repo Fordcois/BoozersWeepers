@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import getSessionUserID from '../Utility/getSignedInUser_id';
 import { FaPencil } from "react-icons/fa6";
+import baseUrl from '../Utility/baseurl';
 import '../../Pages/style.css'
 
 const NewGroupForm = ({ change}) => {
@@ -20,7 +21,7 @@ const NewGroupForm = ({ change}) => {
 		setGroupName('');
 
     if(token) {
-			fetch( '/pubGroups', {
+			fetch( `${baseUrl}//pubGroups`, {
 				method: 'post',
 				headers: {
 					'Authorization': `Bearer ${token}`,
