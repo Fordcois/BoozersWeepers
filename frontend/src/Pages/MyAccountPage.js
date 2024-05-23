@@ -79,7 +79,7 @@ return (
         pastWagers.length === 0 ? 
         <div style={{textAlign:'center', height:'20vh'}}>
           <span className="chalk" style={{ marginTop:'5%','--fsize': '22px', color: '#cd561b'}}> No bets found!</span>
-          <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', color: 'whitesmoke' }}>(<a className="chalk-link" href={`/newWager/`}>Challenge Somebody to start earning Pints</a>)</span>                       
+          <span className="chalk" style={{ marginTop:'1%','--fsize': '19px', color: 'whitesmoke' }}>(<a className="chalk-link" href={`/newWager`}>Challenge Somebody to start earning Pints</a>)</span>                       
         </div>
           : null}
         
