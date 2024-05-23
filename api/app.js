@@ -2,6 +2,7 @@ const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
+const cors = require('cors'); 
 const JWT = require("jsonwebtoken");
 
 // const postsRouter = require("./routes/posts");
@@ -20,6 +21,13 @@ app.use(express.json())
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
+// CORS middleware
+app.use(cors({
+  origin: ['https://boozersweepers.onrender.com', 'http://localhost:3000'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
 
 // middleware function to check for valid tokens
 const tokenChecker = (req, res, next) => {
