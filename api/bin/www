@@ -28,8 +28,6 @@ app.set("port", port);
  **/
 
 var mongoDbUrl = process.env.MONGODB_URL || "mongodb://0.0.0.0/tavern";
-console.log('env_file',env_file)
-console.log('env2',env_2)
 mongoose.connect(mongoDbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
