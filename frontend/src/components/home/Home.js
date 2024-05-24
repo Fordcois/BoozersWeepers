@@ -5,6 +5,7 @@ import isTokenValid from '../Utility/isTokenValid';
 import '../../Pages/style.css'
 import LogoGraphic from '../../Assets/BoozersWeepersLogo_trans.png'
 import QueenGraphic from '../../Assets/OrangeVic.png'
+import ApiWakeup from '../Utility/API_WakeUp';
 
 
 const Home = ({ navigate }) => {
@@ -29,6 +30,8 @@ const Home = ({ navigate }) => {
       <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
 
       <img src={LogoGraphic} alt='BoozersWeepers Logo' className="HomeLogo"/>
+      
+      <ApiWakeup />
       
       <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Home of the Pint-Sized bet</span>
 

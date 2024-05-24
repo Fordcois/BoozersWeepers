@@ -1,6 +1,12 @@
 const User = require("../models/user");
 
 const UsersController = {
+  //PING IS ONLY RELEVANT FOR HOSTING ON RENDER.COM FREETIER
+  Ping: (req, res) => {
+    console.log('Server Pinged!');
+    res.status(200).send('Ping received');
+  },
+
   Create: (req, res) => {
     const user = new User(req.body);
     let passwordErrorMsgs = "";
