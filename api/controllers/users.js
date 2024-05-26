@@ -1,10 +1,9 @@
 const User = require("../models/user");
 
 const UsersController = {
-  //PING IS ONLY RELEVANT FOR HOSTING ON RENDER.COM FREETIER
-  Ping: (req, res) => {
-    console.log('Server Pinged!');
-    res.status(200).send('Ping received');
+  //SeverLoad IS ONLY RELEVANT FOR HOSTING ON RENDER.COM FREETIER
+  SeverLoad: (req, res) => {
+    return res.status(200).json({ serverLive: 'Live' });
   },
 
   Create: (req, res) => {
