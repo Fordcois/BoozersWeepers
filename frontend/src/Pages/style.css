@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+:root {
+  --BWOrange: #cd561b;
+}
 
 .page-content {
   flex-grow: 1;
@@ -371,4 +374,36 @@ font-size: 1.5rem;
 
 .NewWager input {
   margin-bottom: 10px;
+}
+
+.LoadingBox{
+  background-color: var(--BWOrange);
+  border-radius: 20px;
+  font-family: 'Permanent Marker';
+  color: whitesmoke;
+  padding: 0px 25px 5px 25px;
+}
+.LoadingTitle{
+  color: whitesmoke;
+  font-size: 32px;
+  font-family: 'Permanent Marker';
+  text-decoration: underline var(--BWOrange);
+}
+
+.LoadingTitleWhite{
+  color: whitesmoke;
+  font-size: 32px;
+  font-family: 'Permanent Marker';
+  text-decoration: underline whitesmoke;
+}
+
+.HereFromPort{
+    font-family: 'Permanent Marker';
+    color: whitesmoke;
+}
+.HereFromPortOrange{
+  font-family: 'Permanent Marker';
+  color: var(--BWOrange);
+  font-size: 1.5rem
+
 }

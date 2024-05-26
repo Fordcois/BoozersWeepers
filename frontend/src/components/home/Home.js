@@ -6,6 +6,7 @@ import '../../Pages/style.css'
 import LogoGraphic from '../../Assets/BoozersWeepersLogo_trans.png'
 import QueenGraphic from '../../Assets/OrangeVic.png'
 import ApiWakeup from '../Utility/API_WakeUp';
+import HereFromPort from '../Utility/HereFromPort';
 
 
 const Home = ({ navigate }) => {
@@ -31,10 +32,10 @@ const Home = ({ navigate }) => {
 
       <img src={LogoGraphic} alt='BoozersWeepers Logo' className="HomeLogo"/>
       
-      <ApiWakeup />
+      
       
       <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Home of the Pint-Sized bet</span>
-
+<ApiWakeup /> 
       <div style={{ paddingTop: '25px', textAlign: 'center' }}>
         <Link to='/login' state={{expandedState: expanded}} className="Homepage-link"> Sign-in</Link>
         <p>
@@ -42,7 +43,8 @@ const Home = ({ navigate }) => {
         <Link to='/signup' state={{expandedState: expanded}} className="Homepage-link">Register</Link></p>
       </div>
 
- 
+<HereFromPort/>
+
  
       </div>
     </div>
