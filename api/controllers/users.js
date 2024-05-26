@@ -3,7 +3,8 @@ const User = require("../models/user");
 const UsersController = {
   //SeverLoad IS ONLY RELEVANT FOR HOSTING ON RENDER.COM FREETIER
   SeverLoad: (req, res) => {
-    return res.status(200).json({ serverLive: 'Live' });
+    console.log('Checking Server Is Live')
+    return res.status(200).json({ serverLive: 'Server Is Live' });
   },
 
   Create: (req, res) => {

@@ -1,27 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import baseUrl from './baseurl';
 
-// THIS PINGS THE SEVER TO WAKE IT UP AS IT IS HOSTED ON THE FREE TIER OF RENDER.COM
-// BY SENDING A MEANINGLESS REQUEST UPON FRONTEND LOAD IT SHOULD MI
+// THIS PINGS THE SERVER TO WAKE IT UP AS IT IS HOSTED ON THE FREE TIER OF RENDER.COM
+// BY SENDING A MEANINGLESS REQUEST UPON FRONTEND LOAD IT SHOULD MAKE IT RESPONSIVE
 
 const ApiWakeup = () => {
-  
-    useEffect(() => {
+  const [serverStatus, setServerStatus] = useState('Loading...');
+
+  useEffect(() => {
     const PingAPI = async () => {
       try {
-        const response = await fetch(`${baseUrl}/users`, 
-        {method: 'GET',
-         headers: {'Content-Type': 'application/json'}});
-        if (!response.ok) {throw new Error('Network response was not ok');}
-        } 
-      catch (error) {console.error('Error pinging the server:', error);}
+        const response = await fetch(`${baseUrl}/users/isserverlive`, 
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setServerStatus(data.serverLive)
+      } catch (error) {
+        console.error('Error pinging the server:', error);
+        setServerStatus('Error pinging the server');
+      }
     };
 
     PingAPI();
   }, []); // Empty dependency array to run only once
 
   return (
-    <></>
+    <div style={{backgroundColor:'red',color:'white'}}>{serverStatus}</div>
   );
 };
 

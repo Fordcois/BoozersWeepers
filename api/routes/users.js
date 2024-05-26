@@ -5,6 +5,6 @@ const UsersController = require("../controllers/users");
 
 router.post("/", UsersController.Create);
 //SERVER IS ONLY RELEVANT FOR HOSTING ON RENDER.COM FREETIER
-router.post('/ServerLoad',UsersController.SeverLoad)
+router.post('/isserverlive',UsersController.SeverLoad)
 
 module.exports = router;
