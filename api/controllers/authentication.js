@@ -8,7 +8,8 @@ const AuthenticationController = {
     const password = req.body.password;
 
     try {
-      const user = await User.findOne({ email: email });
+      const user = await User.findOne({ email: email }).collation({ locale: 'en', strength: 2 });
+
       if (!user) {
         return res.status(401).json({ message: "Email address not recognised" });
       }
