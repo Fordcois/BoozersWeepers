@@ -8,16 +8,18 @@ const UsersController = {
     return res.status(200).json({ serverLive: 'Server Is Live' });
   },
 
-  Create: (req, res) => {
-
+  Create: async (req, res) => {
+    const { email, username, firstName, lastName, password } = req.body;
     const salt = bcrypt.genSaltSync(10);
+    const UserAlreadyExists = await User.findOne({ email }).collation({ locale: 'en', strength: 2 });
+    if (UserAlreadyExists) {return res.status(400).json({message: 'Email is already in use'})}
 
     const user = new User({
-      email: req.body.email,
-      username: req.body.username,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      password: bcrypt.hashSync(req.body.password, salt)
+      email: email,
+      username: username,
+      firstName: firstName,
+      lastName: lastName,
+      password: bcrypt.hashSync(password, salt)
   });
     let passwordErrorMsgs = "";
     if(user.password.length < 8) {
