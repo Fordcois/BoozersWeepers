@@ -26,20 +26,17 @@ const ApiWakeup = () => {
 
   return (
     <div>
-      {serverStatus !== null && (
+      {serverStatus === null && (
         <div className='BlackOutBackground'>
           <div className='ServerConnectPopUp' >
-
               <span className='HereFromPortOrange' style={{fontSize:'2rem'}}>Just A Moment...</span>
-
               <p style={{margin: '15px 10px'}}>This example page is hosted on the free tier of Render.com. The backend may spin down due to inactivity, so please wait while the server starts up.
               This may take a minute or so. </p>
-              
               <span style={{ fontWeight: 'bold' }}>This message will disappear once the server has fully loaded.</span><br/> 
-          <div className='ServerBeerContainer'>
-              <div className='ServerBeer'><TbBeerFilled /></div>
-              <div className='ServerBeer'><TbBeerFilled /></div>
-              <div className='ServerBeer'><TbBeerFilled/></div>
+              <div className='ServerBeerContainer'>
+                <div className='ServerBeer'><TbBeerFilled /></div>
+                <div className='ServerBeer'><TbBeerFilled /></div>
+                <div className='ServerBeer'><TbBeerFilled/></div>
             </div>
           </div>
         </div>

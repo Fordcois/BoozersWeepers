@@ -424,7 +424,7 @@ font-size: 1.5rem;
 .ServerBeer {
   font-size: 3rem;
   color: var(--BWOrange);
-  animation: spin 2s linear infinite, fade 3s infinite;
+  animation: spin 2s linear infinite, fade 2s infinite;
 }
 
 .ServerBeer:nth-child(1) {
@@ -432,9 +432,9 @@ font-size: 1.5rem;
 }
 
 .ServerBeer:nth-child(2) {
-  animation-delay: 1s;
+  animation-delay: .5s;
 }
 
 .ServerBeer:nth-child(3) {
-  animation-delay: 2s;
+  animation-delay: 1s;
 }
