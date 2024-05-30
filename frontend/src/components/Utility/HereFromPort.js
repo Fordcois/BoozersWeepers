@@ -3,8 +3,8 @@ import '../../Pages/style.css';
 
 const HereFromPort = () => {
   return (
-    <div style={{ textAlign: 'center' }}>
-        <span className='LoadingTitleWhite' style={{textAlign:'center'}}>Here from my Portfolio?</span>
+    <div style={{ textAlign: 'center', borderTop: '2px solid whitesmoke' }}>
+        <span className="chalk" style={{ '--fsize': '32px' ,'--talign': 'center'}}>Here from my Portfolio?</span>
         <p className='Chalk'>
         <span className="HereFromPort">
         You can check out the site without registering using the account:<br/></span>

@@ -44,7 +44,7 @@ const Home = ({ navigate }) => {
         <Link to='/signup' state={{expandedState: expanded}} className="Homepage-link">Register</Link></p>
       </div>
 
-<HereFromPort/>
+      <HereFromPort/>
 
  
       </div>
