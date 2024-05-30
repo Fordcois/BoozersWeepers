@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { TbBeerFilled } from "react-icons/tb";
 import baseUrl from './baseurl';
-import '../../Pages/style.css';
 
-// THIS PINGS THE SERVER TO WAKE IT UP AS IT IS HOSTED ON THE FREE TIER OF RENDER.COM
-// BY SENDING A MEANINGLESS REQUEST UPON FRONTEND LOAD IT SHOULD MAKE IT RESPONSIVE
 
 const ApiWakeup = () => {
   const [serverStatus, setServerStatus] = useState(null);
@@ -27,18 +25,22 @@ const ApiWakeup = () => {
   }, []);
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      {serverStatus === null && (
-        <div>
-          
+    <div>
+      {serverStatus !== null && (
+        <div className='BlackOutBackground'>
+          <div className='ServerConnectPopUp' >
 
-          <div className='LoadingBox'>
-            <span className='LoadingTitleWhite'> Just A moment!</span>
-            <br/>
-            This example page is hosted on the free tier of Render.com. The backend may spin down due to inactivity, so please wait while the server starts up.
-            This may take a minute or so. <br /><br />
+              <span className='HereFromPortOrange' style={{fontSize:'2rem'}}>Just A Moment...</span>
 
-            <span className='LoadingFinalMessage'>This message will disappear once the server has fully loaded.</span>
+              <p style={{margin: '15px 10px'}}>This example page is hosted on the free tier of Render.com. The backend may spin down due to inactivity, so please wait while the server starts up.
+              This may take a minute or so. </p>
+              
+              <span style={{ fontWeight: 'bold' }}>This message will disappear once the server has fully loaded.</span><br/> 
+          <div className='ServerBeerContainer'>
+              <div className='ServerBeer'><TbBeerFilled /></div>
+              <div className='ServerBeer'><TbBeerFilled /></div>
+              <div className='ServerBeer'><TbBeerFilled/></div>
+            </div>
           </div>
         </div>
       )}

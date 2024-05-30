@@ -28,6 +28,7 @@ const Home = ({ navigate }) => {
     <div className='blackboard'>
       <div className='form'>
       <img src={QueenGraphic} alt="Queen Victoria" className="BBbottom-right-image"/>
+      <ApiWakeup /> 
       <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
 
       <img src={LogoGraphic} alt='BoozersWeepers Logo' className="HomeLogo"/>
@@ -35,7 +36,7 @@ const Home = ({ navigate }) => {
       
       
       <span className="chalk" style={{ '--fsize': '34px' ,'--talign': 'center'}}>Home of the Pint-Sized bet</span>
-<ApiWakeup /> 
+
       <div style={{ paddingTop: '25px', textAlign: 'center' }}>
         <Link to='/login' state={{expandedState: expanded}} className="Homepage-link"> Sign-in</Link>
         <p>
