@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // CORS middleware
 app.use(cors({
-  origin: ['https://boozersweepers.onrender.com', 'http://localhost:3000'],
+  origin: ['https://boozersweepers.onrender.com', 'http://localhost:3000','https://www.boozersweepers.frdmedia.co.uk'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
