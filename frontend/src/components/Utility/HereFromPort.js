@@ -5,9 +5,10 @@ import { useLocation } from 'react-router-dom';
 const HereFromPort = () => {
   // Address Needs to be /?refer=
   const referralSource = new URLSearchParams(useLocation().search).get('refer'); 
+  const acceptedReferralSources = ['linkedin','my portfolio']
 
   // If one of your preapproved sources the message will display
-  if (referralSource === 'linkedin' || referralSource === 'my portfolio') 
+  if (acceptedReferralSources.includes(referralSource)) 
     {
     return (
       <div style={{ textAlign: 'center', borderTop: '2px solid whitesmoke' }}>
