@@ -14,6 +14,7 @@ import WalletPage from '../../Pages/WalletPage';
 import PubGroupsPage from '../../Pages/PubGroupsPage'
 import SingleGroupPage from '../../Pages/SingleGroupPage'
 import LeaderBoardPage from '../../Pages/leaderboardPage';
+import ContentFrame from '../contentFrame/ContentFrame';
 
 const App = () => {
     return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path='/newWager'  element={<NewWagerPage navigate={ useNavigate() }/>}/>
           <Route path='/Wager/:wagerID' element={<WagerInfoPage navigate={ useNavigate() }/>}/>
           <Route path='/workshop' element={<Workshop navigate={ useNavigate() }/>}/>
+          <Route path='/frame' element={<ContentFrame navigate={ useNavigate() }/>}/>
           <Route path='/profile/:userID' element={<ProfilePage navigate={ useNavigate() }/>}/>
           <Route path='/wallet' element={<WalletPage navigate={ useNavigate() }/>}/>
           <Route path='/groups/:pubGroupId' element={<SingleGroupPage navigate={ useNavigate() }/>}/>
