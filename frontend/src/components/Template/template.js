@@ -1,10 +1,9 @@
 import React, {useState } from 'react';
-import VertNavbar from '../VertNavBar/VertNavBar';
+
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
-import ContentFrame from '../contentFrame/ContentFrame';
+import PageLayout from '../PageLayout/PageLayout';
 
 import '../../Pages/style.css';
-
 
 
 
@@ -21,9 +20,9 @@ const Template = ({ navigate }) => {
 
 
   return (
-<ContentFrame>
+<PageLayout ShowHeader={false}>
   Hello
-</ContentFrame>
+</PageLayout>
   );
 };
 

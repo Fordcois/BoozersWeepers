@@ -6,9 +6,6 @@ import { Link } from 'react-router-dom';
 
 
 const BlackboardHeader = ({expandedState}) => {
-  // useEffect(() => {
-  //   setExpanded(expandedState);
-  // }, [expandedState]);
     return (
         <div className='BBHeaderContainer'> 
         <div className="BBHeaderMainBar">
