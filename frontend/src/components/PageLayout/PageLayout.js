@@ -1,24 +1,20 @@
 import VertNavbar from '../VertNavBar/VertNavBar';
-import React, { useState, useEffect} from 'react';
+import React, { useState} from 'react';
 import {useLocation } from 'react-router-dom';
-import isTokenValid from '../Utility/isTokenValid';
 import BlackboardHeader from '../blackboardHeader/blackboardHeader';
 import '../../Pages/style.css'
 import QueenGraphic from '../../Assets/OrangeVic.png'
 
 
-const PageLayout = ({ navigate, children,ShowHeader=true, }) => {
-  const [token] = useState(window.localStorage.getItem("token"));
-  const [isLoggedIn] = useState(isTokenValid(token));
+const PageLayout = ({ children,ShowHeader=true }) => {
+  
+
   const toggleExpand = () => {setExpanded(!expanded);};
   const location = useLocation();
   const expandedState = location.state?.expandedState;
   const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : false)
 
-// TODO - Remove from Pagelayout
-  // useEffect(() => {
-  //   if (isLoggedIn) {navigate('/MyAccount', {state : {expandedState: expanded }});}
-  // }, [isLoggedIn, navigate]);
+
 
   return(
 

@@ -14,6 +14,7 @@ import WalletPage from '../../Pages/WalletPage';
 import PubGroupsPage from '../../Pages/PubGroupsPage'
 import SingleGroupPage from '../../Pages/SingleGroupPage'
 import LeaderBoardPage from '../../Pages/leaderboardPage';
+import PageNotFound from '../../Pages/PageNotFound';
 
 const App = () => {
     return (
@@ -31,6 +32,7 @@ const App = () => {
           <Route path='/groups' element={<PubGroupsPage navigate={ useNavigate() }/>}/>
           <Route path='/leaderboard' element={<LeaderBoardPage navigate={ useNavigate() }/>}/>
           <Route path='/'  element={<Home navigate={ useNavigate() }/>}/>
+          <Route path="*" element={<PageNotFound/>}/>
 
         </Routes>
     );
