@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import getSessionUserID from '../components/Utility/getSignedInUser_id';
-import VertNavbar from '../components/VertNavBar/VertNavBar';
+import PageLayout from '../components/PageLayout/PageLayout';
+
 import SinglePendingWager from '../components/singleWagerPageComponents/SinglePendingWager';
 import SingleWagerRequest from '../components/singleWagerPageComponents/SingleWagerRequest';
 import SingleOngoingWager from '../components/singleWagerPageComponents/SingleOngoingWager';
 import SingleResolvedWager from '../components/singleWagerPageComponents/SingleResolvedWager';
-import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
+
 import WagerDetails from '../components/singleWagerPageComponents/WagerDetails';
 import baseUrl from '../components/Utility/baseurl';
 import '../Pages/style.css'
@@ -18,8 +19,7 @@ const WagerInfoPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const loggedInUser = getSessionUserID(token)
   const location = useLocation();
-  const expandedState = location.state?.expandedState;
-  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+  const [expanded, setExpanded] = useState(location.state?.expandedState ?? true);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -40,16 +40,10 @@ const WagerInfoPage = ({ navigate }) => {
     fetchData();
   }, [token, wagerID]);
 
-const toggleExpand = () => {setExpanded(!expanded);};
 
 return (
-  <div className='shade'>
-    <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-      <div className='blackboard'>
-        <div className='form'>
-          <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-          <BlackboardHeader expandedState={expanded}/> 
 
+  <PageLayout expanded={expanded} setExpanded={setExpanded}>
           {!wagerData ? (
               <div style={{ 'textAlign': 'center' }}>
                 <span className="chalk" style={{ '--fsize': '34px' }}>No Wager Found</span>
@@ -71,10 +65,7 @@ return (
               )}
             </>
           )}
-        </div>
-      </div>
-    </div>
-  </div>
+</PageLayout>
 );}
 
 export default WagerInfoPage;

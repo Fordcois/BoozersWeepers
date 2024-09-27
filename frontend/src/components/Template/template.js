@@ -1,28 +1,15 @@
-import React, {useState } from 'react';
-
-import BlackboardHeader from '../blackboardHeader/blackboardHeader';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import PageLayout from '../PageLayout/PageLayout';
-
 import '../../Pages/style.css';
 
-
-
 const Template = ({ navigate }) => {
-
-  const [expanded, setExpanded] = useState(true);
-  const [groupName, setGroupName] = useState('');
-  const toggleExpand = () => {setExpanded(!expanded);};
-
-  const handlegroupNameChange = (event) => {
-    setGroupName(event.target.value)
-	}
-
-
+  const location = useLocation();
+  const [expanded, setExpanded] = useState(location.state?.expandedState ?? true);
 
   return (
-<PageLayout ShowHeader={false}>
-  Hello
-</PageLayout>
+    <PageLayout expanded={expanded} setExpanded={setExpanded}>
+    </PageLayout>
   );
 };
 

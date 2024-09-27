@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import isTokenValid from '../components/Utility/isTokenValid';
 import getSessionUserID from '../components/Utility/getSignedInUser_id';
-import VertNavbar from '../components/VertNavBar/VertNavBar';
-import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import AccountPageList from '../components/myAccountPage/accountpageList';
 import OngoingWagers from '../components/myAccountPage/ongoingWagers';
 import PastWagers from '../components/myAccountPage/PastWagers';
@@ -11,16 +9,16 @@ import UnresolvedWagers from '../components/myAccountPage/UnresolvedWagers';
 import IncomingWagers from '../components/myAccountPage/IncomingWagers';
 import PendingWagers from '../components/myAccountPage/PendingWagers';
 import baseUrl from '../components/Utility/baseurl';
+import PageLayout from '../components/PageLayout/PageLayout';
 import '../Pages/style.css'
 
 const MyAccountPage = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [wagers, setWagers] = useState([]);
-  const [location] = useState(useLocation());
-  const expandedState = location.state?.expandedState;
-  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
-  const [isLoggedIn, setIsLoggedIn] = useState(isTokenValid(token));
-  const [loggedInUserID, setLoggedInUserID] = useState(getSessionUserID(token));
+  const location = useLocation();
+  const [expanded, setExpanded] = useState(location.state?.expandedState ?? true);
+  const [isLoggedIn] = useState(isTokenValid(token));
+  const [loggedInUserID] = useState(getSessionUserID(token));
   const [showIncoming, setShowIncoming] = useState(null);
   const [showOngoing, setShowOngoing] = useState(null);
   const [showPending, setShowPending] = useState(null);
@@ -59,15 +57,11 @@ const MyAccountPage = ({ navigate }) => {
     // Gets past wagers -> wagers which have been resolved and have a winner declared
     const pastWagers = wagers.filter(wager => wager.winner != null)
     
-    const toggleExpand = () => {setExpanded(!expanded);};
+
 
 return (
-<div className='shade'>
-  <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-    <div className='blackboard'>
-      <div className='form'>
-        <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-        <BlackboardHeader expandedState={expanded}/>
+  <PageLayout expanded={expanded} setExpanded={setExpanded}>
+
         
         <div className='chalktitle'>My Wagers</div>
 
@@ -89,10 +83,7 @@ return (
         <AccountPageList list={ongoingWagers} showState={showOngoing} updateStateFunction={setShowOngoing} heading={'My Ongoing Wagers'} ResultsComponent={OngoingWagers} color={'whitesmoke'} expandedState={expanded}/>
         <AccountPageList list={pastWagers} showState={showHistory} updateStateFunction={setShowHistory} heading={'My Past Wagers'} ResultsComponent={PastWagers} color={'whitesmoke'} expandedState={expanded}/>
         
-      </div>
-    </div>
-  </div>
-</div>
+        </PageLayout>
 )};
     
 export default MyAccountPage;

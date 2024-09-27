@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import isTokenValid from '../components/Utility/isTokenValid';
 import VertNavbar from '../components/VertNavBar/VertNavBar';
+import PageLayout from '../components/PageLayout/PageLayout';
 import '../Pages/style.css';
 import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import SingleUserStats from '../components/stats/getSingleUserStats';
@@ -39,17 +40,8 @@ const ProfilePage = () => {
     fetchData();
   }, [userToken, userID]);
 
-  const toggleExpand = () => {
-    setExpanded(!expanded);
-  };
-
   return (
-    <div className='shade'>
-      <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-        <div className='blackboard'>
-          <div className='form'>
-            <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-            <BlackboardHeader expandedState={expanded}/>
+<PageLayout expanded={expanded} setExpanded={setExpanded}>
             
 {userData ? (
 <>
@@ -83,10 +75,8 @@ const ProfilePage = () => {
                 <span className="chalk" style={{ '--fsize': '28px', 'opacity': '0.8' }}>(Sorry!)</span>
               </div>
             )}
-          </div>
-        </div>
-      </div>
-    </div>
+
+</PageLayout>
   );
 };
 

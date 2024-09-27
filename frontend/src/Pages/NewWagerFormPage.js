@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from "react-router-dom"
-import VertNavbar from '../components/VertNavBar/VertNavBar';
 import { FaPencil } from "react-icons/fa6";
-import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
+import PageLayout from '../components/PageLayout/PageLayout';
+
 import '../Pages/style.css'
 import baseUrl from '../components/Utility/baseurl';
 
@@ -15,9 +15,6 @@ const NewWagerForm = ({ navigate }) => {
   const location = useLocation();
   const expandedState = location.state?.expandedState;
   const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
-
-	const toggleExpand = () => {setExpanded(!expanded);};
-
 
 	useEffect(() => {
     if (token) {
@@ -72,12 +69,8 @@ if (token) {
 	return (
 <>
 {userData && (
-<>
-<div className='shade'>
-  <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-    <div className='blackboard'>
-      <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-      <BlackboardHeader expandedState={expanded}/>
+<PageLayout expanded={expanded} setExpanded={setExpanded}>
+
       <div className="NewWager"> 
         <form onSubmit={handleWagerSubmit} style={{width:'auto'}}>
           
@@ -98,16 +91,15 @@ if (token) {
           <button class="orange_Button" id="submit" style={{marginTop: '0.5em', marginBottom: '2em'}}>Submit </button>
         </form>
       </div>
-    </div>
-  </div>
-</div>
-</>
+
+    
+</PageLayout>
 )}
 </>
 );
-	
-} else {navigate("/../login", { state: { expandedState: expanded } });}
-	
+
+} else 
+  {navigate("/../login", { state: { expandedState: expanded } });}
 }
 
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import VertNavbar from '../components/VertNavBar/VertNavBar';
+
+import PageLayout from '../components/PageLayout/PageLayout';
 import isTokenValid from '../components/Utility/isTokenValid';
 import getSessionUserID from '../components/Utility/getSignedInUser_id';
-import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import calculateGroupStats from '../components/groupLeaderboard/groupLeaderBoard';
 import baseUrl from '../components/Utility/baseurl';
 import '../Pages/style.css'
@@ -18,8 +18,7 @@ const [groupWagers,setGroupWagers] = useState([]);
 const [groupLeaderboardData,setGroupLeaderboardData] = useState([])
 
 const location = useLocation();
-const expandedState = location.state?.expandedState;
-const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+const [expanded, setExpanded] = useState(location.state?.expandedState ?? true);
 
 
 useEffect(() => {
@@ -85,10 +84,6 @@ const totalPints = groupWagers.filter(wager => wager.winner).length;
 const OnlyOneMember= sortedWinPercent.length === 1
 const AllMembersOnZeroPercent = sortedWinPercent.every(obj => obj.winPercentage === '0.00')
 
-// for NavBar:
-const toggleExpand = () => {setExpanded(!expanded);};
-
-
 const toggleGroupMembership = async () => {
   try {
     if (!isGroupMember) {
@@ -132,11 +127,9 @@ const toggleGroupMembership = async () => {
 
 return (
 
-<div className='shade'>
-  <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-    <div className='blackboard'>
-      <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-      <BlackboardHeader expandedState={expanded}/> 
+  <PageLayout expanded={expanded} setExpanded={setExpanded}>
+
+
 
       <div className='chalktitle'>{pubGroupData?.name}</div>
       <div id='ButtonDiv'>
@@ -194,9 +187,9 @@ return (
           </p>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+
+</PageLayout>
+
 )};
     
     export default SingleGroupPage;

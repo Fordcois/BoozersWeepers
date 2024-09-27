@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import VertNavbar from '../components/VertNavBar/VertNavBar';
+import PageLayout from '../components/PageLayout/PageLayout';
+
 import isTokenValid from '../components/Utility/isTokenValid';
-import BlackboardHeader from '../components/blackboardHeader/blackboardHeader';
 import NewGroupPage from '../components/newGroupPage/NewGroupPage';
 import SearchBar from '../components/searchbarComponent/Searchbar';
 import getSessionUserID from '../components/Utility/getSignedInUser_id';
@@ -14,11 +14,9 @@ const PubGroupsPage = ({ navigate }) => {
   const [pubGroups, setPubGroups] = useState([])
   const [isLoggedIn] = useState(isTokenValid(token));
   const location = useLocation();
-  const expandedState = location.state?.expandedState;
-  const [expanded, setExpanded] = useState(expandedState !== undefined ? expandedState : true);
+  const [expanded, setExpanded] = useState(location.state?.expandedState ?? true);
   const [groupCreated, setGroupCreated] = useState(0);
 
-  const toggleExpand = () => {setExpanded(!expanded);};
   const handleGroupCreatedState = () => {setGroupCreated(groupCreated + 1);}
 
 
@@ -45,13 +43,8 @@ useEffect(() => {
 const joinedGroups = pubGroups.filter(pubGroup => pubGroup.members.includes(getSessionUserID(token)))
 
 return (
-<div className='shade'>
-  <div className={`page-content ${expanded ? 'shifted-content' : ''}`}>
-    <div className='blackboard'>
-      <div className='form'>
+  <PageLayout expanded={expanded} setExpanded={setExpanded}>
 
-        <VertNavbar expanded={expanded} toggleExpand={toggleExpand} />
-        <BlackboardHeader expandedState={expanded}/> 
 
         <div style={{display:'flex'}}>
         <div id='left' className='post-it' style={{width:'50%'}}>
@@ -83,9 +76,7 @@ return (
           </div> 
         </div>
       </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+    </PageLayout>
 )};
 export default PubGroupsPage;
