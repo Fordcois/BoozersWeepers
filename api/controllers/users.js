@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const UsersController = {
   //SeverLoad IS ONLY RELEVANT FOR HOSTING ON RENDER.COM FREETIER
   SeverLoad: (req, res) => {
-    console.log('Checking Server Is Live')
     return res.status(200).json({ serverLive: 'Server Is Live' });
   },
 
