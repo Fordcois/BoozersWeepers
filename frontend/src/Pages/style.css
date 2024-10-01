@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 :root {
   --BWOrange: #cd561b;
+  --BWWhite: whitesmoke;
 }
 
 .page-content {
@@ -11,6 +12,12 @@
 }
 .shifted-content {
   margin-left: 200px;
+}
+
+.center-text-column{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .orange_Button {
@@ -103,8 +110,37 @@
   color: whitesmoke;
   text-align: var(--talign);
   display: block;
-  /* margin: 10;  */
 }
+/* Refined Styles here */
+.paragraph-chalk-white{
+  font-family: 'Permanent Marker';
+  color: var(--BWWhite);
+  font-size: 1.5rem;
+}
+
+.paragraph-chalk-orange{
+  font-family: 'Permanent Marker';
+  color: var(--BWOrange);
+}
+
+.chalk-link,
+.chalk-link:visited {
+  font-family: 'Permanent Marker';
+  color: var(--BWWhite);
+  text-decoration: underline var(--BWOrange);
+  font-size: 1.5rem;
+}
+
+.chalk-link:hover,
+.chalk-link:visited:hover {
+  color: var(--BWOrange);
+}
+
+.chalk-link:active,
+.chalk-link:visited:active {
+  color: #e57036;
+}
+
 
 .chalktitle-center{
   font-family: 'Permanent Marker';
@@ -290,22 +326,7 @@ input[type="date"] {
   font-size: 16px;
 }
 
-.chalk-link,
-.chalk-link:visited {
-  font-family: 'Permanent Marker';
-  color: whitesmoke;
-  text-decoration: underline #cd561b;
-}
 
-.chalk-link:hover,
-.chalk-link:visited:hover {
-  color: #cd561b;
-}
-
-.chalk-link:active,
-.chalk-link:visited:active {
-  color: #e57036;
-}
 
 .black-pen{
   font-family: 'Permanent Marker';

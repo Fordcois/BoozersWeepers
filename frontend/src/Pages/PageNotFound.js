@@ -8,8 +8,14 @@ const PageNotFound = () => {
 return (
 
     <PageLayout>
-        <h1> Page Not Found</h1>
-        <p> The Page you're looking for cannot be found</p>
+        <div className='center-text-column'>
+        <h1 className='chalktitle'> Page Not Found</h1>
+        <p className='paragraph-chalk-white'>
+        The Page you're looking for can't be found! <br/> ... <br/>
+        Sorry about that
+        </p>
+        <span className='paragraph-chalk-white'>(<a className="chalk-link" href={`/myaccount`}>Back</a>)</span>  
+        </div>                
     </PageLayout>
     )};
 
